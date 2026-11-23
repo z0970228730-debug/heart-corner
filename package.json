@@ -1,0 +1,14 @@
+{
+  "name": "heart-corner",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "芯彤的小角落：Heart studio 會員網站（LINE 登入、芯幣、票券、店家核銷）",
+  "scripts": {
+    "check": "node --check netlify/functions/api.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
+    "jose": "^5.9.6"
+  }
+}

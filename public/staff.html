@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>店家核銷｜芯彤美學</title>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Noto+Serif+TC:wght@600&family=Noto+Sans+TC:wght@400;500&display=swap">
+<style>
+:root{--ink:#574a4f;--sub:#8a7c80;--line:#ecdfd9;--paper:#fffaf6;--card:#fffdfa;--cream:#f7ece4;--mauve:#7c6a7e;--mauve-deep:#5f4f63;--rose:#b07f78;--ok-bg:#e4efe0;--ok:#4d7a45;--bad-bg:#f6e2e0;--bad:#a24b45;
+  --serif:'Noto Serif TC',serif;--sans:'Noto Sans TC','PingFang TC',sans-serif;--latin:'Cormorant Garamond',Georgia,serif;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:#efe7e6;color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65}
+input,button{font:inherit}input{font-size:16px!important}
+.wrap{width:min(100%,520px);margin:0 auto;min-height:100svh;background:var(--paper);padding:20px max(18px,env(safe-area-inset-right,0px)) 40px max(18px,env(safe-area-inset-left,0px));display:grid;gap:14px;align-content:start}
+.head{display:flex;justify-content:space-between;align-items:center}
+.tag{display:inline-block;font-size:11px;padding:1px 9px;border-radius:99px;background:var(--mauve);color:#fff}
+h1{font-family:var(--serif);font-size:22px;margin:4px 0 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:12px;box-shadow:0 8px 24px rgba(104,80,84,.07)}
+label{font-size:13px;color:var(--sub)}
+.field{display:grid;gap:6px}
+input[type=text],input[type=password],input[inputmode]{height:48px;border-radius:12px;border:1px solid var(--line);padding:0 14px;background:#fff;color:var(--ink);width:100%}
+.btn{height:48px;border-radius:99px;border:0;font-weight:500;cursor:pointer;padding:0 20px}
+.btn-p{background:var(--mauve);color:#fff}.btn-g{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sum{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sum div{padding:12px;border-radius:14px;background:var(--mauve);color:#fff}
+.sum small{display:block;font-size:12px;opacity:.85}.sum b{font-family:var(--latin);font-size:26px}
+.badge{display:inline-block;padding:6px 16px;border-radius:99px;font-weight:500}
+.ok{background:var(--ok-bg);color:var(--ok)}.bad{background:var(--bad-bg);color:var(--bad)}
+.code{font-family:var(--latin);font-size:20px;font-weight:600;letter-spacing:1.5px;font-variant-numeric:lining-nums}
+.cp .btn{white-space:nowrap;min-width:64px;flex:none}
+.sum b{font-variant-numeric:lining-nums}
+dl{display:grid;grid-template-columns:84px 1fr;gap:6px 10px;margin:0;font-size:14px}dt{color:var(--sub)}dd{margin:0}
+.rules{margin:0;padding:12px 14px;border-radius:12px;font-size:14px}
+.cp{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.cp b{font-weight:500}.cp small{display:block;font-size:12px;color:var(--sub)}
+.log{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}.log:last-child{border-bottom:0}
+.log small{display:block;font-size:12px;color:var(--sub)}
+.note{padding:10px 12px;border-radius:10px;background:var(--cream);font-size:14px;word-break:break-all}
+.muted{color:var(--sub);font-size:13.5px;margin:0}
+.chk{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink)}.chk input{width:20px;height:20px;accent-color:var(--mauve)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--mauve-deep);color:#fff;padding:10px 18px;border-radius:99px;font-size:14px;opacity:0;transition:.3s;pointer-events:none}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head"><div><span class="tag">店家專用</span><h1>店家核銷</h1></div><button class="btn btn-g" id="out" hidden style="height:38px">登出</button></div>
+
+  <form class="card" id="loginCard" hidden>
+    <div class="field"><label for="pin">店家密碼</label><input id="pin" type="password" inputmode="numeric" autocomplete="current-password"></div>
+    <button class="btn btn-p" type="submit">進入</button>
+    <p class="muted" id="loginErr"></p>
+  </form>
+
+  <div id="app" hidden>
+    <div class="sum"><div><small>今日核銷</small><b id="sN">0</b> 張</div><div><small>今日折抵</small><b id="sV">NT$0</b></div></div>
+    <form class="card" id="findForm" style="margin-top:14px">
+      <div class="field"><label for="code">輸入會員碼或折扣碼（或用手機相機掃客人的 QR Code）</label><input id="code" type="text" autocomplete="off" autocapitalize="characters" placeholder="例如 HSM-7K2M3P 或 HSL-7K2M-Q8PD"></div>
+      <button class="btn btn-p" type="submit">查詢</button>
+    </form>
+    <div id="result" style="margin-top:14px;display:grid;gap:14px"></div>
+    <section class="card" style="margin-top:14px"><b>今日紀錄</b><div id="log"><p class="muted">今天還沒有紀錄。</p></div></section>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+'use strict';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=t=>t?new Intl.DateTimeFormat('zh-TW',{timeZone:'Asia/Taipei',year:'numeric',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(t)):'—';
+const fmtD=t=>t?new Intl.DateTimeFormat('zh-TW',{timeZone:'Asia/Taipei',year:'numeric',month:'numeric',day:'numeric'}).format(new Date(t)):'—';
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)}
+async function api(p,body){
+  const o=body===undefined?{credentials:'same-origin'}:{method:'POST',credentials:'same-origin',headers:{'content-type':'application/json'},body:JSON.stringify(body)};
+  try{const r=await fetch('/api/staff/'+p,o);const j=await r.json().catch(()=>({}));if(r.status===401&&p!=='login'){show(false)}return r.ok?j:{error:j.error||'發生錯誤',status:r.status}}catch(e){return {error:'網路連線不穩'}}
+}
+function show(inn){$('#loginCard').hidden=inn;$('#app').hidden=!inn;$('#out').hidden=!inn;if(inn)loadLog()}
+$('#loginCard').onsubmit=async e=>{e.preventDefault();const r=await api('login',{pin:$('#pin').value});if(r.error){$('#loginErr').textContent=r.error;return}$('#pin').value='';show(true);autoFind()};
+$('#out').onclick=async()=>{await api('logout',{});show(false)};
+$('#findForm').onsubmit=e=>{e.preventDefault();find($('#code').value)};
+
+async function loadLog(){
+  const r=await api('today');if(r.error)return;
+  const red=r.log.filter(x=>x.action==='redeem');
+  $('#sN').textContent=red.length;$('#sV').textContent='NT$'+red.reduce((a,x)=>a+(x.amount||0),0);
+  $('#log').innerHTML=r.log.length?r.log.map(x=>`<div class="log"><div><b>${x.action==='redeem'?'核銷折價券':'首次到店'}・${esc(x.name||'')}</b><small>${x.code?esc(x.code)+'・':''}${fmt(x.at)}${x.note?'・'+esc(x.note):''}</small></div><span>${x.action==='redeem'?'−NT$'+x.amount:'✓'}</span></div>`).join(''):'<p class="muted">今天還沒有紀錄。</p>';
+}
+function find(raw){
+  const code=String(raw||'').toUpperCase().replace(/\s/g,'');if(!code)return;
+  $('#code').value=code;
+  if(code.startsWith('HSM-'))findMember(code);else findCoupon(code);
+}
+async function findMember(code){
+  const r=await api('member?code='+encodeURIComponent(code));const box=$('#result');
+  if(r.error){box.innerHTML=`<section class="card"><span class="badge bad">${esc(r.error)}</span></section>`;return}
+  if(!r.found){box.innerHTML=`<section class="card"><span class="badge bad">查無此會員</span><p class="muted">請確認會員碼是否正確。</p></section>`;return}
+  const m=r.member;
+  box.innerHTML=`<section class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><b style="font-size:18px">${esc(m.name)}</b><span class="code">${esc(m.code)}</span></div>
+    <dl><dt>手機末三碼</dt><dd>${esc(m.phoneTail||'—')}</dd><dt>加入日期</dt><dd>${fmtD(m.joined)}</dd><dt>芯幣</dt><dd>${(m.coins/10).toFixed(1)}</dd><dt>邀請人</dt><dd>${esc(m.referrer||'—')}</dd><dt>首次到店</dt><dd>${m.firstVisit?fmt(m.firstVisit):'尚未確認'}</dd></dl>
+    ${m.firstVisit?'':`<button class="btn btn-p" id="fv">確認首次到店${m.referrer?`（${esc(m.referrer)} 會得到芯幣）`:''}</button>`}
+  </section>
+  <section class="card"><b>可使用的票券</b>${r.coupons.length?r.coupons.map(c=>`<div class="cp"><div><b>${esc(c.title)}</b><small>${esc(c.code)}・有效至 ${fmtD(c.expires_at)}${c.needs_min_spend?'・滿 NT$1,000 可用':''}</small></div><button class="btn btn-g" style="height:38px" data-use="${esc(c.code)}">使用</button></div>`).join(''):'<p class="muted">沒有可使用的票券。</p>'}</section>`;
+  const fv=$('#fv');if(fv)fv.onclick=async()=>{fv.disabled=true;const x=await api('first-visit',{code:m.code});if(x.error){toast(x.error);fv.disabled=false;return}toast(x.rewarded?`已確認首次到店，${x.rewarded} 獲得 ${x.coins} 芯幣`:'已確認首次到店');loadLog();findMember(m.code)};
+  box.querySelectorAll('[data-use]').forEach(b=>b.onclick=()=>find(b.dataset.use));
+}
+async function findCoupon(code){
+  const r=await api('coupon?code='+encodeURIComponent(code));const box=$('#result');
+  if(r.error){box.innerHTML=`<section class="card"><span class="badge bad">${esc(r.error)}</span></section>`;return}
+  if(!r.found){box.innerHTML=`<section class="card"><span class="badge bad">查無此折扣碼</span><p class="muted">請確認客人出示的折扣碼是否輸入正確。</p></section>`;return}
+  const c=r.coupon,st=r.status,lab={valid:['有效','ok'],used:['已使用','bad'],expired:['已過期','bad']}[st];
+  box.innerHTML=`<section class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><span class="badge ${lab[1]}">${lab[0]}</span><span class="code">${esc(c.code)}</span></div>
+    <dl><dt>票券</dt><dd>${esc(c.title)}</dd><dt>面額</dt><dd>NT$${c.value}</dd><dt>會員</dt><dd>${esc(r.member.name||'—')}</dd><dt>有效期限</dt><dd>${fmtD(c.expires)}</dd>${c.usedAt?`<dt>核銷時間</dt><dd>${fmt(c.usedAt)}</dd>`:''}<dt>使用條件</dt><dd>${c.minSpend?'每滿 NT$1,000 可用 1 張，每筆最多折 NT$300':'無消費門檻'}・不可與生日優惠同時使用</dd></dl>
+    ${st==='valid'?`<div class="field"><label for="spend">這次消費金額</label><input id="spend" inputmode="numeric" placeholder="例如 2500"></div>
+      <label class="chk"><input type="checkbox" id="bday"> 這筆消費有使用生日優惠</label>
+      <button class="btn btn-p" id="doIt">確認核銷</button><p class="muted" id="err"></p>`:''}
+  </section>`;
+  const b=$('#doIt');if(b)b.onclick=async()=>{b.disabled=true;$('#err').textContent='';
+    const x=await api('redeem',{code:c.code,spend:parseInt(($('#spend').value||'').replace(/\D/g,''))||0,birthday:$('#bday').checked});
+    if(x.error){$('#err').textContent=x.error;b.disabled=false;return}
+    box.innerHTML=`<section class="card" style="text-align:center"><span class="badge ok" style="justify-self:center">核銷完成</span><b style="font-size:18px">請在夯客結帳時折抵 NT$${x.value}</b><p class="muted">把這行貼到夯客的結帳備註：</p><div class="note" id="note">${esc(x.note)}</div><button class="btn btn-g" id="cp">複製備註</button></section>`;
+    $('#cp').onclick=()=>{navigator.clipboard?.writeText(x.note).then(()=>toast('已複製'),()=>toast('請長按備註手動複製'))};
+    loadLog();
+  };
+}
+function autoFind(){const q=new URLSearchParams(location.search);const v=q.get('m')||q.get('c');if(v)find(v)}
+(async()=>{const r=await api('check');show(!r.error);if(!r.error)autoFind()})();
+</script>
+</body>
+</html>

@@ -1,0 +1,2550 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="芯彤美學 Heart studio 的會員小角落：每日任務、塔羅指引、漢芳療保養建議、芯幣與折價券。">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<script src="/assets/qrcode.js"></script>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style>
+<title>芯彤的小角落</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#f6eeea">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Serif+TC:wght@500;600&family=Noto+Sans+TC:wght@400;500&display=swap">
+<style>
+/* Layout: 手機優先的「小角落」App 外殼（最寬 460px），冬夜水彩插畫＋貓咪對話泡泡貫穿每一頁；桌機置中，兩側是柔光。
+   單一暖色主題（刻意不做深色版，配合插畫原稿的暖燈色調）。 */
+:root{
+  --ink:#574a4f;        /* 主要文字：帶玫瑰調的深灰 */
+  --sub:#8a7c80;        /* 次要文字 */
+  --faint:#b3a5a7;
+  --paper:#fffaf6;      /* 外殼底 */
+  --card:#fffdfa;
+  --cream:#f7ece4;
+  --blush:#f3e2dc;
+  --line:#ecdfd9;
+  --mauve:#7c6a7e;      /* 主色：冬夜紫灰 */
+  --mauve-deep:#5f4f63;
+  --rose:#b07f78;       /* 點綴：暖玫瑰 */
+  --gold:#c49a62;       /* 芯幣金 */
+  --gold-soft:#ead7b6;
+  --night:#8a849b;
+  --ground:#efe7e6;     /* 桌機背景 */
+  --shadow:0 10px 30px rgba(104,80,84,.09);
+  --shadow-lift:0 16px 40px rgba(104,80,84,.16);
+  --serif:'Noto Serif TC','Songti TC',serif;
+  --sans:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;
+  --latin:'Cormorant Garamond','Iowan Old Style',Georgia,serif;
+  --r-lg:22px;--r-md:16px;--r-sm:12px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+input,textarea,select{font-size:16px!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
+.glow{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 15% 0%,#fff4e4 0,transparent 45%),radial-gradient(ellipse at 90% 80%,#e4dcea 0,transparent 55%)}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0;padding:0}
+button:disabled{cursor:default}
+a{color:inherit}
+:focus-visible{outline:2.5px solid var(--rose);outline-offset:3px;border-radius:8px}
+h1:focus,h2:focus{outline:none}
+img{display:block;max-width:100%}
+.num{font-variant-numeric:lining-nums tabular-nums}
+.eyebrow,.metric b,.purse .bal,.ring .val b,.orbit b,.amounts button b,.ticket .t-code,.ticket .t-val b,.hist .amt,.code-box b,.tile-wide .gift,.tfront .roman,.today-top .date{font-variant-numeric:lining-nums tabular-nums}
+a.btn{text-decoration:none}
+
+.shell{position:relative;z-index:1;width:min(100%,460px);min-height:100svh;margin:0 auto;background:var(--paper);box-shadow:0 0 70px rgba(80,60,72,.12);padding-bottom:calc(84px + env(safe-area-inset-bottom,0px));overflow-x:hidden}
+.gutter{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+
+/* ---------- 頂部列 ---------- */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;height:62px;background:rgba(255,250,246,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
+.topbar.scrolled{border-bottom-color:var(--line)}
+.brand{display:flex;align-items:center;gap:10px;text-align:left}
+.brand-mark{width:34px;height:34px}
+.brand b{display:block;font-family:var(--latin);font-style:italic;font-weight:600;font-size:19px;letter-spacing:.2px;line-height:1.1}
+.brand small{display:block;font-size:10.5px;letter-spacing:1.5px;color:var(--faint)}
+.wallet-chip{display:flex;align-items:center;gap:6px;height:36px;padding:0 12px 0 6px;border-radius:99px;background:var(--card);border:1px solid var(--line);box-shadow:0 3px 10px rgba(110,80,70,.06);font-weight:500;font-size:14px}
+.wallet-chip svg{width:26px;height:26px}
+.wallet-chip .fish{width:18px;height:18px;margin-left:6px}
+.wallet-chip i{font-style:normal;color:var(--sub);font-size:13px}
+
+/* ---------- 共用元素 ---------- */
+.coin{display:inline-block;vertical-align:-0.2em}
+.eyebrow{font-family:var(--latin);font-size:12.5px;letter-spacing:3px;text-transform:uppercase;color:var(--rose)}
+.h2{font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.35;letter-spacing:.5px;margin:4px 0 0;text-wrap:balance}
+.h3{font-family:var(--serif);font-weight:600;font-size:17px;margin:0;letter-spacing:.3px}
+.muted{color:var(--sub);font-size:13.5px}
+.tiny{font-size:12px;color:var(--faint);line-height:1.6}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 24px;border-radius:99px;font-weight:500;letter-spacing:.5px;transition:transform .15s,box-shadow .2s,background .2s}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--mauve);color:#fff;box-shadow:0 8px 20px rgba(95,79,99,.25)}
+.btn-primary:hover{background:var(--mauve-deep)}
+.btn-ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
+.btn-gold{background:linear-gradient(135deg,#d8b27a,#b98a52);color:#fff;box-shadow:0 8px 20px rgba(185,138,82,.3)}
+.btn:disabled{opacity:.45;box-shadow:none}
+.btn-block{width:100%}
+.section{padding-block:26px 6px}
+.stack{display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+.stack>*,.ticket>*,.card>*{min-width:0}
+
+/* 頁面標題區：插畫天空＋貓咪泡泡 */
+.page{animation:pageIn .45s ease both}
+@keyframes pageIn{from{opacity:.4;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sky{position:relative;padding-block:26px 46px;background:linear-gradient(170deg,#8d879e 0%,#a89caf 40%,#d9c3c6 78%,var(--paper) 100%);color:#fff;overflow:hidden}
+.sky::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-38px;height:70px;background:var(--paper);border-radius:50% 50% 0 0}
+.sky .eyebrow{color:#fdf1e4;opacity:.9}
+.sky .h2{color:#fff;font-size:25px;text-shadow:0 2px 12px rgba(70,55,80,.25)}
+.sky p{margin:6px 0 0;color:#fbf2ec;font-size:14px}
+.snow{position:absolute;inset:0;pointer-events:none}
+.snow span{position:absolute;color:#fff8e6;opacity:.8;text-shadow:0 0 8px #ffe7c4;animation:twinkle 3.6s ease-in-out infinite}
+@keyframes twinkle{50%{opacity:.25;transform:scale(.8)}}
+
+.talk{display:flex;align-items:flex-end;gap:10px;margin-top:14px;position:relative;z-index:2}
+.talk-cat{flex:none;width:52px;height:52px;border-radius:50%;overflow:hidden;border:2px solid #fff;box-shadow:0 6px 14px rgba(70,50,60,.18);background:var(--cream)}
+.talk-cat img{width:100%;height:100%;object-fit:cover;object-position:52% 55%;transform:scale(1.9)}
+.bubble{position:relative;background:#fff;color:var(--ink);border-radius:18px 18px 18px 6px;padding:10px 14px;font-size:14px;line-height:1.6;box-shadow:0 8px 20px rgba(80,60,70,.12);max-width:300px}
+.bubble b{color:var(--rose);font-weight:500}
+.bubble.pop{animation:bubblePop .4s cubic-bezier(.3,1.6,.5,1)}
+@keyframes bubblePop{from{transform:scale(.85);opacity:.3}to{transform:none;opacity:1}}
+
+/* ---------- 首頁 ---------- */
+.hero{position:relative}
+.hero-img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(transparent,var(--paper))}
+.hero-talk{position:absolute;left:max(18px,env(safe-area-inset-left,0px));right:18px;top:16px;z-index:2}
+.hero-talk .bubble{max-width:250px;border-radius:18px 18px 6px 18px;margin-left:auto}
+.hello{position:relative;z-index:2;margin-top:-34px;text-align:center}
+.hello h1{font-family:var(--serif);font-weight:600;font-size:27px;line-height:1.4;letter-spacing:1px;margin:0;text-wrap:balance}
+.hello h1 em{font-style:normal;color:var(--rose)}
+.hello p{margin:8px 0 0;color:var(--sub);font-size:14.5px}
+
+.today{margin-top:22px;padding:18px;display:grid;gap:16px;background:linear-gradient(160deg,#fffdfa,#fbf1eb)}
+.today-top{display:flex;justify-content:space-between;align-items:baseline}
+.today-top .date{font-family:var(--latin);font-size:15px;color:var(--sub);letter-spacing:.5px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.metric{display:grid;justify-items:center;gap:2px;padding:12px 4px;border-radius:var(--r-md);background:#fff;border:1px solid var(--line);text-align:center}
+.metric svg{width:28px;height:28px}
+.metric b{font-family:var(--latin);font-size:24px;font-weight:600;line-height:1.1;color:var(--ink)}
+.metric small{font-size:11.5px;color:var(--sub);letter-spacing:.5px}
+.progress{height:8px;border-radius:9px;background:var(--blush);overflow:hidden}
+.progress i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#d7b0a6,var(--rose));transition:width .6s ease}
+.progress-row{display:flex;justify-content:space-between;font-size:12.5px;color:var(--sub);margin-bottom:6px}
+
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:168px;padding:14px;border-radius:var(--r-lg);overflow:hidden;text-align:left;color:#fff;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;isolation:isolate}
+.tile:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .5s}
+.tile:hover img{transform:scale(1.05)}
+.tile::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 30%,rgba(66,48,62,.72))}
+.tile b{font-family:var(--serif);font-size:17px;font-weight:600;letter-spacing:.5px}
+.tile small{font-size:12px;opacity:.92}
+.tile .badge{position:absolute;top:12px;left:12px;padding:3px 10px;border-radius:99px;background:rgba(255,250,246,.9);color:var(--mauve-deep);font-size:11.5px;font-weight:500}
+.tile .badge.done{background:var(--mauve);color:#fff}
+.tile-wide{grid-column:1/-1;min-height:120px;flex-direction:row;align-items:center;justify-content:space-between;color:var(--ink);background:linear-gradient(120deg,#f6e7dd,#eee3ee)}
+.tile-wide::before{display:none}
+.tile-wide .tw-copy{display:grid;gap:2px}
+.tile-wide small{color:var(--sub)}
+.tile-wide .gift{font-family:var(--latin);font-size:30px;font-weight:600;color:var(--rose);line-height:1}
+.tile-wide .gift small{display:block;font-family:var(--sans);font-size:11px;color:var(--sub);text-align:right}
+
+.quote-card{padding:22px 20px;text-align:center;background:var(--card);position:relative}
+.quote-card::before,.quote-card::after{content:"";position:absolute;width:14px;height:14px;border:1px solid var(--gold-soft)}
+.quote-card::before{top:10px;left:10px;border-right:0;border-bottom:0}
+.quote-card::after{bottom:10px;right:10px;border-left:0;border-top:0}
+.quote-card p{font-family:var(--serif);font-size:17px;line-height:1.9;margin:10px 0;white-space:pre-line}
+.quote-card .sign{font-family:var(--latin);font-style:italic;color:var(--sub)}
+
+.studio{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:16px}
+.studio img{width:76px;height:76px;border-radius:50%;object-fit:cover}
+.studio .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip-link{display:inline-flex;align-items:center;gap:4px;height:32px;padding:0 14px;border-radius:99px;border:1px solid var(--line);background:#fff;font-size:13px;text-decoration:none}
+.chip-link.main{background:var(--mauve);color:#fff;border-color:var(--mauve)}
+
+/* ---------- 抽牌 ---------- */
+.seg{display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:99px;background:var(--cream);border:1px solid var(--line)}
+.seg button{height:40px;border-radius:99px;font-size:14px;color:var(--sub);transition:background .25s,color .25s}
+.seg button[aria-pressed="true"]{background:#fff;color:var(--ink);font-weight:500;box-shadow:0 3px 10px rgba(110,80,80,.1)}
+.deck{position:relative;height:250px;margin-top:4px}
+.deck .tcard{position:absolute;left:50%;top:40px;width:76px;margin-left:-38px;aspect-ratio:360/620;transform-origin:50% 320%;transition:transform .45s cubic-bezier(.3,1.2,.5,1),opacity .4s,top .3s}
+.deck.shuffling .tcard{transition:none}
+.deck.spread .tcard{cursor:pointer}
+.deck.spread .tcard:hover,.deck.spread .tcard:focus-visible{top:22px}
+.deck .tcard .tback{border-radius:9px}
+.deck .tcard .tback::before{inset:4px;border-radius:6px}
+.deck .tcard .tback::after{inset:7px;background-size:9px 9px}
+.ritual{display:grid;gap:10px;justify-items:center;text-align:center}
+.ritual-steps{display:flex;gap:6px;align-items:center;font-size:12.5px;color:var(--faint)}
+.ritual-steps span.on{color:var(--rose);font-weight:500}
+.ritual-steps i{width:18px;height:1px;background:var(--line)}
+.ask{width:100%;max-width:340px;text-align:left}
+.asked{padding:12px 16px;border-radius:var(--r-md);background:var(--cream);text-align:center}
+.asked span{font-size:12px;letter-spacing:1px;color:var(--rose)}
+.asked p{margin:2px 0 0;font-family:var(--serif);font-size:16px}
+.history{display:grid;gap:10px}
+.hist-cards{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px}
+.hist-cards button{flex:none;width:76px;display:grid;gap:4px;text-align:center;font-size:11.5px;color:var(--sub);opacity:.6}
+.hist-cards button[aria-pressed="true"]{opacity:1;color:var(--ink)}
+.hist-cards img{width:76px;border-radius:7px;box-shadow:0 4px 10px rgba(80,60,70,.15)}
+.hist-cards span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4}
+.tcard{aspect-ratio:7/11.5;border-radius:14px}
+.tback{width:100%;height:100%;border-radius:14px;background:radial-gradient(circle at 50% 42%,#9a8aa0 0,#6f5f74 70%);border:1px solid #5c4d61;box-shadow:0 12px 26px rgba(70,50,70,.28);position:relative;overflow:hidden}
+.tback::before{content:"";position:absolute;inset:7px;border:1px solid rgba(234,215,182,.75);border-radius:9px}
+.tback::after{content:"";position:absolute;inset:12px;border-radius:6px;background-image:radial-gradient(rgba(255,240,210,.45) 1px,transparent 1.3px);background-size:14px 14px;opacity:.6}
+.tback svg{position:absolute;left:50%;top:50%;width:52%;transform:translate(-50%,-50%);z-index:1}
+.deck-hint{text-align:center;margin-top:4px}
+
+.reveal{display:grid;gap:18px}
+.flip{width:min(230px,62vw);margin:6px auto 0;aspect-ratio:7/11.5;perspective:1400px}
+.flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.4,.1,.2,1)}
+.flip.on .flip-inner{transform:rotateY(180deg)}
+.flip .face:not(.front){transition:visibility 0s .5s}
+.flip.on .face:not(.front){visibility:hidden}
+.tback,.tback svg,.tarot-img{-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.flip .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px}
+.flip .front{transform:rotateY(180deg)}
+.wrong{font-family:var(--latin)}
+
+.reading{padding:20px;display:grid;gap:16px}
+.keys{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.keys span{padding:3px 12px;border-radius:99px;background:var(--cream);font-size:12.5px;color:var(--mauve-deep)}
+.reading .meaning{font-size:15px;line-height:1.95;margin:0}
+.divider{display:flex;align-items:center;gap:10px;color:var(--gold);font-family:var(--latin);font-size:13px;letter-spacing:2px}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.oil{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;padding:16px;border-radius:var(--r-md);background:linear-gradient(140deg,#fff,var(--chakra-soft,#f6ebe3));border:1px solid var(--line)}
+.oil .drop{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1px solid var(--line)}
+.oil .drop svg{width:22px;height:22px}
+.oil h4{margin:0;font-family:var(--serif);font-size:16px;font-weight:600}
+.oil h4 small{font-family:var(--sans);font-weight:400;font-size:12px;color:var(--sub);margin-left:6px}
+.oil p{margin:4px 0 0;font-size:13.5px;line-height:1.8;color:var(--ink)}
+.oil .how{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:13px;color:var(--sub)}
+.chakra-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:1px}
+.warm-card{padding:28px 22px;text-align:center;background:linear-gradient(165deg,#fffdf9,#f7ebe4);border-radius:var(--r-lg);border:1px solid #ead9cc;box-shadow:var(--shadow);position:relative}
+.warm-card .h{font-family:var(--latin);letter-spacing:3px;color:var(--gold);font-size:13px}
+.warm-card p{font-family:var(--serif);font-size:19px;line-height:2;margin:14px 0;white-space:pre-line}
+.warm-art{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow)}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+
+/* 正版牌面與解讀 */
+.flip{aspect-ratio:360/620}
+.tarot-img{width:100%;height:100%;object-fit:cover;border-radius:14px;box-shadow:0 18px 36px rgba(90,64,70,.25);border:1px solid #e3cfb8}
+.en-name{font-family:var(--latin);font-style:italic;font-size:16px;color:var(--sub)}
+.insight{display:grid;gap:10px;padding:14px 16px;border-radius:var(--r-md);background:var(--cream)}
+.ins-row{display:grid;gap:2px}
+.ins-tag{font-size:12px;letter-spacing:1px;color:var(--rose);font-weight:500}
+.ins-row p{margin:0;font-family:var(--serif);font-size:15px;line-height:1.8}
+.chakra-card{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:12px 14px;border-radius:var(--r-md);border:1px solid var(--line);background:#fff}
+.ck-dot{width:14px;height:14px;border-radius:50%;margin-top:6px;box-shadow:0 0 0 4px var(--chakra-soft)}
+.chakra-card b{font-family:var(--serif);font-size:16px}
+.ck-sk{font-family:var(--latin);font-style:italic;font-size:14px;color:var(--sub)}
+.ck-meta{font-size:13px;color:var(--sub)}
+.latin{font-family:var(--latin);font-style:italic;font-size:14.5px;color:var(--sub);margin-top:-2px}
+.spec{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;margin:8px 0 4px;font-size:13px}
+.spec dt{color:var(--sub)}.spec dd{margin:0}
+.oil .alt{font-size:12.5px;color:var(--sub);border-top:1px dashed var(--line);padding-top:8px;margin-top:8px}
+.oil .alt i{font-family:var(--latin)}
+.ing-ch{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 2px}
+.ing-ch span{font-size:11.5px;padding:2px 9px;border-radius:99px;border:1px solid var(--cc);color:var(--ink);background:#fff}
+.ing-ch span.on{background:var(--cc);color:#fff;font-weight:500}
+.stage-pick{display:grid;gap:6px;padding:14px 16px;border-radius:var(--r-md);background:var(--cream)}
+.stage-pick b{font-weight:500}
+.sub-ings{display:grid;gap:10px;margin-top:10px}
+.sub-ing{padding-top:10px;border-top:1px dashed var(--line)}
+.sub-ing b{font-family:var(--serif);font-size:15px}
+.sub-ing i{font-family:var(--latin);font-size:13px;color:var(--sub)}
+.sub-tag{margin-left:6px;font-size:11px;color:var(--rose)}
+.sub-ing p{margin:4px 0 0;font-size:13px}
+.alt-prods{display:grid;gap:8px;padding:12px 14px;border-radius:var(--r-md);border:1px solid var(--line);background:#fff}
+.alt-prod{display:grid;gap:2px;padding-top:8px;border-top:1px solid var(--line)}
+.alt-prods .herb-tag+.alt-prod{border-top:0;padding-top:0}
+.alt-prod b{font-weight:500;font-size:14px}
+.alt-prod span{font-size:12.5px;color:var(--sub)}
+.herb{padding:12px 14px;border-radius:var(--r-md);background:linear-gradient(120deg,#fbf3e8,#f6ece2);border:1px solid #eedfc9}
+.herb-tag{font-size:12px;letter-spacing:1px;color:var(--gold);font-weight:500}
+.herb{display:grid;gap:8px}
+.herb p{margin:0;font-size:13.5px;line-height:1.8}
+.care-steps{margin:0;padding-left:20px;display:grid;gap:4px;font-size:13.5px;line-height:1.75}
+.care-steps li::marker{color:var(--gold);font-family:var(--latin);font-weight:600}
+.care-note{font-size:12.5px!important;color:var(--sub)}
+.product{display:grid;gap:8px;padding:12px 14px;border-radius:var(--r-sm);background:#fff;border:1px solid #eedfc9}
+.pr-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.pr-head b{font-family:var(--serif);font-size:17px}
+.pr-head small{font-size:12.5px;color:var(--sub)}
+.pr-tag{font-size:11px;padding:1px 8px;border-radius:99px;background:var(--gold);color:#fff}
+.product .spec{margin:0}
+.btn-pair{display:grid;gap:6px}
+.btn-pair .task-btn{min-width:84px}
+.studio-pick{color:var(--mauve-deep)}
+
+/* ---------- 任務 ---------- */
+.ring-wrap{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;padding:18px}
+.ring{width:104px;height:104px;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .val{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.ring .val b{font-family:var(--latin);font-size:30px;font-weight:600;line-height:1}
+.ring .val small{font-size:11px;color:var(--sub)}
+.streak{display:flex;gap:6px;margin-top:10px}
+.streak span{flex:1;height:30px;border-radius:9px;display:grid;place-items:center;font-size:11px;color:var(--faint);background:var(--cream);border:1px solid var(--line)}
+.streak span.on{background:var(--mauve);color:#fff;border-color:var(--mauve)}
+.streak span.gift{border-style:dashed;border-color:var(--gold);color:var(--gold)}
+.tasks{display:grid;gap:10px}
+.task{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:14px;border-radius:var(--r-md);background:var(--card);border:1px solid var(--line);transition:background .3s,opacity .3s}
+.task .ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--cream)}
+.task .ic svg{width:22px;height:22px;fill:none;stroke:var(--rose);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.task b{display:block;font-weight:500;font-size:15px}
+.task small{display:block;font-size:12.5px;color:var(--sub);line-height:1.5}
+.task .reward{display:inline-flex;align-items:center;gap:2px;font-size:12px;color:var(--gold);margin-top:2px}
+.task .reward svg{width:15px;height:15px}
+.task-btn{min-width:72px;height:36px;padding:0 14px;border-radius:99px;font-size:13px;font-weight:500;border:1px solid var(--line);background:#fff}
+.task-btn.claim{background:var(--gold);border-color:var(--gold);color:#fff;animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(196,154,98,.18)}}
+.task.done{background:#faf5f2}
+.task.done b{color:var(--sub)}
+.task-btn.ok{color:var(--mauve);border-color:transparent;background:transparent}
+.mini-prog{height:4px;border-radius:4px;background:var(--blush);margin-top:6px;overflow:hidden}
+.mini-prog i{display:block;height:100%;background:var(--rose)}
+
+.breath{padding:22px;text-align:center;display:grid;gap:14px;justify-items:center}
+.orbit{width:180px;height:180px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#fff 0,#f4e5e2 60%,transparent 61%);position:relative}
+.orbit::before{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid var(--gold-soft);transform:scale(var(--s,.7));transition:transform var(--d,4s) ease-in-out;background:radial-gradient(circle,rgba(176,127,120,.12),rgba(124,106,126,.1))}
+.orbit div{position:relative;display:grid;gap:2px}
+.orbit b{font-family:var(--latin);font-size:40px;font-weight:600;line-height:1}
+.orbit span{font-size:14px;color:var(--sub)}
+
+/* ---------- 貓咪小屋 ---------- */
+.house{position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lift)}
+.house img,.house .cat-vid{width:100%;aspect-ratio:3/2;object-fit:cover;cursor:pointer;display:block;background:#e9dcd6}
+.house .cat-react{position:absolute;inset:0;height:100%;opacity:0;pointer-events:none;transition:opacity .25s}
+.house .cat-react.on{opacity:1}
+@keyframes purr{30%{transform:scale(1.02) rotate(-.3deg)}60%{transform:scale(1.01) rotate(.3deg)}}
+.house .bubble{position:absolute;top:14px;left:14px;max-width:72%;pointer-events:none}
+.house .pet-hint{position:absolute;right:12px;bottom:12px;padding:6px 14px;border-radius:99px;background:rgba(255,250,246,.92);font-size:13px;font-weight:500;color:var(--mauve-deep);pointer-events:none}
+.float{position:absolute;pointer-events:none;font-size:22px;color:var(--rose);animation:floatUp 1.2s ease-out forwards;z-index:5}
+@keyframes floatUp{to{transform:translateY(-70px) scale(1.3);opacity:0}}
+.feed{padding:18px;display:grid;gap:14px}
+.bowl-row{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+.bowl{position:relative;width:96px;height:76px}
+.bowl svg{width:100%;height:100%}
+.bowl b{position:absolute;right:-6px;top:-6px;min-width:30px;height:30px;padding:0 8px;border-radius:99px;background:var(--rose);color:#fff;display:grid;place-items:center;font-size:14px;font-weight:500}
+.rate{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13.5px;color:var(--sub)}
+.rate svg{width:20px;height:20px}
+.rate .eq{font-family:var(--latin);font-size:18px;color:var(--gold)}
+.feed-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cap{font-size:12px;color:var(--faint)}
+.fly{position:fixed;z-index:60;width:28px;height:28px;pointer-events:none;transition:transform .8s cubic-bezier(.5,-.4,.5,1),opacity .8s}
+
+/* ---------- 芯幣錢包 ---------- */
+.purse{position:relative;margin-top:-30px;z-index:2;padding:22px 20px;background:linear-gradient(145deg,#fffaf2,#f6e6d4);border:1px solid #ead6bc;text-align:center;overflow:hidden}
+.purse::before{content:"";position:absolute;width:220px;height:220px;right:-70px;top:-90px;border-radius:50%;background:radial-gradient(circle,rgba(196,154,98,.18),transparent 70%)}
+.purse .big-coin{width:76px;height:76px;margin:0 auto;animation:spinIn 1s ease both}
+@keyframes spinIn{from{transform:rotateY(180deg) scale(.6);opacity:0}}
+.purse .bal{font-family:var(--latin);font-size:52px;font-weight:600;line-height:1;margin-top:8px;color:var(--ink)}
+.purse .bal small{font-family:var(--serif);font-size:16px;margin-left:4px;color:var(--sub)}
+.purse .worth{margin-top:4px;font-size:13.5px;color:var(--sub)}
+.purse .worth b{color:var(--rose);font-weight:500}
+.notice{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:var(--r-sm);background:#fdf3e6;border:1px solid #f1dfc2;font-size:13px;line-height:1.6;text-align:left;margin-top:14px}
+.notice svg{flex:none;width:18px;height:18px;margin-top:2px;fill:none;stroke:var(--gold);stroke-width:1.8}
+.redeem{padding:18px;display:grid;gap:14px}
+.amounts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.amounts button{padding:10px 4px;border-radius:var(--r-md);border:1px solid var(--line);background:#fff;display:grid;gap:0;justify-items:center}
+.amounts button b{font-family:var(--latin);font-size:22px;font-weight:600;line-height:1.2}
+.amounts button small{font-size:11.5px;color:var(--sub)}
+.amounts button[aria-pressed="true"]{border-color:var(--gold);background:#fdf6ea;box-shadow:0 0 0 2px rgba(196,154,98,.25)}
+.amounts button:disabled{opacity:.4}
+.ticket{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:16px 18px;border-radius:var(--r-md);background:linear-gradient(120deg,#fff,#fbefe4);border:1px solid #ecd7c1;overflow:hidden}
+.ticket::before,.ticket::after{content:"";position:absolute;right:92px;width:16px;height:16px;border-radius:50%;background:var(--paper);border:1px solid #ecd7c1}
+.ticket::before{top:-9px}.ticket::after{bottom:-9px}
+.ticket .t-title{font-weight:500}
+.ticket .t-code{font-family:var(--latin);font-size:18px;font-weight:600;letter-spacing:1.5px;color:var(--mauve-deep);overflow-wrap:anywhere}
+.ticket .t-meta{font-size:12px;color:var(--sub)}
+.ticket .t-val{border-left:1px dashed #e2c9ae;padding-left:16px;text-align:center;min-width:76px}
+.ticket .t-val b{display:block;font-family:var(--latin);font-size:26px;font-weight:600;color:var(--rose);line-height:1.1}
+.ticket .t-val small{font-size:11px;color:var(--sub)}
+.ticket.used{opacity:.5}
+.ticket .stamp{position:absolute;right:100px;top:50%;transform:translateY(-50%) rotate(-12deg);border:2px solid var(--rose);color:var(--rose);padding:0 8px;border-radius:6px;font-size:12px;font-weight:500}
+.hist{display:grid}
+.hist div{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:12px 2px;border-bottom:1px solid var(--line)}
+.hist div:last-child{border-bottom:0}
+.hist b{font-weight:500;font-size:14px}
+.hist time{font-size:12px;color:var(--faint);grid-column:1}
+.hist .amt{grid-row:1/3;grid-column:2;align-self:center;font-family:var(--latin);font-size:19px;font-weight:600}
+.hist .plus{color:var(--gold)}
+.hist .minus{color:var(--sub)}
+details.rules{border-radius:var(--r-md);background:var(--card);border:1px solid var(--line);padding:0 16px}
+details.rules summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;height:52px;font-weight:500}
+details.rules summary::-webkit-details-marker{display:none}
+details.rules summary::after{content:"+";font-size:20px;color:var(--rose);transition:transform .3s}
+details.rules[open] summary::after{transform:rotate(45deg)}
+.rule-list{margin:0 0 16px;padding:0;list-style:none;display:grid;gap:10px;font-size:13.5px;line-height:1.7}
+.rule-list li{display:grid;grid-template-columns:86px 1fr;gap:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.rule-list li span:first-child{color:var(--sub)}
+
+/* ---------- 評論小幫手 ---------- */
+.rv{padding:18px;display:grid;gap:12px}
+.rv-q{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.rv-q b{font-weight:500;font-size:15px}
+.rv-q small{font-size:12px;color:var(--faint)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{min-height:36px;padding:6px 14px;border-radius:99px;border:1px solid var(--line);background:#fff;font-size:13.5px;line-height:1.4;transition:background .2s,border-color .2s,color .2s}
+.chips button[aria-pressed="true"]{background:#f6ece9;border-color:var(--rose);color:var(--mauve-deep);font-weight:500}
+.chips button[aria-pressed="true"]::before{content:"✓ ";color:var(--rose)}
+.rv-out{display:grid;gap:10px}
+.rv-out textarea{width:100%;min-height:290px;resize:vertical;border-radius:var(--r-md);border:1px solid var(--line);background:#fffefc;padding:14px 16px;font:inherit;font-size:15px;line-height:1.9;color:var(--ink)}
+.rv-out textarea:focus{outline:2px solid var(--rose);outline-offset:0;border-color:transparent}
+.rv-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--faint)}
+.rv-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rv-steps{margin:0;padding-left:20px;font-size:13.5px;color:var(--sub);display:grid;gap:4px}
+
+/* 香氣翻牌 */
+.play-stats{display:grid;grid-template-columns:repeat(3,1fr);padding:12px 6px;text-align:center}
+.play-stats small{display:block;font-size:12px;color:var(--sub)}
+.play-stats b{font-family:var(--latin);font-size:22px;font-weight:600}
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;perspective:1000px}
+.mcard{aspect-ratio:3/4;position:relative;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.mcard .m-back{transition:visibility 0s .25s}
+.mcard.on .m-back{visibility:hidden}
+.mcard:not(.on) .m-front{visibility:hidden;transition:visibility 0s .25s}
+.m-face svg,.m-face b,.m-face small{-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.tcard,.flip,.deck{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.m-inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,.1,.2,1)}
+.mcard.on .m-inner{transform:rotateY(180deg)}
+.m-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:12px;display:grid;place-items:center}
+.m-back{background:radial-gradient(circle at 50% 42%,#9a8aa0 0,#6f5f74 70%);border:1px solid #5c4d61;box-shadow:0 6px 14px rgba(70,50,70,.2)}
+.m-back svg{width:44%}
+.m-front{transform:rotateY(180deg);background:#fffdfa;border:1.5px solid var(--mc);align-content:center;gap:2px;padding:6px;text-align:center;box-shadow:0 6px 14px rgba(70,50,70,.12)}
+.m-front svg{width:38%;height:auto}
+.m-front b{font-size:13px;font-weight:500;line-height:1.3}
+.m-front small{font-size:10.5px;color:var(--sub)}
+.mcard.got .m-front{background:color-mix(in srgb,var(--mc) 14%,#fff)}
+.mcard.got{animation:gotPop .4s ease}
+@keyframes gotPop{50%{transform:scale(1.06)}}
+.fact{padding:14px 16px;display:grid;gap:8px}
+.fact.pop{animation:bubblePop .4s cubic-bezier(.3,1.6,.5,1)}
+.fact-head{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:center}
+.fact-head svg{width:34px}
+.fact-head b{display:block;font-family:var(--serif);font-size:16px;margin-top:2px}
+.fact p{margin:0;font-size:14px;line-height:1.85}
+.play-done{padding:18px;display:grid;gap:10px;text-align:center;justify-items:center}
+.stars{display:flex;gap:6px;font-size:30px;color:var(--line)}
+.stars .on{color:var(--gold)}
+/* 貓咪成長 */
+.lv-tag{position:absolute;left:12px;bottom:12px;padding:5px 12px;border-radius:99px;background:rgba(95,79,99,.85);color:#fff;font-size:12.5px;pointer-events:none;z-index:3}
+.dc{position:absolute;pointer-events:none;z-index:2}
+.dc-lights{left:0;top:0;width:100%;height:44px}
+.dc-tree{left:10px;bottom:40px;width:54px}
+.dc-yarn{left:68px;bottom:44px;width:34px}
+.dc-frame{right:14px;top:52px;width:52px}
+.growth{padding:18px;display:grid;gap:12px}
+.g-head{display:flex;justify-content:space-between;align-items:flex-end}
+.decor-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.decor{display:grid;justify-items:center;gap:2px;padding:10px 4px;border-radius:var(--r-md);border:1px solid var(--line);background:#fff;text-align:center}
+.decor .d-ic svg{width:34px;height:34px}
+.decor b{font-size:12.5px;font-weight:500}
+.decor small{font-size:10.5px;color:var(--sub)}
+.decor.on{border-color:var(--gold);background:#fdf6ea}
+.decor:disabled{opacity:.45}
+/* 媽媽小幫手 */
+.water,.mood,.cal{padding:18px;display:grid;gap:12px}
+.cups{display:grid;grid-template-columns:repeat(8,1fr);gap:4px}
+.cup svg{width:100%;height:auto}
+.cup .wtr{opacity:0;transform:scaleY(0);transform-origin:50% 100%;transition:transform .35s,opacity .2s}
+.cup.full .wtr{opacity:1;transform:none}
+.water-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-size:14px}
+.goal-ctl{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--sub)}
+.goal-ctl button{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:#fff}
+.mood-row{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.mood-row button{display:grid;justify-items:center;gap:6px;padding:10px 2px;border-radius:var(--r-md);border:1px solid var(--line);background:#fff;font-size:12.5px}
+.mood-row i{width:24px;height:24px;border-radius:50%;background:var(--mc);opacity:.85}
+.mood-row button[aria-pressed="true"]{border-color:var(--mc);background:color-mix(in srgb,var(--mc) 14%,#fff);font-weight:500}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal-h{font-size:11.5px;color:var(--faint);padding-bottom:2px}
+.cal-d{position:relative;aspect-ratio:1;border-radius:10px;background:var(--cream);display:grid;place-items:center;font-size:12px;color:var(--sub);overflow:hidden}
+.cal-d i{position:absolute;inset:0;background:var(--mc);opacity:.55;border-radius:10px}
+.cal-d b{position:relative;z-index:1;font-weight:500}
+.cal-d em{position:absolute;right:2px;bottom:0;font-size:9px;font-style:normal;z-index:1}
+.cal-d.today{outline:2px solid var(--rose);outline-offset:-2px}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--sub)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:-1px;opacity:.75}
+/* 心情日記・喝水紀錄 */
+:root{--water:#3f8fc0}
+button.cal-d{border:0;padding:0;font:inherit;cursor:pointer}
+button.cal-d:disabled{opacity:.4;cursor:default}
+.cal-d.sel{box-shadow:0 0 0 2px var(--mauve) inset}
+.cal-d u{position:absolute;left:4px;top:4px;width:5px;height:5px;border-radius:50%;background:var(--mauve-deep);z-index:1}
+.dot-diary{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--mauve-deep);vertical-align:1px;margin-right:2px}
+.diary{padding:18px;display:grid;gap:10px}
+.day-sum{display:flex;flex-wrap:wrap;gap:8px}
+.ds-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:99px;background:var(--cream);font-size:13px}
+.ds-chip i{width:10px;height:10px;border-radius:50%;background:var(--mc)}
+.diary textarea{width:100%;min-height:150px;resize:vertical;border-radius:var(--r-md);border:1px solid var(--line);background:#fffefc;padding:14px 16px;font:inherit;font-size:15px;line-height:1.9;color:var(--ink);background-image:repeating-linear-gradient(transparent 0 calc(1.9em - 1px),#f1e6e1 calc(1.9em - 1px) 1.9em);background-position:0 13px;background-attachment:local}
+.diary textarea:focus{outline:2px solid var(--rose);outline-offset:0;border-color:transparent}
+.whist{padding:18px;display:grid;gap:12px}
+.seg.mini{width:132px}
+.seg.mini button{height:30px;font-size:12.5px}
+.wstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.wstats div{padding:10px 4px;border-radius:var(--r-sm);background:var(--cream)}
+.wstats small{display:block;font-size:11.5px;color:var(--sub)}
+.wstats b{font-family:var(--latin);font-size:24px;font-weight:600;font-variant-numeric:lining-nums tabular-nums}
+.wstats span{font-size:12px;color:var(--sub);margin-left:2px}
+.chart{position:relative}
+.chart svg{width:100%;height:auto;display:block;touch-action:pan-y}
+.chart .ax{font-size:10px;fill:var(--sub);font-family:var(--sans);font-variant-numeric:tabular-nums}
+.chart .base{stroke:var(--line);stroke-width:1}
+.chart .goal{stroke:var(--rose);stroke-width:1.2;stroke-dasharray:4 3}
+.chart .goal-l{font-size:10.5px;fill:var(--rose)}
+.chart .hit{fill:transparent;cursor:pointer}
+.chart .hit.on{fill:rgba(63,143,192,.08)}
+.tip{position:absolute;top:-8px;transform:translate(-50%,-100%);padding:5px 10px;border-radius:8px;background:var(--mauve-deep);color:#fff;font-size:12px;white-space:nowrap;pointer-events:none}
+.wtable{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+.wtable th,.wtable td{padding:6px 4px;border-bottom:1px dashed var(--line);text-align:left}
+.wtable td.num{text-align:right}
+.wtable th:last-child{text-align:right}
+
+/* 徽章 */
+.badge-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.badge-card{padding:16px 12px;display:grid;justify-items:center;gap:4px;text-align:center}
+.badge-card b{font-family:var(--serif);font-size:15px;margin-top:4px}
+.badge-card small{font-size:12px;color:var(--sub)}
+.badge-card .progress{width:100%;margin-top:6px}
+.badge-card.got{background:linear-gradient(160deg,#fffdf8,#fbf1e2)}
+.medal.got{filter:drop-shadow(0 4px 8px rgba(196,154,98,.4))}
+.past-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.past-row:last-child{border-bottom:0}
+.badge-tile .mini-medals{display:flex;gap:2px}
+.badge-tile{min-height:96px}
+
+/* 正式版：登入卡、會員卡、QR */
+.login-card{padding:18px;display:grid;gap:10px;margin-top:18px}
+.member-card{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:center;padding:16px}
+.mc-qr{width:96px;height:96px;padding:6px;background:#fff;border-radius:12px;border:1px solid var(--line);cursor:pointer}
+.mc-qr svg,.qr-box svg{width:100%;height:100%;display:block}
+.qr-box{width:min(240px,70vw);aspect-ratio:1;margin:14px auto;padding:10px;background:#fff;border-radius:16px;border:1px solid var(--line)}
+.t-qr{position:absolute;right:10px;top:10px;font-size:11px;padding:2px 8px;border-radius:99px;border:1px solid var(--line);background:#fff;color:var(--mauve-deep)}
+.demo a{font-size:11.5px;color:var(--sub);text-decoration:underline;text-underline-offset:3px}
+
+/* 店家核銷頁 */
+.staff-wrap{padding-block:18px 8px;display:grid;gap:14px}
+.staff-head p{margin:2px 0 0}
+.staff-card{padding:18px;display:grid;gap:12px}
+.staff-err{margin:0;color:#b04a4a;font-size:13px}
+.st-sum{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.st-sum div{padding:12px;border-radius:var(--r-md);background:var(--mauve);color:#fff}
+.st-sum small{display:block;font-size:12px;opacity:.85}
+.st-sum b{font-family:var(--latin);font-size:26px;font-weight:600;font-variant-numeric:lining-nums tabular-nums}
+.st-sum span{font-size:12px;margin-left:4px}
+.st-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.st-badge{display:inline-block;padding:6px 16px;border-radius:99px;font-weight:500;font-size:15px}
+.st-badge.ok{background:#e4efe0;color:#4d7a45}
+.st-badge.bad{background:#f6e2e0;color:#a24b45}
+.st-code{font-family:var(--latin);font-size:19px;font-weight:600;letter-spacing:1.5px;font-variant-numeric:lining-nums}
+.st-info{display:grid;grid-template-columns:72px 1fr;gap:6px 10px;margin:0;font-size:14px}
+.st-info dt{color:var(--sub)}.st-info dd{margin:0}
+.st-check{display:flex;align-items:center;gap:8px;font-size:14px}
+.st-check input{width:20px;height:20px;accent-color:var(--mauve)}
+.st-rules{margin:0;padding:12px 14px 12px 30px;border-radius:var(--r-sm);font-size:13.5px;line-height:1.8}
+.st-rules.ok{background:#eef5eb;color:#3f6a38}
+.st-rules.bad{background:#fbeeec;color:#93433d}
+.st-log{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.st-log:last-child{border-bottom:0}
+.st-log b{font-weight:500;font-size:14px;display:block}
+.st-log small{font-size:12px;color:var(--sub)}
+.st-log span{font-family:var(--latin);font-size:17px;font-weight:600;color:var(--rose);white-space:nowrap}
+
+/* 保養小教室 */
+.a-card{display:grid;gap:6px;padding:18px;text-align:left;justify-items:start}
+.a-card b{font-family:var(--serif);font-size:18px;line-height:1.5;text-wrap:balance}
+.a-card small{font-size:12.5px;color:var(--rose)}
+.article-wrap{padding-block:18px 8px}
+.a-back{margin-bottom:14px}
+.article{display:grid;gap:10px;justify-items:start}
+.a-title{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.5;margin:4px 0 0;text-wrap:balance}
+.a-meta{font-size:12.5px;color:var(--faint)}
+.a-body{font-size:16px;line-height:2;max-width:38em}
+.a-body h3{font-family:var(--serif);font-size:18px;margin:26px 0 4px;color:var(--mauve-deep)}
+.a-body p{margin:0 0 14px}
+.a-body ol,.a-body ul{margin:0 0 14px;padding-left:22px;display:grid;gap:6px}
+.a-body li::marker{color:var(--rose);font-family:var(--latin);font-weight:600}
+.a-note{font-size:13px!important;color:var(--sub);background:var(--cream);padding:12px 14px;border-radius:var(--r-sm);line-height:1.8}
+
+/* 芯幣換好禮 */
+.gift-card{padding:18px;display:grid;gap:12px;background:linear-gradient(150deg,#fffdfa,#fbeef0)}
+.gift-top{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center}
+.gift-art{width:64px;height:80px;border-radius:14px;background:#fff;display:grid;place-items:center;border:1px solid var(--line)}
+.gift-art svg{width:44px}
+.gift-ways{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gift-way{position:relative;display:grid;justify-items:center;gap:2px;padding:14px 8px 10px;border-radius:var(--r-md);border:1px solid var(--line);background:#fff}
+.gift-way b{font-family:var(--latin);font-size:24px;font-weight:600;font-variant-numeric:lining-nums;display:flex;align-items:center;gap:4px}
+.gift-way small{font-size:12.5px;color:var(--sub)}
+.gift-way .pr-tag{position:absolute;top:-9px;right:10px}
+.gift-way:disabled{opacity:.45}
+
+/* 結帳試算 */
+.calc{display:grid;gap:6px;padding:14px 16px;border-radius:var(--r-md);background:var(--card);border:1px solid var(--line)}
+.calc label{font-size:13px;color:var(--sub)}
+.calc-row{display:flex;align-items:center;gap:8px}
+.calc-row span{font-family:var(--latin);font-size:18px;color:var(--sub)}
+.calc-row input{flex:1;min-width:0;height:44px;border-radius:var(--r-sm);border:1px solid var(--line);padding:0 12px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}
+.calc-out{margin:0;font-size:13.5px;line-height:1.7}
+.calc-out b{color:var(--rose);font-weight:500}
+
+/* ---------- 幸運轉盤 ---------- */
+.wheel-card{padding:18px;display:grid;gap:14px;overflow:hidden}
+.spin-modal .wheel{width:min(260px,80vw)}
+.wheel{position:relative;width:min(290px,100%);aspect-ratio:1;margin:0 auto}
+.wheel>svg{width:100%;height:100%;filter:drop-shadow(0 12px 22px rgba(90,64,70,.22))}
+.wheel text{font-variant-numeric:lining-nums}
+.wheel-ptr{position:absolute;left:50%;top:-6px;z-index:2;width:0;height:0;margin-left:-13px;border-left:13px solid transparent;border-right:13px solid transparent;border-top:26px solid var(--rose);filter:drop-shadow(0 3px 3px rgba(0,0,0,.2));transform-origin:50% 0}
+.wheel-ptr.kick{animation:kick .18s ease-out}
+@keyframes kick{40%{transform:rotate(-14deg)}}
+.wheel-hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:#fffaf6;display:grid;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+details.odds summary{cursor:pointer;font-size:13px;color:var(--sub);text-align:center}
+details.odds ul{list-style:none;margin:10px 0 6px;padding:0;display:grid;gap:4px;font-size:13px}
+details.odds li{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:4px 0}
+.win-burst{width:130px;height:130px;margin:6px auto 0;border-radius:50%;display:grid;place-content:center;justify-items:center;background:radial-gradient(circle,#fff8ea 0,#f4dfbf 70%);box-shadow:0 0 0 8px rgba(196,154,98,.15),0 0 40px rgba(196,154,98,.4);animation:spinIn .8s ease both}
+.win-burst b{font-family:var(--latin);font-size:34px;font-weight:600;color:var(--rose);line-height:1;font-variant-numeric:lining-nums}
+.win-burst small{font-size:12px;color:var(--sub)}
+
+/* ---------- 邀請 ---------- */
+.invite-hero{padding:20px;text-align:center;display:grid;gap:12px;background:linear-gradient(160deg,#fffdfa,#f3e7ef)}
+.code-box{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 10px 10px 18px;border-radius:var(--r-md);background:#fff;border:1.5px dashed #d8c3cc}
+.code-box b{font-family:var(--latin);font-size:24px;font-weight:600;letter-spacing:4px;color:var(--mauve-deep)}
+.code-box button{height:38px;padding:0 16px;border-radius:99px;background:var(--mauve);color:#fff;font-size:13px}
+.link-box{font-size:12.5px;color:var(--sub);word-break:break-all;user-select:all;padding:8px 12px;background:var(--cream);border-radius:10px}
+.steps{display:grid;gap:0;counter-reset:s}
+.steps div{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:12px 0;position:relative}
+.steps div::before{counter-increment:s;content:counter(s);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--cream);color:var(--rose);font-family:var(--latin);font-weight:600;font-size:17px}
+.steps div:not(:last-child)::after{content:"";position:absolute;left:16.5px;top:46px;bottom:-12px;width:1px;background:var(--line)}
+.steps b{font-weight:500}
+.steps p{margin:2px 0 0;font-size:13px;color:var(--sub)}
+.friends div{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.friends div:last-child{border-bottom:0}
+.pill{padding:2px 10px;border-radius:99px;font-size:12px}
+.pill.ok{background:#efe6f0;color:var(--mauve-deep)}
+.pill.wait{background:var(--cream);color:var(--sub)}
+
+/* ---------- 加入會員 sheet ---------- */
+.sheet-bg{position:fixed;inset:0;z-index:50;background:rgba(60,45,55,.42);display:grid;align-items:end;justify-items:center;animation:fade .25s ease}
+@keyframes fade{from{opacity:0}}
+.sheet{width:min(100%,460px);max-height:92svh;overflow:auto;background:var(--paper);border-radius:26px 26px 0 0;padding:10px max(20px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));animation:up .35s cubic-bezier(.2,.9,.3,1)}
+@keyframes up{from{transform:translateY(40px);opacity:.5}}
+.sheet .grab{width:42px;height:5px;border-radius:5px;background:var(--line);margin:0 auto 14px}
+.field{display:grid;gap:6px}
+.field label{font-size:13px;color:var(--sub)}
+.field input{height:48px;border-radius:var(--r-sm);border:1px solid var(--line);background:#fff;padding:0 14px;font:inherit;color:var(--ink)}
+.field input:focus{outline:2px solid var(--rose);outline-offset:0;border-color:transparent}
+.line-btn{background:#06c755;color:#fff;box-shadow:0 8px 18px rgba(6,199,85,.22)}
+
+/* ---------- 底部導覽 ---------- */
+.nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,460px);z-index:25;display:grid;grid-template-columns:repeat(5,1fr);padding:8px max(8px,env(safe-area-inset-left,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-right,0px));background:rgba(255,250,246,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+.nav button{display:grid;justify-items:center;gap:2px;padding:6px 0;border-radius:14px;font-size:11.5px;color:var(--sub);position:relative}
+.nav svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.nav button[aria-current="page"]{color:var(--mauve-deep);font-weight:500}
+.nav button[aria-current="page"]::before{content:"";position:absolute;top:-9px;width:22px;height:3px;border-radius:3px;background:var(--rose)}
+.nav .dot{position:absolute;top:4px;left:calc(50% + 8px);width:8px;height:8px;border-radius:50%;background:var(--rose);border:2px solid var(--paper)}
+
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);z-index:70;padding:10px 18px;border-radius:99px;background:var(--mauve-deep);color:#fff;font-size:14px;opacity:0;transition:.35s;pointer-events:none;white-space:nowrap;max-width:calc(100% - 32px)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.footer{text-align:center;padding-block:26px 10px}
+.footer a{font-family:var(--latin);font-style:italic;font-size:15px;color:var(--sub)}
+.demo{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.demo span{font-size:11.5px;color:var(--faint)}
+.demo button{font-size:11.5px;color:var(--rose);text-decoration:underline;text-underline-offset:3px}
+
+@media (min-width:700px){.shell{margin-block:0}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+
+
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f2dcae"/><stop offset=".5" stop-color="#d4a96b"/><stop offset="1" stop-color="#b3864f"/></linearGradient>
+    <linearGradient id="gGoldIn" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#e9cd98"/><stop offset="1" stop-color="#f8e8c6"/></linearGradient>
+  </defs>
+  <!-- 芯幣：H 金幣 -->
+  <symbol id="coin" viewBox="0 0 48 48">
+    <circle cx="24" cy="24" r="22.5" fill="url(#gGold)"/>
+    <circle cx="24" cy="24" r="19.2" fill="url(#gGoldIn)" stroke="#b98c55" stroke-width=".8"/>
+    <circle cx="24" cy="24" r="21" fill="none" stroke="#fff3d6" stroke-width=".7" stroke-dasharray="1 2.2" opacity=".9"/>
+    <path d="M14.2 13h8.4v1.6h-2.3v8.2h7.4v-8.2h-2.3V13h8.4v1.6h-2.3v18.8h2.3V35h-8.4v-1.6h2.3v-8.8h-7.4v8.8h2.3V35h-8.4v-1.6h2.3V14.6h-2.3Z" fill="#fbeccc" transform="translate(.5 .6)" opacity=".8"/>
+    <path d="M14.2 13h8.4v1.6h-2.3v8.2h7.4v-8.2h-2.3V13h8.4v1.6h-2.3v18.8h2.3V35h-8.4v-1.6h2.3v-8.8h-7.4v8.8h2.3V35h-8.4v-1.6h2.3V14.6h-2.3Z" fill="#b5864c"/>
+  </symbol>
+  <!-- 小魚乾 -->
+  <symbol id="fish" viewBox="0 0 32 32">
+    <path d="M4 16c4-6 10-8 15-6.5 2.6.8 4.4 2.6 5.4 4.2L29 10.2l-1.6 5.8 1.6 5.8-4.6-3.5c-1 1.6-2.8 3.4-5.4 4.2C14 24 8 22 4 16Z" fill="#d9a77a" stroke="#a9744c" stroke-width="1"/>
+    <path d="M14 11.5c1.4 2.6 1.4 6.4 0 9M18 11.2c1 2.8 1 6.8 0 9.6" fill="none" stroke="#b9825a" stroke-width=".9" opacity=".8"/>
+    <circle cx="8.6" cy="15" r="1.3" fill="#5e4334"/>
+  </symbol>
+  <symbol id="drop" viewBox="0 0 24 24"><path d="M12 3c3.6 4.5 6 7.9 6 11a6 6 0 0 1-12 0c0-3.1 2.4-6.5 6-11Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9.4 15.2a2.8 2.8 0 0 0 2.6 2.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="glow" aria-hidden="true"></div>
+<div class="shell" id="shell">
+  <header class="topbar gutter" id="topbar">
+    <button class="brand" data-go="home" aria-label="回到首頁">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><use href="#coin"/></svg>
+      <span><b>Heart studio</b><small>芯彤美學・小角落</small></span>
+    </button>
+    <button class="wallet-chip" data-go="coins" aria-label="查看我的芯幣">
+      <svg aria-hidden="true"><use href="#coin"/></svg><span class="num" id="chipCoin">0.0</span>
+      <svg class="fish" aria-hidden="true"><use href="#fish"/></svg><i class="num" id="chipFish">0</i>
+    </button>
+  </header>
+  <main id="main"></main>
+  <footer class="footer gutter">
+    <a href="https://www.instagram.com/heart_.studio/" target="_blank" rel="noopener noreferrer">with love · Heart studio</a>
+    <div class="demo"><a href="/privacy.html">隱私權政策</a><a href="/staff.html">店家核銷</a><button id="logoutBtn" type="button" hidden>登出</button></div>
+  </footer>
+</div>
+
+<nav class="nav" aria-label="主要導覽" id="nav">
+  <button data-go="home"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20H4z"/><path d="M10 20v-5.5h4V20"/></svg><span>首頁</span></button>
+  <button data-go="cards"><svg viewBox="0 0 24 24"><rect x="6.5" y="3.5" width="11" height="17" rx="2"/><path d="M12 8.5l1.2 2.3 2.5.4-1.8 1.8.4 2.5-2.3-1.2-2.3 1.2.4-2.5-1.8-1.8 2.5-.4z"/></svg><span>抽牌</span><i class="dot" id="dotCards" hidden></i></button>
+  <button data-go="tasks"><svg viewBox="0 0 24 24"><rect x="4.5" y="4" width="15" height="17" rx="2.5"/><path d="M8.5 10l1.8 1.8 3.4-3.4M8.5 16h7"/></svg><span>任務</span><i class="dot" id="dotTasks" hidden></i></button>
+  <button data-go="cat"><svg viewBox="0 0 24 24"><path d="M5 9.5 5.6 4l3.6 3a8 8 0 0 1 5.6 0l3.6-3 .6 5.5c.9 1.2 1.4 2.6 1.4 4 0 4.2-4 6.5-8.4 6.5S3.6 17.7 3.6 13.5c0-1.4.5-2.8 1.4-4Z"/><path d="M9 13.2h.01M15 13.2h.01M11 16l1 .8 1-.8"/></svg><span>小屋</span></button>
+  <button data-go="coins"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 16.5c-3-2-4.2-3.6-4.2-5.4 0-1.3.9-2.2 2-2.2.9 0 1.6.5 2.2 1.3.6-.8 1.3-1.3 2.2-1.3 1.1 0 2 .9 2 2.2 0 1.8-1.2 3.4-4.2 5.4Z"/></svg><span>芯幣</span></button>
+</nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div id="sheetRoot"></div>
+<audio id="purr" src="assets/cat-purr.mp3" preload="none"></audio>
+
+<script>
+'use strict';
+/* ======================================================================
+   設定區：芯彤可以在這裡調整所有規則數字
+   ====================================================================== */
+const CONFIG = {
+  coinValueNTD: 5,           // 1 芯幣 = 折抵 NT$5
+  fishPerFeed: 1,            // 每餵 1 條小魚乾
+  coinTenthsPerFeed: 1,      // 換得 0.1 芯幣（以 0.1 為單位記錄）
+  bowlCap: 30,               // 小魚乾最多存 30 條（碗滿了要先餵）
+  coinLifeDays: 365,         // 芯幣自獲得起 365 天到期
+  expireWarnDays: 30,        // 到期前 30 天提醒
+  redeemOptions: [20, 40, 60], // 可兌換的芯幣數量（最低 20 = NT$100，單次最多 60 = NT$300）
+  redeemCodeDays: 30,        // 兌換碼 30 天內到店出示
+  couponPerNTD: 1000,        // 每消費滿 NT$1,000 可使用 1 張折價券
+  maxDiscountNTD: 300,       // 每筆消費折抵合計上限
+  gifts: [], // 七玫瑰先不上架；要恢復時把下面這筆放回陣列裡
+  giftsOff: [{id:'rose7',name:'七玫瑰潤手精華',price:990,
+    desc:'融合白玫瑰、大馬士革玫瑰、千葉玫瑰等七種玫瑰，香氣層次溫柔細緻，質地好吸收。',
+    ways:[{coins:100,cash:490,tag:'推薦'},{coins:200,cash:0,tag:''}]}],
+  streakBonusFish: 3,        // 連續報到 7 天加送 3 條小魚乾
+  referInviter: 20,          // 好友完成首次到店，邀請人得 20 芯幣（= NT$100）
+  referNewcomerNTD: 100,     // 新朋友加入得 NT$100 首次體驗券
+  referCouponDays: 60,
+  bookingUrl: 'https://heartstudio.tw/',  // 之後換成夯客預約連結
+  lineId: '@311ydsui',              // LINE 官方帳號 ID（例如 '@heartstudio'），填了之後「預約課程」會打開 LINE 並自動帶入訊息
+  lineMessage: '我要預約',
+  googleReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJvc73JMdbbDQR87_edx0nUsE', // 直接打開寫評論視窗
+  googleMapsUrl: 'https://www.google.com/maps/place/?q=place_id:ChIJvc73JMdbbDQR87_edx0nUsE',
+  staffName: '子翎老師',
+  inviteBase: location.origin+'/?ref='
+};
+
+const TASKS = [
+  {id:'checkin', name:'來小屋報到', desc:'打開小角落，跟貓咪說聲嗨', fish:1, icon:'<path d="M4 11.5 12 5l8 6.5V20H4z"/><path d="M9.5 14.5c.8 1 1.6 1.4 2.5 1.4s1.7-.4 2.5-1.4"/>'},
+  {id:'draw', name:'抽一張今日牌卡', desc:'看看今天給妳的指引', fish:1, go:'cards', icon:'<rect x="6.5" y="3.5" width="11" height="17" rx="2"/><path d="M12 8.5l1.2 2.3 2.5.4-1.8 1.8.4 2.5-2.3-1.2-2.3 1.2.4-2.5-1.8-1.8 2.5-.4z"/>'},
+  {id:'breath', name:'腹式呼吸 1 分鐘', desc:'手放肚子，跟著貓咪慢慢呼吸', fish:2, icon:'<path d="M3 9h11a3 3 0 1 0-3-3M3 15h15a3 3 0 1 1-3 3M3 12h8"/>'},
+  {id:'pet', name:'摸摸貓咪 5 下', desc:'到小屋輕輕摸牠的頭', fish:1, go:'cat', need:5, icon:'<path d="M7 11V6.5a1.5 1.5 0 0 1 3 0V10m0-3.5V5a1.5 1.5 0 0 1 3 0v5m0-3a1.5 1.5 0 0 1 3 0v4m0-2a1.5 1.5 0 0 1 3 0v4c0 4-2.7 7-6.6 7-2.6 0-4.3-1-5.7-3L5 13.4a1.6 1.6 0 0 1 2.5-2"/>'},
+  {id:'game', name:'玩一局香氣翻牌', desc:'配對漢芳療產品和香氣，順便認識它們', fish:2, go:'play', icon:'<rect x="3.5" y="5" width="7.5" height="11" rx="1.5"/><rect x="13" y="8" width="7.5" height="11" rx="1.5"/><path d="M7.2 9.2l.8 1.6 1.7.2-1.2 1.2.3 1.7-1.6-.8-1.5.8.3-1.7-1.2-1.2 1.7-.2z"/>'},
+  {id:'oil', name:'今天有做居家保養', desc:'不知道怎麼做？先看芯彤的示範影片', fish:1, icon:'<path d="M12 3c3.6 4.5 6 7.9 6 11a6 6 0 0 1-12 0c0-3.1 2.4-6.5 6-11Z"/>'}
+];
+const DAILY_FISH_MAX = TASKS.reduce((s,t)=>s+t.fish,0);
+
+/* 七大脈輪 × 精油 × 漢方香氣
+   - 精油附拉丁學名、萃取部位、主要成分，方便專業說明
+   - 漢方只描述「香氣與使用感受」，不寫功效
+   - studioBlends：之後可填入工作室自有產品名稱（依脈輪順序），有填就會顯示「工作室推薦」 */
+const studioBlends = ['', '', '', '', '', '', ''];
+/* 示範影片：拍好後把連結貼進來（YouTube、IG、雲端都可以）；空白時顯示「影片準備中」 */
+const CARE_VIDEOS = { breast:'', belly:'', general:'' };
+/* 漢芳療產品：網站上只寫成分、香氣、使用感受與脈輪對應，不寫功效 */
+const PRODUCTS = {
+  orange:{name:'橘肌緻',sub:'腹部・身體保養油',chakra:'海底輪・臍輪・太陽神經叢・心輪',
+    oils:'薑、葡萄柚、黑胡椒、廣藿香、玫瑰天竺葵',base:'玫瑰果油、英國小雛菊浸泡油',
+    feel:'主要照顧中焦與下焦。薑、黑胡椒的溫暖辛香，加上葡萄柚的明亮果香，擦上去有溫溫的感受。',
+    note:'懷孕期間只在下肢與局部肌膚溫和塗抹，請避免按壓腹部；剖腹產傷口癒合後再使用。',
+    plus:'橘肌緻 PLUS：另含 ShapePerfection 複方（香草壬醯胺、有機芥末芽萃取），需與橘肌緻 1:1 調和，溫熱感更明顯，孕期與哺乳期不使用，使用前請先小範圍測試。'},
+  milk:{name:'乳泌泌',sub:'哺乳期・孕期上半身保養油',chakra:'心輪・太陽神經叢・海底輪・眉心輪・頂輪',
+    oils:'羅馬洋甘菊、苦橙葉、甜羅勒、乳香',base:'冷壓芝麻油、酪梨油、黑種草油',
+    feel:'質地溫和，孕婦和敏感肌膚也適合。適合上半身容易緊繃、或產後身心壓力比較大的媽媽。',
+    note:'避開乳頭與乳暈，餵奶前用溫毛巾擦拭乾淨。'},
+  calm:{name:'乳靜靜',sub:'離乳期保養油',chakra:'心輪・眉心輪・太陽神經叢・海底輪',
+    oils:'香蜂草、天竺葵、檸檬薄荷、橙花苦橙葉',base:'胡蘿蔔浸泡油',
+    feel:'專為離乳階段設計，清涼安撫的香氣，陪過度消耗的身心慢慢回到原本的平衡。',
+    note:'專為離乳階段設計，還在哺乳的媽媽請不要使用。'},
+  full:{name:'豐盈盈',sub:'胸部日常保養油',chakra:'心輪・臍輪・喉輪・太陽神經叢・眉心輪・頂輪',
+    oils:'蛇麻草、芫荽籽、千葉玫瑰、依蘭、快樂鼠尾草',base:'石榴籽油、蘋果籽油、巴西莓果油',
+    feel:'以中醫「生發」的概念出發，帶來向上發起的能量，主要照顧上焦與中焦。',
+    note:''}
+};
+const BREAST_STAGES=[{id:'milk',name:'哺乳中'},{id:'calm',name:'離乳中'},{id:'full',name:'日常保養'}];
+/* 每個脈輪對應的漢芳療產品（依產品內精油的脈輪對應） */
+const CHAKRA_PRODUCT=['orange','orange','orange','milk','full','milk','milk'];
+const PRODUCT_INGS={orange:['廣藿香','薑','葡萄柚','黑胡椒','玫瑰天竺葵'],milk:['羅馬洋甘菊','乳香','苦橙葉','甜羅勒'],calm:['香蜂草','天竺葵','檸檬薄荷','橙花苦橙葉'],full:['依蘭依蘭','千葉玫瑰','快樂鼠尾草','蛇麻草','芫荽籽']};
+/* 精油：ch 是對應脈輪的序號（0 海底輪 … 6 頂輪），香氣描述只寫感受 */
+const ING={
+  '薑':{la:'Zingiber officinale',ch:[0,1],feel:'具備平衡、溫暖、行動與強化的「地氣能量」，聞起來溫熱又踏實。'},
+  '葡萄柚':{la:'Citrus paradisi',ch:[2,1],feel:'帶來歡欣的動能與定心的力量，酸甜明亮的果香讓心情跟著亮起來。'},
+  '黑胡椒':{la:'Piper nigrum',ch:[2,0],feel:'具備很好的行氣與提振能量，溫暖的辛香讓人打起精神。'},
+  '廣藿香':{la:'Pogostemon cablin',ch:[0,2],feel:'飽含強勁的地氣能量，濃郁沉穩的大地木質香。'},
+  '玫瑰天竺葵':{la:'Pelargonium graveolens',ch:[3],feel:'滋陰清心的平衡型香氣，幫助打開心的中心，讓情緒保持穩定。'},
+  '蛇麻草':{la:'Humulus lupulus',ch:[2,3],feel:'蘊含向上托舉的「生發」能量，讓身心不再一直往下墜，帶來放鬆感。'},
+  '芫荽籽':{la:'Coriandrum sativum',ch:[2],feel:'性溫的溫和香氣，溫暖全身，喚起心中的安詳與平靜。'},
+  '千葉玫瑰':{la:'Rosa centifolia',ch:[3,1],feel:'又叫「五月玫瑰」，花瓣層層緊密包裹，象徵「先愛自己、先照顧好自己」的內斂溫潤能量。'},
+  '依蘭依蘭':{la:'Cananga odorata',ch:[4,3,1],feel:'被譽為「花中之花」，幫助打開喉輪，讓人勇敢展現自我魅力、自信地說出想法。'},
+  '快樂鼠尾草':{la:'Salvia sclarea',ch:[5,6,1],feel:'帶來解脫般的放鬆感，和幸福愉悅的感受。'},
+  '羅馬洋甘菊':{la:'Chamaemelum nobile',ch:[3,2],feel:'富含酯類，香氣柔和，帶來很好的放鬆與安撫感。'},
+  '苦橙葉':{la:'Citrus aurantium',ch:[0,3],feel:'芳療中極具「向下扎根」力量的花葉，帶來寧靜安撫的感受，也注入內心的勇氣。'},
+  '甜羅勒':{la:'Ocimum basilicum',ch:[2,3],feel:'提供溫和的推動力，讓心神安定下來。'},
+  '乳香':{la:'Boswellia carterii',ch:[6,5,0,1],feel:'氣味空靈飄逸，帶著修復與回春的能量感，適合靜下心來嗅聞。'},
+  '香蜂草':{la:'Melissa officinalis',ch:[5,3],feel:'清涼地撫平躁動，讓用腦過度、忙碌的思緒安靜下來。'},
+  '天竺葵':{la:'Pelargonium graveolens',ch:[3],feel:'滋陰清心的平衡型香氣，幫助心神提升，打開心的中心。'},
+  '檸檬薄荷':{la:'',ch:[3,2],feel:'被譽為「薄荷界的薰衣草」，不含薄荷醇，溫和不刺激，帶來平衡與安撫。'},
+  '橙花苦橙葉':{la:'Citrus aurantium',ch:[3,0],feel:'提供扎根穩定的力量，幫助劃清能量的界線，不過度消耗、付出自己。'}
+};
+function todayProduct(ci){const def=CHAKRA_PRODUCT[ci];if(def!=='orange'&&S.breastStage)return S.breastStage;return def}
+function pickIng(key,ci){const list=PRODUCT_INGS[key];return list.find(n=>ING[n].ch[0]===ci)||list.find(n=>ING[n].ch.includes(ci))||list[0]}
+/* 漢芳療精油居家保養：只描述手法與感受，不寫功效 */
+const CARE = {
+  breast:{area:'乳房',
+    steps:['取 2–3 滴漢芳療按摩油在掌心，雙手搓熱。','手掌輕貼在胸口，慢慢深呼吸 3 次，感受掌心的溫度與香氣。','用指腹沿著乳房外圍，輕柔地畫圓輕撫 5–10 圈，力道放輕就好。','最後雙手交疊放在胸口，對自己說一句「辛苦了」。'],
+    note:'哺乳期請避開乳頭與乳暈，餵奶前用溫毛巾擦拭乾淨；若有紅腫、發熱或疼痛，請先就醫，不要自行按摩。',
+    cta:'預約乳房豐彈美學・技術教學'},
+  belly:{area:'腹部',
+    steps:['取 2–3 滴漢芳療按摩油在掌心，雙手搓熱。','雙手輕放在腹部，慢慢深呼吸 3 次，感受腹部隨呼吸起伏。','以肚臍為中心，用整個手掌順時針輕輕畫圈 10 次。','最後雙手停在腹部，再深呼吸一次，結束今天的保養。'],
+    note:'產後想開始腹部保養，建議自然產滿 6 週、剖腹產滿 8–12 週，並經醫師評估後再開始；剖腹產傷口癒合前請避開傷口。',
+    cta:'預約腹部緊實課程・技術教學'},
+  legs:{area:'下肢',
+    steps:['取 2–3 滴漢芳療按摩油在掌心，雙手搓熱。','坐著把腳稍微抬高，從腳踝往小腿方向，用整個手掌輕輕向上塗抹。','膝蓋周圍和大腿外側也輕輕帶過，力道放輕，不需要用力推。','最後雙手放在肚子上，慢慢深呼吸 3 次，和寶寶說說話。'],
+    note:'懷孕期間以溫和塗抹為主，請避開腹部按壓；如果腿部出現紅腫、單側腫脹或疼痛，請先就醫。',
+    cta:'預約孕期乳房保養'},
+  breastPreg:{area:'乳房',
+    steps:['取 2–3 滴漢芳療按摩油在掌心，雙手搓熱。','手掌輕貼在胸口，慢慢深呼吸 3 次，感受掌心的溫度與香氣。','用指腹在乳房周圍輕輕塗抹，讓油慢慢吸收，不需要按壓。','最後雙手交疊放在胸口，對自己和寶寶說一句「辛苦了」。'],
+    note:'懷孕期間請以溫和塗抹為主，不要用力按壓或刺激乳頭；若有異常分泌或疼痛，請先詢問醫師。',
+    cta:'預約孕期乳房保養'}
+};
+const CHAKRAS = [
+  {name:'海底輪',sk:'Muladhara',en:'Root',pos:'尾椎・骨盆底',elem:'土',color:'#b0605a',soft:'#f6e2dc',theme:'安全感、穩定、被支撐',
+   oil:{zh:'岩蘭草',la:'Vetiveria zizanoides',part:'根',comp:'岩蘭草醇、岩蘭草酮',feel:'像雨後泥土般沉穩的木質土香，聞著會讓人想慢下來。'},
+   alt:{zh:'大西洋雪松',la:'Cedrus atlantica',part:'木材',comp:'喜馬拉雅雪松烯'},
+   herb:{zh:'艾葉',feel:'溫暖的草本香，和岩蘭草調在一起，擦在腳底會有溫溫的包覆感。'},
+   care:'belly',where:'腳底與腳踝內側'},
+  {name:'臍輪',sk:'Svadhisthana',en:'Sacral',pos:'肚臍下方・下腹',elem:'水',color:'#cf8a52',soft:'#f9e9da',theme:'喜悅、感受、創造力',
+   oil:{zh:'甜橙',la:'Citrus sinensis',part:'果皮（冷壓）',comp:'d-檸檬烯（約 90%）',feel:'明亮甜美的柑橘香，是很多媽媽第一次接觸精油時最喜歡的味道。'},
+   alt:{zh:'依蘭',la:'Cananga odorata',part:'花',comp:'大根老鸛草烯 D、乙酸苄酯'},
+   herb:{zh:'陳皮',feel:'柑橘曬乾後的甘甜香，搭配甜橙會讓香氣更圓潤、更有層次。'},
+   care:'belly',where:'下腹部，以順時針方向輕輕畫圈'},
+  {name:'太陽神經叢',sk:'Manipura',en:'Solar Plexus',pos:'上腹・胃部',elem:'火',color:'#c9a043',soft:'#f8eed5',theme:'自信、界線、行動力',
+   oil:{zh:'薑',la:'Zingiber officinale',part:'根莖',comp:'薑烯、β-倍半水茴香萜',feel:'溫熱帶點辛香的氣味，像冬天的一杯熱薑茶。'},
+   alt:{zh:'黑胡椒',la:'Piper nigrum',part:'果實',comp:'β-石竹烯'},
+   herb:{zh:'老薑',feel:'更濃郁的薑香，擦在上腹會有微微溫熱的感受。'},
+   care:'belly',where:'上腹部，雙手搓熱後輕放'},
+  {name:'心輪',sk:'Anahata',en:'Heart',pos:'胸口中央',elem:'風',color:'#7f9a72',soft:'#e9f0e2',theme:'愛、接納、溫柔',
+   oil:{zh:'大馬士革玫瑰',la:'Rosa damascena',part:'花瓣',comp:'香茅醇、牻牛兒醇',feel:'被譽為「精油之后」的柔軟花香，香氣飽滿又溫柔。'},
+   alt:{zh:'天竺葵',la:'Pelargonium graveolens',part:'葉',comp:'香茅醇、牻牛兒醇'},
+   herb:{zh:'玫瑰花',feel:'花瓣浸泡油帶著淡淡乾燥花香，比純精油更輕柔。'},
+   care:'breast',where:'鎖骨下方與肩頸前側（哺乳期請避開乳頭與乳暈）'},
+  {name:'喉輪',sk:'Vishuddha',en:'Throat',pos:'喉嚨・頸部',elem:'乙太（空）',color:'#6f8fae',soft:'#e3ebf3',theme:'表達、溝通、說出需要',
+   oil:{zh:'羅馬洋甘菊',la:'Chamaemelum nobile',part:'花',comp:'當歸酸異丁酯等酯類',feel:'帶著青蘋果般的甜香，香氣柔和，是很受歡迎的花草香。'},
+   alt:{zh:'德國洋甘菊',la:'Matricaria recutita',part:'花',comp:'母菊天藍烴（呈現深藍色）'},
+   herb:{zh:'菊花',feel:'清雅微甘的花草香，擦在頸側感覺清爽。'},
+   care:'breast',where:'頸側與鎖骨，從耳下往鎖骨方向輕推'},
+  {name:'眉心輪',sk:'Ajna',en:'Third Eye',pos:'兩眉之間',elem:'光',color:'#76709e',soft:'#e8e5f2',theme:'直覺、洞察、安靜思考',
+   oil:{zh:'乳香',la:'Boswellia carterii',part:'樹脂',comp:'α-蒎烯、檸檬烯',feel:'古老的樹脂香，清新中帶著木質，很適合靜心時使用。'},
+   alt:{zh:'東印度檀香',la:'Santalum album',part:'心材',comp:'α-檀香醇、β-檀香醇'},
+   herb:{zh:'沉香',feel:'深沉溫潤的木質香，嗅聞時會讓呼吸自然變慢。'},
+   care:'belly',where:'太陽穴與後頸（避開眼周）'},
+  {name:'頂輪',sk:'Sahasrara',en:'Crown',pos:'頭頂',elem:'意識',color:'#9a7aa6',soft:'#efe5f2',theme:'放下、信任、與自己連結',
+   oil:{zh:'真正薰衣草',la:'Lavandula angustifolia',part:'花穗',comp:'沉香醇、乙酸沉香酯',feel:'最經典的花草香，溫和、百搭，是睡前最常被選擇的香氣。'},
+   alt:{zh:'橙花',la:'Citrus aurantium var. amara',part:'花',comp:'沉香醇、橙花叔醇'},
+   herb:{zh:'桂花',feel:'溫柔的甜香，和薰衣草調在一起，香氣會更有東方的韻味。'},
+   care:'breast',where:'耳後，或滴在枕頭邊角'}
+];
+
+/* 偉特塔羅大阿爾克那（1909 年原版，公有領域）
+   為了給媽媽正向的感受，不收錄死神、惡魔、高塔三張牌，只採正位解讀 */
+const TAROT = [
+  {img:'00',r:'0',zh:'愚者',en:'The Fool',k:['新的開始','好奇','輕盈'],c:1,
+   m:'愚者帶著小包袱，踏上一段全新的旅程，腳邊的小狗陪著他。這張牌提醒妳：每一個新階段都是一場冒險，不需要什麼都準備好才出發。',
+   q:'如果今天不用擔心做錯，妳最想試試看什麼？',act:'做一件以前沒做過的小事，例如換一條路散步、喝一種新的茶。',
+   cat:'不知道也沒關係呀，我每天也是先聞聞看才決定要不要走過去的。'},
+  {img:'01',r:'I',zh:'魔術師',en:'The Magician',k:['創造','資源','行動'],c:2,
+   m:'魔術師面前的桌上擺著所有需要的工具。妳手邊其實已經有很多資源：經驗、雙手、願意幫忙的人。今天適合把想法化成第一步。',
+   q:'有哪一件事，是妳其實已經準備好、只差開始的？',act:'把一個想做的計畫寫下來，只寫第一個步驟就好。',
+   cat:'妳會的東西比妳以為的還多喔，我都看在眼裡。'},
+  {img:'02',r:'II',zh:'女祭司',en:'The High Priestess',k:['直覺','安靜','內在智慧'],c:5,
+   m:'女祭司安靜地坐在兩根柱子之間，手中握著智慧的書卷。答案不一定在外面，今天留一點安靜給自己，聽聽身體和心裡的聲音。',
+   q:'最近妳的直覺一直在提醒妳什麼？',act:'放下手機五分鐘，閉上眼睛，只感受自己的呼吸。',
+   cat:'安靜一下下，妳就會聽見自己在說什麼了。'},
+  {img:'03',r:'III',zh:'皇后',en:'The Empress',k:['豐盛','滋養','母性'],c:3,
+   m:'皇后坐在豐饒的麥田與森林之中，是大地之母的象徵。妳一直在滋養寶寶和家人，今天也輪到妳被滋養：好好吃一頓飯，讓身體感受到被照顧。',
+   q:'今天，妳可以為自己做一件什麼樣的溫柔小事？',act:'替自己泡一杯熱飲，坐下來慢慢喝完。',
+   cat:'照顧寶寶的妳好辛苦，今天換我陪妳，好嗎？'},
+  {img:'04',r:'IV',zh:'皇帝',en:'The Emperor',k:['秩序','穩定','守護'],c:0,
+   m:'皇帝穩穩坐在寶座上，代表規律與安全感。生活忙亂時，替自己建立一個小小的固定節奏，就是給自己最好的守護。',
+   q:'哪一個小習慣，能讓妳的一天更安心？',act:'訂一個固定的休息時間，例如每天下午三點喝一杯水。',
+   cat:'我每天都在同一個窗邊曬太陽，固定的地方最安心了。'},
+  {img:'05',r:'V',zh:'教皇',en:'The Hierophant',k:['學習','傳承','請教'],c:4,
+   m:'教皇把知識傳承給前來請教的人。妳不需要一個人摸索，向信任的人或專業的人請教，借用前人走過的路，也是一種智慧。',
+   q:'最近有什麼問題，是妳一直想問卻還沒開口的？',act:'把一個疑問寫下來，傳訊息問問信任的人。',
+   cat:'有問題就說出來呀，喵一聲大家就會來幫忙了。'},
+  {img:'06',r:'VI',zh:'戀人',en:'The Lovers',k:['連結','選擇','真心'],c:3,
+   m:'戀人在天使的祝福下彼此相望，象徵真誠的連結。今天適合好好對待身邊重要的人，也包括妳自己；做選擇時，跟著真心走。',
+   q:'此刻，妳最想對誰說一聲謝謝？',act:'傳一則溫暖的訊息給一個重要的人。',
+   cat:'我最喜歡妳了，這件事不用選。'},
+  {img:'07',r:'VII',zh:'戰車',en:'The Chariot',k:['前進','意志','掌握方向'],c:2,
+   m:'戰車上的人帶著堅定的眼神向前，兩隻獅身獸一起拉車。把大目標拆成小步驟，今天只要往前一點點，就是在前進。',
+   q:'妳最近完成的哪件小事，值得替自己鼓掌？',act:'列出今天最重要的一件事，完成後替自己打個勾。',
+   cat:'衝呀！不過累了記得回來窩著。'},
+  {img:'08',r:'VIII',zh:'力量',en:'Strength',k:['溫柔的力量','耐心','勇氣'],c:0,
+   m:'力量牌裡的女子溫柔地撫摸獅子，沒有用蠻力。真正的力量不是硬撐，而是溫柔地陪著自己，像對好朋友那樣對自己說話。',
+   q:'如果用對待好朋友的語氣對自己說話，妳會說什麼？',act:'對著鏡子，對自己說一句肯定的話。',
+   cat:'妳已經很勇敢了，勇敢的人也可以撒嬌。'},
+  {img:'09',r:'IX',zh:'隱者',en:'The Hermit',k:['沉澱','獨處','內在的光'],c:5,
+   m:'隱者提著一盞燈，在安靜的山頂照亮腳下的路。給自己一段不被打擾的時間，哪怕只有十分鐘，讓心慢慢沉澱下來。',
+   q:'什麼樣的獨處時光，最能讓妳充電？',act:'點一盞小燈或一點香氛，安靜地待十分鐘。',
+   cat:'我也喜歡一個人躲在紙箱裡，出來的時候就充好電了。'},
+  {img:'10',r:'X',zh:'命運之輪',en:'Wheel of Fortune',k:['轉變','循環','好時機'],c:1,
+   m:'命運之輪不停轉動，四季也會更替。辛苦的時期會過去，新的好事正在路上。今天適合順著變化走，留意身邊出現的小驚喜。',
+   q:'回頭看，最近有哪些事情正在慢慢變好？',act:'寫下三件這個月發生的好事，再小都可以。',
+   cat:'冬天過完就是春天，我都記得。'},
+  {img:'11',r:'XI',zh:'正義',en:'Justice',k:['平衡','誠實','取捨'],c:4,
+   m:'正義女神一手持劍、一手拿著天秤，代表平衡。看看最近的付出和休息是不是平衡，誠實地說出自己的需要，是讓生活走得更長遠的方式。',
+   q:'這一週，妳給自己的休息足夠嗎？',act:'把一件可以請別人幫忙的事交出去。',
+   cat:'飯要吃、覺要睡，這很公平喔。'},
+  {img:'12',r:'XII',zh:'吊人',en:'The Hanged Man',k:['暫停','換個角度','等待'],c:6,
+   m:'吊人神情平靜，頭上散發著光芒，代表從不同角度看世界後得到的領悟。卡住的時候，先停下來休息也沒關係，換個角度，事情可能會變得不一樣。',
+   q:'如果換一個角度看眼前的事，妳會看到什麼？',act:'今天允許自己有一段什麼都不做的時間。',
+   cat:'我倒著看世界的時候，常常發現新玩具。'},
+  {img:'14',r:'XIV',zh:'節制',en:'Temperance',k:['調和','中庸','慢慢來'],c:1,
+   m:'天使在兩個杯子之間緩緩倒水，一腳在水裡、一腳在岸上。不用一次做到最好，少一點、慢一點、剛剛好就好。',
+   q:'今天，哪件事可以「做一半就好」？',act:'喝水時放慢速度，感受溫度慢慢流過喉嚨。',
+   cat:'飯不要一次吃太快，慢慢吃比較香。'},
+  {img:'17',r:'XVII',zh:'星星',en:'The Star',k:['希望','溫柔','相信'],c:6,
+   m:'星空下，女子把水溫柔地倒回大地與池中，是充滿希望的一張牌。經過辛苦之後，光會慢慢回來，相信一切正在慢慢變好。',
+   q:'此刻，妳心裡最溫柔的一個願望是什麼？',act:'今晚抬頭看看天空，替自己許一個小小的願望。',
+   cat:'今晚窗外有星星，我幫妳數了，一顆都沒少。'},
+  {img:'18',r:'XVIII',zh:'月亮',en:'The Moon',k:['直覺','夢想','溫柔的感受'],c:5,
+   m:'月亮在夜空中靜靜照亮一條小路。這張牌邀請妳溫柔地接住自己的情緒和感受，不需要急著弄清楚一切，跟著月光慢慢走就好。',
+   q:'最近有什麼感受，值得被妳溫柔地看見？',act:'睡前寫下一句今天的心情，不用寫得很完整。',
+   cat:'晚上我會守在門口，妳安心睡。'},
+  {img:'19',r:'XIX',zh:'太陽',en:'The Sun',k:['喜悅','活力','被看見'],c:2,
+   m:'孩子騎著白馬，在向日葵與燦爛陽光下張開雙手，是最快樂的一張牌。今天是充滿光的一天，去曬曬太陽，把小小的快樂分享出去。',
+   q:'今天有什麼事，讓妳忍不住笑了？',act:'找個時間曬五分鐘太陽，或拍一張讓妳開心的照片。',
+   cat:'窗邊的陽光今天特別暖，快來一起躺！'},
+  {img:'20',r:'XX',zh:'審判',en:'Judgement',k:['覺醒','肯定自己','重新出發'],c:4,
+   m:'天使吹響號角，人們張開雙臂迎接新的開始。回頭看看這段時間的自己，妳其實走了好遠。替自己說一句肯定的話，帶著它重新出發。',
+   q:'這段日子裡，妳最想謝謝自己的是什麼？',act:'寫一張小卡給自己，放在每天看得到的地方。',
+   cat:'我宣布：妳今天也很棒。'},
+  {img:'21',r:'XXI',zh:'世界',en:'The World',k:['圓滿','完成','新的旅程'],c:6,
+   m:'世界牌中的舞者在花環中央輕盈起舞，象徵一個階段的圓滿完成。謝謝一路努力的自己，好好慶祝，然後迎接下一段旅程。',
+   q:'妳最近完成了哪一個值得慶祝的階段？',act:'替自己準備一個小小的慶祝，例如一塊喜歡的甜點。',
+   cat:'轉一圈回到原點的時候，妳已經不一樣了。'}
+];
+
+const WARM = ['更慢一點也沒關係，\n妳已經很努力了。','今天能做多少，就做多少。\n剩下的，明天再慢慢來。','妳不需要把每一件事，\n都做到完美才值得休息。','有時候，好好吃一頓飯，\n也是在溫柔地照顧自己。','允許自己偶爾停下來，\n生活不會因此失去方向。','願妳今天有一個瞬間，\n能感覺到自己被好好善待。','把肩膀放鬆一點。\n妳可以不用一直撐得那麼緊。','照顧別人之前，\n也記得問問自己還好嗎。','哪怕只是喝口熱茶，\n也算留了一點時間給自己。','妳可以有自己的步調，\n不用和任何人比較。','那些沒說出口的辛苦，\n也值得被妳自己看見。','一步一步來就好。\n每一步都算數。','從一個舒服的深呼吸開始，\n再看看接下來要做什麼。','願妳回頭看自己時，\n也能帶著一點欣賞。'];
+
+
+const CAT_LINES = {
+  home:['嗨，妳來啦！今天過得還好嗎？','歡迎回來～我剛剛在窗邊等妳。','今天也辛苦了，先坐一下吧。'],
+  cards:['今天想聽聽什麼指引呢？選一張妳有感覺的。','閉上眼睛，深呼吸一次，再挑一張喔。'],
+  cardsDone:['還有其他想問的嗎？可以再洗一次牌喔。','每個問題都值得被好好回答，想問就再抽一張吧。'],
+  tasks:['今天的小任務都很簡單，做完記得找我領小魚乾！','一點點就好，不用全部做完也沒關係。'],
+  tasksDone:['全部完成了！妳今天把自己照顧得好好的。'],
+  cat:['在毛毯上窩著，等妳來坐一下。','摸摸我的頭，我會呼嚕給妳聽。'],
+  pet:['呼嚕呼嚕……好舒服。','再摸一下下嘛～','妳的手好溫暖。','喵～（瞇眼）','今天有妳陪，真好。'],
+  feed:['好香的小魚乾！謝謝妳～','嚼嚼嚼……這條特別好吃！','吃飽了，幫妳存了一點芯幣喔。'],
+  feedEmpty:['碗空空的……去做個小任務帶點小魚乾回來好嗎？'],
+  coins:['這些芯幣都是妳照顧自己的證明喔。','存起來，下次來工作室的時候可以用！'],
+  invite:['把小角落分享給也需要被照顧的朋友吧！'],
+};
+
+/* ======================================================================
+   工具
+   ====================================================================== */
+const $ = s=>document.querySelector(s);
+const DAY = 86400000;
+const now = ()=>Date.now();
+const pick = a=>a[Math.floor(Math.random()*a.length)];
+const tz = 'Asia/Taipei';
+function dayKey(t=now()){return new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'}).format(t)}
+function fmtDate(t,opt={month:'numeric',day:'numeric'}){return new Intl.DateTimeFormat('zh-TW',{timeZone:tz,...opt}).format(t)}
+function fmtFull(t){return new Intl.DateTimeFormat('zh-TW',{timeZone:tz,year:'numeric',month:'numeric',day:'numeric'}).format(t)}
+const c1 = tenths=>(tenths/10).toFixed(1);
+function hash(str){let h=2166136261;for(const ch of str){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function genCode(prefix){const a='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let s='';for(let i=0;i<8;i++)s+=a[Math.floor(Math.random()*a.length)];return prefix+'-'+s.slice(0,4)+'-'+s.slice(4)}
+
+/* ======================================================================
+   狀態（示範版存在 localStorage；正式版改存後端資料庫）
+   ====================================================================== */
+const KEY='heart-corner-v2';
+let mem=null;
+function load(){try{const v=localStorage.getItem(KEY);if(v)return JSON.parse(v)}catch(e){}return mem}
+function save(){mem=S;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+function seed(){
+  const t=now();
+  const s={v:2,member:{name:'妳',code:'HS'+(hash(String(t))%9000+1000),joined:t-120*DAY},
+    fish:8,lots:[],hist:[],days:{},draw:null,streak:{last:dayKey(t-DAY),n:3},coupons:[],invites:[
+      {name:'小雯',status:'done',at:t-20*DAY},{name:'Amy',status:'wait',at:t-3*DAY}],sound:true,demo:true};
+  const add=(tenths,ago,label)=>{const at=t-ago*DAY;s.lots.push({id:'l'+ago+label.length,t:tenths,rem:tenths,at,exp:at+CONFIG.coinLifeDays*DAY});s.hist.push({at,d:tenths,label})};
+  add(28,345,'餵貓咪累積');
+  add(10,120,'加入會員禮');
+  add(200,20,'好友 小雯 完成首次到店');
+  add(42,9,'餵貓咪累積');
+  add(34,2,'餵貓咪累積');
+  s.coupons.push({id:'c1',kind:'redeem',title:'芯幣折抵 NT$100',code:'HSC-7K2M-Q8PD',value:100,at:t-15*DAY,exp:t+15*DAY,used:false});
+  return s;
+}
+let S = load() || {v:3,member:null,fish:0,lots:[],hist:[],days:{},draw:null,draws:[],streak:{last:'',n:0},coupons:[],invites:[],sound:true,demo:false,badges:{}};
+S.demo=false;S.member=null;S.coupons=[];S.hist=[];S.invites=[];S.fish=0;
+(function migrate(){
+  if(S.v3)return;S.v3=1;
+  S.catXp=S.catXp||0;S.decor=S.decor||{};S.badges=S.badges||{};S.waterGoal=S.waterGoal||8;S.draws=S.draws||[];
+  if(S.demo){
+    S.catXp=Math.max(S.catXp,46);S.decor.yarn=true;
+    const t=now(),moods=['happy','calm','tired','calm','happy','tired','low','calm','happy','calm','tired','happy'];
+    for(let i=1;i<=12;i++){const k=dayKey(t-i*DAY);if(!k.startsWith(monthKey()))continue;S.days[k]=S.days[k]||{tasks:{},pets:0,fed:0};S.days[k].mood=moods[i-1];S.days[k].water=i%3===0?5:8;if(i%2===0)S.days[k].games=1}
+    for(let i=1;i<=6;i++){const k=dayKey(t-i*DAY);if(k.startsWith(monthKey()))S.draws.push({date:k,card:i*3%19,seen:true,q:''})}
+    const pm=monthKey(dayKey(t-32*DAY));S.badges[pm]={draw:t-32*DAY,water:t-35*DAY};
+  }
+  save();
+})();
+if(!S.days)S.days={};
+
+function today(){const k=dayKey();if(!S.days[k])S.days[k]={tasks:{},pets:0,fed:0,breathDone:false,oilDone:false};return S.days[k]}
+let SERVER=null;
+async function api(path,body){
+  const opt=body===undefined?{credentials:'same-origin'}:{method:'POST',credentials:'same-origin',headers:{'content-type':'application/json'},body:JSON.stringify(body)};
+  let r;try{r=await fetch('/api/'+path,opt)}catch(e){return {error:'網路連線不穩，請稍後再試'}}
+  const j=await r.json().catch(()=>({error:'系統忙碌中，請稍後再試'}));
+  if(r.status===401&&path!=='me'){SERVER=null;S.member=null;render();openLogin();}
+  return r.ok?j:{error:j.error||'發生錯誤，請稍後再試',status:r.status};
+}
+function applyServer(st){
+  if(!st||!st.member)return;
+  SERVER=st;
+  S.member={name:st.member.name,code:st.member.refCode,memberCode:st.member.code,picture:st.member.picture,needsProfile:st.member.needsProfile,firstVisit:st.member.firstVisit};
+  S.fish=st.fish;
+  S.hist=st.hist.map(h=>({at:Date.parse(h.at),d:h.d,label:h.label}));
+  S.coupons=st.coupons.map(c=>({code:c.code,kind:c.kind,title:c.title,value:c.value,at:Date.parse(c.at),exp:Date.parse(c.exp),used:c.used,usedAt:c.usedAt?Date.parse(c.usedAt):null,minSpend:c.minSpend}));
+  S.streak=st.streak||{n:0,last:''};
+  const d=today();d.tasks={};Object.keys(st.today.tasks||{}).forEach(k=>{if(k!=='free_spin')d.tasks[k]=1});d.freeSpin=st.today.freeSpin?1:0;
+  S.invites=st.invites||[];
+  S.badges=S.badges||{};Object.entries(st.badges||{}).forEach(([m,v])=>{S.badges[m]=Object.assign(S.badges[m]||{},v)});
+  save();
+}
+function needLogin(){if(SERVER)return false;openLogin();return true}
+function refFromUrl(){try{return sessionStorage.getItem('hc_ref')||''}catch(e){return ''}}
+function openLogin(ref){
+  ref=ref||refFromUrl();
+  sheet(`<div style="text-align:center"><svg width="56" height="56" aria-hidden="true"><use href="#coin"/></svg>
+    <b class="h2" style="display:block;font-size:21px">加入芯彤的小角落</b>
+    <p class="muted" style="margin:4px 0 16px">用 LINE 一鍵登入，加入就送 1 芯幣${ref?`<br>朋友邀請妳來，再送 NT$${CONFIG.referNewcomerNTD} 首次體驗券`:''}</p>
+    <a class="btn line-btn btn-block" href="/api/login${ref?'?ref='+encodeURIComponent(ref):''}">用 LINE 登入</a>
+    <p class="tiny" style="margin:12px 0 0">登入代表妳同意<a href="/privacy.html" target="_blank" rel="noopener">隱私權政策</a>。我們只會取得妳的 LINE 名稱與頭像。</p></div>`);
+}
+function openProfile(){
+  const m=S.member||{};
+  sheet(`<div style="text-align:center"><b class="h2" style="display:block;font-size:21px">歡迎來到小角落</b><p class="muted" style="margin:4px 0 14px">再填一點資料就完成了</p></div>
+    <form id="profileForm" class="stack">
+      <div class="field"><label for="pName">怎麼稱呼妳？</label><input id="pName" required maxlength="20" value="${esc(m.name||'')}"></div>
+      <div class="field"><label for="pPhone">手機號碼（和預約時用的一樣）</label><input id="pPhone" required inputmode="tel" pattern="09[0-9]{8}" placeholder="0912345678"></div>
+      <div class="field"><label for="pBday">妳的生日（選填，生日月有小驚喜）</label><input id="pBday" type="date"></div>
+      <div class="field"><label for="pBaby">寶寶的生日或預產期（選填）</label><input id="pBaby" type="date"></div>
+      <p class="tiny" style="margin:0" id="pErr"></p>
+      <button class="btn btn-primary btn-block" type="submit">完成</button>
+    </form>`);
+  $('#profileForm').onsubmit=async e=>{e.preventDefault();const b=e.submitter||$('#profileForm button');b.disabled=true;
+    const r=await api('profile',{name:$('#pName').value,phone:$('#pPhone').value,birthday:$('#pBday').value,babyBirthday:$('#pBaby').value});
+    b.disabled=false;if(r.error){$('#pErr').textContent=r.error;return}
+    applyServer(r);closeSheet();history.replaceState(null,'','#home');route='home';render(true);toast('歡迎加入！送妳 1 芯幣');setTimeout(maybeSpinPrompt,900);};
+}
+function qrSvg(text,size){try{const q=qrcode(0,'M');q.addData(text);q.make();return q.createSvgTag({cellSize:Math.max(2,Math.floor(size/(q.getModuleCount()+8))),margin:4,scalable:true})}catch(e){return `<p class="tiny">${esc(text)}</p>`}}
+function showQr(title,url,code,note){sheet(`<div style="text-align:center"><b class="h3" style="display:block">${title}</b><div class="qr-box">${qrSvg(url,240)}</div><div class="t-code" style="font-family:var(--latin);font-size:20px;font-weight:600;letter-spacing:2px">${code}</div><p class="muted">${note}</p><button class="btn btn-ghost btn-block" data-close>關閉</button></div>`)}
+function activeLots(){const t=now();return S.lots.filter(l=>l.rem>0&&l.exp>t).sort((a,b)=>a.at-b.at)}
+function balance(){return SERVER?SERVER.coins:0}
+function expiring(){const lim=now()+CONFIG.expireWarnDays*DAY;return activeLots().filter(l=>l.exp<=lim)}
+function addCoins(tenths,label,mergeKey){
+  const t=now();
+  if(mergeKey){
+    let lot=S.lots.find(l=>l.mk===mergeKey);
+    if(lot){lot.t+=tenths;lot.rem+=tenths;const h=S.hist.find(h=>h.mk===mergeKey);if(h)h.d+=tenths;return}
+    S.lots.push({id:'l'+t,t:tenths,rem:tenths,at:t,exp:t+CONFIG.coinLifeDays*DAY,mk:mergeKey});
+    S.hist.push({at:t,d:tenths,label,mk:mergeKey});return;
+  }
+  S.lots.push({id:'l'+t,t:tenths,rem:tenths,at:t,exp:t+CONFIG.coinLifeDays*DAY});
+  S.hist.push({at:t,d:tenths,label});
+}
+function spendCoins(tenths,label){
+  if(balance()<tenths)return false;
+  let need=tenths;
+  for(const l of activeLots()){const u=Math.min(l.rem,need);l.rem-=u;need-=u;if(!need)break}
+  S.hist.push({at:now(),d:-tenths,label});return true;
+}
+function taskState(t){
+  const d=today();
+  if(d.tasks[t.id])return 'done';
+  if(t.id==='checkin')return 'ready';
+  if(t.id==='draw')return S.draw&&S.draw.date===dayKey()?'ready':'todo';
+  if(t.id==='pet')return d.pets>=t.need?'ready':'todo';
+  if(t.id==='breath')return d.breathDone?'ready':'todo';
+  if(t.id==='oil')return d.oilDone?'ready':'todo';
+  if(t.id==='game')return d.gameDone?'ready':'todo';
+  return 'todo';
+}
+async function claim(id,fromEl){
+  if(needLogin())return;
+  const t=TASKS.find(x=>x.id===id);const d=today();
+  if(d.tasks[id]||taskState(t)!=='ready')return;
+  if(fromEl)fromEl.disabled=true;
+  const r=await api('claim',{task:id});
+  if(r.error){toast(r.error);if(fromEl)fromEl.disabled=false;return}
+  applyServer(r.state);
+  flyFish(fromEl,Math.min(r.gain,3));
+  if(r.bonus)setTimeout(()=>toast(`連續報到 ${r.streak} 天！加送 ${r.bonus} 條小魚乾`),900);
+  if(r.added<r.gain)toast('碗滿了！先去小屋餵貓咪吧');else toast(`領到 ${r.gain} 條小魚乾`);
+  if(id==='checkin')setTimeout(checkBadges,1200);
+  render();
+}
+
+/* ======================================================================
+   路由
+   ====================================================================== */
+/* ======================================================================
+   評論小幫手：依客人勾選的真實感受組合句子（不需要網路或 AI 服務）
+   ====================================================================== */
+/* 用語原則：只寫「體驗、感受、服務、環境」，不寫療效。
+   避免：治療、改善、消除、緩解、疏通、通乳、塞奶、乳腺炎、硬塊、奶量增加、矯正、回正、復位、腹直肌、瘦身、消水腫、保證。 */
+const RV_SERVICES=[
+  {id:'lact',name:'泌乳按摩',cat:'breast'},
+  {id:'beauty',name:'乳房豐彈美學',cat:'breast'},
+  {id:'pregb',name:'孕期乳房保養',cat:'preg'},
+  {id:'abdo',name:'腹部緊實課程',cat:'body'},
+  {id:'teach',name:'技術教學',cat:'teach'}
+]
+/* g：new＝懷孕與產後一年內、later＝產後一年以上、self＝單純保養 */
+const RV_STAGES=[
+  {id:'preg',name:'懷孕中',g:'new',lines:['懷孕後身體常常覺得緊繃，','懷孕中期很想好好放鬆一下，','孕期的身體變化讓我有點不知所措，']},
+  {id:'pp0',name:'坐月子中',g:'new',lines:['坐月子期間身心都很累，','還在坐月子，每天顧寶寶顧到很疲憊，','月子期間很需要有人陪我照顧自己，']},
+  {id:'pp1',name:'產後 1–3 個月',g:'new',lines:['產後一兩個月還在適應新生活，','剛生完的那段日子真的很忙亂，','產後兩個多月，終於想起要照顧一下自己，']},
+  {id:'pp6',name:'產後 4–12 個月',g:'new',lines:['產後半年多，一直把自己排在最後，','寶寶大一點了，想把時間留一點給自己，','生完快一年，終於有空好好保養，']},
+  {id:'pp1y',name:'產後 1–3 年',g:'later',lines:['孩子兩歲多了，這幾年幾乎沒有好好照顧自己，','生完之後忙了好幾年，終於想把時間留給自己，','產後兩年多，一直想找機會好好保養，']},
+  {id:'pp3y',name:'產後 3 年以上',g:'later',lines:['孩子都上學了，才發現自己好久沒被照顧，','生完很多年了，一直覺得現在開始也不晚，','當媽媽好幾年，這次決定好好對自己好一點，']},
+  {id:'self',name:'單純想保養自己',g:'self',lines:['一直想找時間好好照顧自己，','最近比較忙，想給自己放個小假，','想替自己安排一段放鬆的時間，']},
+  {id:'none',name:'不寫這段',g:'all',lines:['']}
+];
+const RV_FEELS={
+  common:[{t:'力道剛剛好，完全不會不舒服',during:1},{t:'整個人放鬆下來'},{t:'心情輕鬆很多'},{t:'身體暖暖的很舒服'},{t:'終於有一段屬於自己的時間'},{t:'覺得自己被好好照顧'}],
+  breast:[{t:'對哺乳更有信心'},{t:'比較知道日常怎麼照顧自己'},{t:'胸口周圍很放鬆'}],
+  preg:[{t:'孕期的心情安定不少'},{t:'對產後的準備更有方向'}],
+  body:[{t:'腹部暖暖的很舒服'},{t:'整個人輕鬆不少'}],
+  teach:[{t:'學到在家也能做的保養方法'},{t:'步驟教得很清楚，回家也記得住'}]
+}
+const RV_STAFF=['手法很溫柔','說明很清楚','會先了解我的狀況','力道會隨時跟我確認','很有耐心聽我說','會分享日常保養的小方法'];
+const RV_PLACE=['乾淨又舒服','很注重隱私','預約時間很彈性','空間有淡淡的香氣'];
+/* 每一句都可以標 g（只用在某個族群），沒標就是全部適用 */
+const RV_POOL={
+  open:[
+    {f:s=>`在澎湖找了一陣子，最後選擇芯彤美學 Heart studio 的${s}，很開心有來。`},
+    {f:s=>`朋友推薦我到澎湖的芯彤美學體驗${s}。`},
+    {f:s=>`這次到芯彤美學（Heart studio，澎湖）體驗${s}，想留個心得。`},
+    {f:s=>`第一次體驗${s}其實有點緊張，來到芯彤美學之後就放心了。`},
+    {f:s=>`在 IG 看到芯彤美學很久，這次終於預約了${s}。`},
+    {f:s=>`這是我第二次來芯彤美學，這次預約的是${s}。`},
+    {f:s=>`想給自己一點喘息的時間，所以預約了芯彤美學的${s}。`},
+    {f:s=>`老公幫我預約了芯彤美學的${s}，當作給我的小禮物。`,g:['new','later']},
+    {f:s=>`身邊的媽媽朋友都說芯彤美學很不錯，這次來體驗${s}。`,g:['new','later']},
+    {f:s=>`在澎湖想找一個能安心放鬆的地方，選了芯彤美學的${s}。`},
+    {f:s=>`趁寶寶睡午覺的空檔，來芯彤美學體驗${s}。`,g:['new']},
+    {f:s=>`這次在芯彤美學 Heart studio 預約了${s}，整體體驗很好。`},
+    {f:s=>`原本只是抱著試試看的心情，預約了芯彤美學的${s}，結果很驚喜。`},
+    {f:s=>`終於來寫評論了！上次在芯彤美學體驗了${s}。`},
+    {f:s=>`找了好幾家，最後決定交給芯彤美學，這次做的是${s}。`},
+    {f:s=>`一直很想體驗${s}，這次終於在芯彤美學完成了。`},
+    {f:s=>`在 Google 地圖看到不少好評，就來芯彤美學試試${s}。`},
+    {f:s=>`月子中心的姊妹推薦我來芯彤美學體驗${s}。`,g:['new']},
+    {f:s=>`帶著有點忐忑的心情來體驗${s}，一進門就覺得被溫柔接住。`},
+    {f:s=>`把孩子交給家人顧，自己偷偷跑來芯彤美學體驗${s}。`,g:['later']},
+    {f:s=>`下班後特地來芯彤美學體驗${s}。`,g:['self','later']}
+  ],
+  lead:['真心推薦芯彤美學！','先說結論：一定會再回訪！','一定要來分享這次的好體驗。','想來好好推薦一下芯彤美學。','這次的體驗真的值得寫下來。'],
+  during:[f=>`${f}，`,f=>`老實說${f}，`,f=>`一開始就感覺到${f}，`],
+  feel:[
+    a=>`做完之後${a.join('，')}。`,
+    a=>`最明顯的感受是${joinZh(a)}。`,
+    a=>`結束的時候${a.join('，')}，比我想像中更好。`,
+    a=>`整個過程下來，${a.join('，')}。`,
+    a=>`離開的時候${joinZh(a)}。`,
+    a=>`對我來說最珍貴的是${joinZh(a)}。`,
+    a=>`這一個多小時裡，${a.join('，')}。`,
+    a=>`回家路上心裡很滿足，${a.join('，')}。`,
+    a=>`印象最深的是${joinZh(a)}。`,
+    a=>`說真的，${a.join('，')}。`,
+    a=>`整體感受就是${joinZh(a)}。`
+  ],
+  staff:[
+    (n,a)=>`${n}${a.join('、')}，整個過程很安心。`,
+    (n,a)=>`${n}${a.join('、')}，讓我覺得很被重視。`,
+    (n,a)=>`很謝謝${n}，${a.join('、')}。`,
+    (n,a)=>`${n}人很親切，${a.join('、')}。`,
+    (n,a)=>`特別想謝謝${n}，${a.join('、')}，完全不會有壓力。`,
+    (n,a)=>`${n}${a.join('、')}，聊著聊著心情也變好了。`,
+    (n,a)=>`服務的過程中，${n}${a.join('、')}，很細心。`,
+    (n,a)=>`${n}${a.join('、')}，是很讓人放心的人。`,
+    (n,a)=>`${n}很專業，${a.join('、')}。`,
+    (n,a)=>`遇到${n}很幸運，${a.join('、')}。`,
+    (n,a)=>`${n}${a.join('、')}，有任何問題都可以放心問。`
+  ],
+  place:[
+    {f:a=>`工作室${a.join('、')}，這點很加分。`},
+    {f:a=>`另外工作室${a.join('、')}，產後出門也不會有壓力。`,g:['new']},
+    {f:a=>`空間${a.join('、')}，待起來很自在。`},
+    {f:a=>`工作室${a.join('、')}，一進門就覺得很放鬆。`},
+    {f:a=>`環境方面，${a.join('、')}，讓人很安心。`},
+    {f:a=>`也很喜歡工作室${a.join('、')}。`},
+    {f:a=>`小小的工作室${a.join('、')}，很有溫度。`}
+  ],
+  rec:[
+    {f:s=>`如果妳也在澎湖找${s}，很推薦芯彤美學。`},
+    {f:s=>`在澎湖想找溫柔又細心的${s}，芯彤美學是我會推薦給朋友的選擇。`},
+    {f:s=>`想在澎湖找${s}的話，芯彤美學值得一試。`},
+    {f:s=>`問我澎湖哪裡有${s}，我會說芯彤美學。`},
+    {f:()=>`在澎湖想找一個安心放鬆的地方，芯彤美學很適合。`},
+    {f:s=>`在澎湖想體驗${s}的朋友，可以放心交給芯彤美學。`},
+    {f:()=>`推薦給在澎湖、想好好照顧自己的媽媽們。`,g:['new']},
+    {f:()=>`推薦給澎湖的新手媽媽，給自己一點被照顧的時間。`,g:['new']},
+    {f:()=>`如果妳在澎湖懷孕中或剛生完，很推薦來芯彤美學放鬆一下。`,g:['new']},
+    {f:()=>`推薦給所有在澎湖努力當媽媽的妳。`,g:['new','later']},
+    {f:()=>`生完很多年也不晚，推薦給想重新照顧自己的媽媽們。`,g:['later']},
+    {f:()=>`孩子大了，也記得把時間留給自己，推薦芯彤美學。`,g:['later']},
+    {f:()=>`推薦給在澎湖、忙了好幾年終於想好好照顧自己的媽媽。`,g:['later']},
+    {f:()=>`推薦給在澎湖想好好寵愛自己的女生。`,g:['self']},
+    {f:()=>`不管有沒有生過寶寶，都很適合來芯彤美學好好放鬆。`,g:['self']}
+  ],
+  close:['下次還會再來！','已經預約下一次了。','謝謝芯彤美學 ♡','真的很推薦。','期待下次再見。','會再介紹朋友來。','下次想帶姊妹一起來。','','']
+};
+const RV_EMOJI=[' ♡',' 🌿',' ✨',' 😊',' 🥰'];
+const RV={svc:['lact'],stage:'pp1',feels:['整個人放鬆下來','覺得自己被好好照顧'],staff:['手法很溫柔'],place:['乾淨又舒服'],own:'',len:'full',text:'',edited:false};
+const RV_RECENT=(()=>{try{return JSON.parse(localStorage.getItem('heart-rv-recent'))||{}}catch(e){return {}}})();
+function pickFresh(slot,arr){
+  const used=RV_RECENT[slot]||[];
+  const keep=Math.min(used.length,Math.max(0,arr.length-2));
+  const pool=arr.map((x,i)=>i).filter(i=>!used.slice(-keep).includes(i));
+  const i=pool[Math.floor(Math.random()*pool.length)];
+  RV_RECENT[slot]=[...used,i].slice(-8);
+  return arr[i];
+}
+function forGroup(arr,g){return arr.filter(x=>!x.g||(g!=='all'&&x.g.includes(g))).map(x=>x.f)}
+function saveRecent(){try{localStorage.setItem('heart-rv-recent',JSON.stringify(RV_RECENT))}catch(e){}}
+function joinZh(a){if(a.length<2)return a.join('');return a.slice(0,-1).join('、')+'，還有'+a[a.length-1]}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function rvFeelsFor(){const cats=new Set(RV_SERVICES.filter(x=>RV.svc.includes(x.id)).map(x=>x.cat));return [...RV_FEELS.common,...['breast','preg','body','teach'].filter(c=>cats.has(c)).flatMap(c=>RV_FEELS[c])]}
+function genReview(){
+  const svcs=RV_SERVICES.filter(x=>RV.svc.includes(x.id));
+  if(!svcs.length)return '';
+  const nm=svcs.map(x=>x.name);const svcName=nm.length<2?nm[0]:nm.slice(0,-1).join('、')+'和'+nm[nm.length-1];
+  const short=pick(nm);
+  const st=RV_STAGES.find(x=>x.id===RV.stage)||RV_STAGES[RV_STAGES.length-1];
+  const g=st.g;
+  const stage=pick(st.lines);
+  const chosen=shuffle(rvFeelsFor().filter(f=>RV.feels.includes(f.t)));
+  const during=chosen.filter(f=>f.during).map(f=>f.t);
+  const after=chosen.filter(f=>!f.during).map(f=>f.t);
+  // 各段落
+  const P={};
+  P.open=stage+pickFresh('open-'+g,forGroup(RV_POOL.open,g))(svcName);
+  let own=RV.own.trim();if(own&&!/[。！!？?~～♡]$/.test(own))own+='。';P.own=own;
+  let feel='';
+  if(during.length)feel+=pick(RV_POOL.during)(during[0]);
+  if(after.length)feel+=pickFresh('feel',RV_POOL.feel)(after);else if(feel)feel=feel.replace(/，$/,'。');
+  P.feel=feel;
+  if(RV.len==='full'){
+    const sa=shuffle(RV_STAFF.filter(x=>RV.staff.includes(x)));
+    const pa=shuffle(RV_PLACE.filter(x=>RV.place.includes(x)));
+    P.staff=sa.length?pickFresh('staff',RV_POOL.staff)(CONFIG.staffName,sa):'';
+    P.place=pa.length?pickFresh('place-'+g,forGroup(RV_POOL.place,g))(pa):'';
+  }
+  P.rec=pickFresh('rec-'+g,forGroup(RV_POOL.rec,g))(short);
+  P.close=RV.len==='full'?pick(RV_POOL.close):'';
+  // 隨機選一種段落順序，讓每篇的結構都不一樣
+  const orders=RV.len==='full'?[
+    ['open','own','feel','staff','place','rec','close'],
+    ['open','staff','own','feel','place','rec','close'],
+    ['own','open','feel','rec','staff','place','close'],
+    ['lead','open','own','feel','staff','place','close'],
+    ['open','feel','own','place','staff','rec','close']
+  ]:[['open','own','feel','rec'],['open','feel','own','rec'],['own','open','feel','rec'],['lead','open','own','feel']];
+  let order=pick(orders);
+  if(!P.own&&order[0]==='own')order=order.slice(1);
+  if(order.includes('lead'))P.lead=pick(RV_POOL.lead);
+  let seg=order.map(k=>P[k]).filter(Boolean);
+  // 完整版有一半機率分段，讀起來更像真人寫的
+  let text;
+  if(RV.len==='full'&&seg.length>=4&&Math.random()<.5){const cut=1+Math.floor(Math.random()*(seg.length-2));text=seg.slice(0,cut).join('')+'\n\n'+seg.slice(cut).join('')}
+  else text=seg.join('');
+  text=text.replace(/。。/g,'。');
+  // 偶爾把一個句號換成驚嘆號、結尾加一個小表情
+  if(Math.random()<.35){const idx=[...text.matchAll(/。/g)].map(m=>m.index);if(idx.length>1){const i=idx[Math.floor(Math.random()*(idx.length-1))];text=text.slice(0,i)+'！'+text.slice(i+1)}}
+  if(Math.random()<.35)text=text.replace(/\s*$/,'')+pick(RV_EMOJI);
+  saveRecent();
+  return text;
+}
+function newReview(){let t='',i=0;do{t=genReview();i++}while(t===RV.text&&i<12);RV.text=t;RV.edited=false}
+
+const ROUTES=['home','cards','tasks','cat','coins','invite','review','play','mom','badges','articles'];
+let route='home';
+function go(r){if(!ROUTES.includes(r))r='home';if(r!=='articles')articleId=null;if(r!=='mom')momDay=null;if(location.hash!=='#'+r)history.replaceState(null,'','#'+r);route=r;render(true)}
+window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(ROUTES.includes(h)&&h!==route){route=h;render(true)}});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b){e.preventDefault();go(b.dataset.go)}});
+
+/* ======================================================================
+   畫面元件
+   ====================================================================== */
+const coinSvg=(s=20)=>`<svg class="coin" width="${s}" height="${s}" aria-hidden="true"><use href="#coin"/></svg>`;
+const fishSvg=(s=18)=>`<svg class="coin" width="${s}" height="${s}" aria-hidden="true"><use href="#fish"/></svg>`;
+const snow=()=>`<div class="snow" aria-hidden="true">${[[8,12,11],[22,78,16],[46,16,8],[14,62,9],[60,88,12],[36,40,7]].map(([t,l,s],i)=>`<span style="top:${t}%;left:${l}%;font-size:${s}px;animation-delay:${i*.6}s">✦</span>`).join('')}</div>`;
+function sky(eyebrow,title,sub,line){
+  return `<section class="sky gutter">${snow()}<div class="eyebrow">${eyebrow}</div><h2 class="h2" tabindex="-1" id="pageTitle">${title}</h2>${sub?`<p>${sub}</p>`:''}
+  <div class="talk"><div class="talk-cat"><img src="assets/cat-rest.webp" alt=""></div><div class="bubble pop" id="catTalk">${line}</div></div></section>`;
+}
+function catSay(text){const b=$('#catTalk');if(!b)return;b.classList.remove('pop');void b.offsetWidth;b.innerHTML=text;b.classList.add('pop')}
+
+function viewHome(){
+  const d=today(), done=Object.keys(d.tasks).length, fishToday=TASKS.filter(t=>d.tasks[t.id]).reduce((s,t)=>s+t.fish,0);
+  const drawn=S.draw&&S.draw.date===dayKey();
+  const q=WARM[hash(dayKey())%WARM.length];
+  const unclaimed=TASKS.filter(t=>taskState(t)==='ready').length;
+  return `
+  <section class="hero">
+    <img class="hero-img" src="assets/cat-window.webp" alt="橘白小貓坐在窗邊，陪妳看冬夜和柔柔的燈光" fetchpriority="high">
+    <div class="hero-talk"><div class="bubble pop" id="catTalk">${pick(CAT_LINES.home)}</div></div>
+  </section>
+  <div class="gutter">
+    <div class="hello"><h1 tabindex="-1" id="pageTitle">歡迎回到<br>芯彤的<em>小角落</em></h1>
+      <p>每天來坐一下，照顧自己，也替貓咪帶點小魚乾。</p></div>
+
+    ${SERVER?'':`<section class="card login-card"><b class="h3">加入芯彤的小角落</b><p class="muted" style="margin:0">用 LINE 一鍵登入，每天做任務、餵貓咪、存芯幣換折價券。</p><button class="btn line-btn btn-block" data-login>用 LINE 登入</button></section>`}
+    <section class="card today" aria-label="今天的進度">
+      <div class="today-top"><span class="h3">今天的妳</span><span class="date">${fmtDate(now(),{month:'long',day:'numeric',weekday:'short'})}</span></div>
+      <div class="metrics">
+        <button class="metric" data-go="coins"><svg aria-hidden="true"><use href="#coin"/></svg><b class="num">${c1(balance())}</b><small>芯幣</small></button>
+        <button class="metric" data-go="cat"><svg aria-hidden="true"><use href="#fish"/></svg><b class="num">${S.fish}</b><small>小魚乾</small></button>
+        <button class="metric" data-go="tasks"><svg viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:var(--rose);stroke-width:1.6"><path d="M12 3.5c1.2 3 4.5 4.6 4.5 8.6a4.5 4.5 0 0 1-9 0c0-1.8.8-3 1.8-4 .2 1.4.9 2.2 1.7 2.6-.2-2.7.3-5 1-7.2Z"/></svg><b class="num">${S.streak.n}</b><small>連續天數</small></button>
+      </div>
+      <div>
+        <div class="progress-row"><span>今日任務 ${done} / ${TASKS.length}</span><span>${fishToday} / ${DAILY_FISH_MAX} 條小魚乾</span></div>
+        <div class="progress"><i style="width:${done/TASKS.length*100}%"></i></div>
+      </div>
+      <button class="btn ${unclaimed?'btn-gold':'btn-primary'} btn-block" data-go="tasks">${unclaimed?`有 ${unclaimed} 份小魚乾等妳領取`:(done===TASKS.length?'今天都完成了，去看看貓咪':'開始今天的小任務')}</button>
+    </section>
+
+    <section class="section">
+      <div class="eyebrow">Today's corner</div>
+      <h2 class="h2" style="margin-bottom:14px">今天，想去哪個小角落？</h2>
+      <div class="tiles">
+        <button class="tile" data-go="cards"><img src="assets/cat-letter.webp" alt="" loading="lazy"><span class="badge ${drawn?'done':''}">${drawn?`今日已抽 ${todayDraws().length} 張`:'每日指引'}</span><b>今日牌卡</b><small>塔羅指引・精油建議</small></button>
+        <button class="tile" data-go="cat"><img src="assets/cat-rest.webp" alt="" loading="lazy"><span class="badge">${S.fish} 條待餵</span><b>貓咪小屋</b><small>摸摸牠、餵小魚乾</small></button>
+        <button class="tile" data-go="play"><img src="assets/cat-oil.webp" alt="" loading="lazy"><span class="badge ${today().gameDone?'done':''}">${today().gameDone?'今日已玩':'1 分鐘小遊戲'}</span><b>香氣翻牌</b><small>配對漢芳療的香氣</small></button>
+        <button class="tile" data-go="mom"><img src="assets/hero-globe.webp" alt="" loading="lazy"><span class="badge">${today().water||0} / ${S.waterGoal||8} 杯水</span><b>媽媽小幫手</b><small>喝水打卡・心情日曆</small></button>
+        <button class="tile tile-wide badge-tile" data-go="badges"><span class="tw-copy"><b>本月徽章</b><small>已獲得 ${monthBadges().filter(b=>b.done).length} / ${BADGES.length} 枚・每枚送 ${BADGE_REWARD_FISH} 條小魚乾</small></span><span class="mini-medals">${monthBadges().map(b=>medalSvg(b,30)).join('')}</span></button>
+        <button class="tile tile-wide" data-go="articles"><span class="tw-copy"><b>保養小教室</b><small>芯彤寫給妳的保養觀念和小知識</small></span><span class="gift" style="font-size:22px">${ARTICLES.length} 篇</span></button>
+        <button class="tile tile-wide" data-go="review"><span class="tw-copy"><b>寫下這次的體驗心得</b><small>勾選感受，小幫手幫妳整理成評論</small></span><span class="gift" style="font-size:24px">✎</span></button>
+        <button class="tile tile-wide" data-go="invite"><span class="tw-copy"><b>邀請好友來小角落</b><small>好友得 NT$${CONFIG.referNewcomerNTD} 體驗券・妳得 ${CONFIG.referInviter} 芯幣</small></span><span class="gift">+${CONFIG.referInviter}<small>芯幣</small></span></button>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card quote-card"><div class="eyebrow">A note for you</div><p>${esc(q)}</p><div class="sign">— 芯彤美學</div></div>
+    </section>
+
+    <section class="section">
+      <div class="card studio">
+        <img src="assets/hero-globe.webp" alt="水晶球裡的溫室，小貓在裡面睡覺" loading="lazy">
+        <div><b class="h3">芯彤美學 Heart studio</b><div class="muted">澎湖・泌乳按摩與產後美學</div>
+          <div class="links"><a class="chip-link main" href="${lineBookUrl()}" target="_blank" rel="noopener noreferrer">線上預約</a><a class="chip-link" href="https://www.instagram.com/heart_.studio/" target="_blank" rel="noopener noreferrer">Instagram</a></div></div>
+      </div>
+    </section>
+  </div>`;
+}
+
+let fanPicked=false;const DECK_N=13;let ritualBusy=false;let drawAgain=false;
+function viewCards(){
+  const drawn=S.draw&&S.draw.date===dayKey()&&!drawAgain;
+  const deck=S.deckTab||'tarot';
+  const tabs=`<div class="seg" role="group" aria-label="選擇牌卡"><button data-deck="tarot" aria-pressed="${deck==='tarot'}">塔羅指引</button><button data-deck="warm" aria-pressed="${deck==='warm'}">暖心小卡</button></div>`;
+  let body='';
+  if(deck==='warm'){
+    const q=WARM[(hash(dayKey())+(S.warmShift||0))%WARM.length];
+    body=`<div class="warm-card"><div class="h">FOR TODAY'S YOU</div><p>${esc(q)}</p><div class="muted" style="font-family:var(--latin);font-style:italic">— 芯彤美學</div></div>
+    <div class="row"><button class="btn btn-ghost" id="warmNext">再換一張</button></div>
+    <div class="warm-art"><img src="assets/cat-letter.webp" alt="橘白小貓在桌邊，替妳守著一封小信" loading="lazy"></div>`;
+  } else if(!drawn){
+    body=`<div class="ritual">
+      <div class="ritual-steps" aria-hidden="true"><span id="rs1" class="on">靜心</span><i></i><span id="rs2">洗牌</span><i></i><span id="rs3">攤牌</span><i></i><span id="rs4">抽牌</span></div>
+      <div class="deck" id="deck">${Array.from({length:DECK_N},(_,i)=>`<button class="tcard" data-pick="${i}" tabindex="-1" aria-label="第 ${i+1} 張牌" style="transform:translate(${i*.4}px,${-i*.6}px)"><div class="tback"><svg viewBox="0 0 48 48"><use href="#coin"/></svg></div></button>`).join('')}</div>
+      <p class="muted deck-hint" id="deckHint">先閉上眼睛，深呼吸三次，<br>在心裡想著今天想問的事。</p>
+      <div class="field ask"><label for="askQ">今天想問的問題（選填）</label><input id="askQ" maxlength="40" placeholder="例如：最近該怎麼好好照顧自己？"></div>
+      <button class="btn btn-primary" id="shuffleBtn">我準備好了，開始洗牌</button>
+      <button class="chip-link" id="sfxBtn" aria-pressed="${S.sound}">音效：${S.sound?'開':'關'}</button>
+    </div>`;
+  } else {
+    const card=TAROT[S.draw.card%TAROT.length], ch=CHAKRAS[card.c], blend=studioBlends[card.c];
+    const tds=todayDraws();
+    body=`<div class="reveal">
+      ${S.draw.q?`<div class="asked"><span>妳的問題</span><p>${esc(S.draw.q)}</p></div>`:''}
+      <div class="flip ${S.draw.seen?'on':''}" id="flip">
+        <div class="flip-inner"><div class="face"><div class="tback"><svg viewBox="0 0 48 48"><use href="#coin"/></svg></div></div>
+        <div class="face front"><img class="tarot-img" src="assets/tarot/${card.img}.webp" alt="塔羅牌 ${card.zh} ${card.en}"></div></div>
+      </div>
+      <article class="card reading" style="--chakra:${ch.color};--chakra-soft:${ch.soft}">
+        <div style="text-align:center"><div class="eyebrow">${fmtDate(now(),{month:'long',day:'numeric'})}・今日指引</div><h3 class="h2" style="font-size:24px">${card.r}・${card.zh}</h3><div class="en-name">${card.en}</div></div>
+        <div class="keys">${card.k.map(k=>`<span>${k}</span>`).join('')}</div>
+        <p class="meaning">${card.m}</p>
+        <div class="insight"><div class="ins-row"><span class="ins-tag">給妳的提問</span><p>${card.q}</p></div><div class="ins-row"><span class="ins-tag">今日小行動</span><p>${card.act}</p></div></div>
+        <div class="talk" style="margin:0"><div class="talk-cat"><img src="assets/cat-rest.webp" alt=""></div><div class="bubble">${card.cat}</div></div>
+        <div class="divider">今日漢芳療 × 脈輪</div>
+        <div class="chakra-card">
+          <span class="ck-dot" style="background:${ch.color}"></span>
+          <div><b>${ch.name}</b> <span class="ck-sk">${ch.sk}・${ch.en} Chakra</span><div class="ck-meta">位置：${ch.pos}　元素：${ch.elem}</div><div class="ck-meta">主題：${ch.theme}</div></div>
+        </div>
+        ${tarotCare(card,ch)}
+        <p class="tiny" style="margin:0">精油與香氣建議為日常保養參考，不取代醫療。孕期請把濃度降到 0.5%（10ml 基底油加 1 滴）；哺乳期塗抹後請在餵奶前擦拭乾淨；寶寶在旁時以擴香為主。使用前可先在手臂內側做小範圍測試。</p>
+      </article>
+      ${tds.length>1?`<section class="history"><b class="h3">今天抽過的牌</b><div class="hist-cards">${tds.map((d,i)=>`<button data-showdraw="${i}" aria-pressed="${d===S.draw}"><img src="assets/tarot/${TAROT[d.card%TAROT.length].img}.webp" alt="${TAROT[d.card%TAROT.length].zh}"><span>${d.q?esc(d.q):TAROT[d.card%TAROT.length].zh}</span></button>`).join('')}</div></section>`:''}
+      <button class="btn btn-primary btn-block" id="drawMore">還有想問的？再抽一張</button>
+    </div>`;
+  }
+  return sky('Daily card','今日牌卡',drawn&&deck==='tarot'?'今天的牌已經為妳翻開了。':'讓牌卡替今天說一句話。',drawn?pick(CAT_LINES.cardsDone):pick(CAT_LINES.cards))+`<div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3">${tabs}${body}</div>`;
+}
+
+let breathTimer=null;
+function viewTasks(){
+  const d=today(), done=TASKS.filter(t=>d.tasks[t.id]).length, frac=done/TASKS.length;
+  const C=2*Math.PI*44;
+  const filled=S.streak.n>0&&S.streak.n%7===0?7:S.streak.n%7;
+  const days=[];for(let i=0;i<7;i++)days.push(i<filled?'on':'');
+  return sky('Little tasks','今日任務','照顧自己的小事，做完就能換小魚乾。',done===TASKS.length?pick(CAT_LINES.tasksDone):pick(CAT_LINES.tasks))+`
+  <div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3">
+    <section class="card ring-wrap">
+      <div class="ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="var(--blush)" stroke-width="8"/><circle cx="50" cy="50" r="44" fill="none" stroke="var(--rose)" stroke-width="8" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-frac)}" style="transition:stroke-dashoffset .8s"/></svg>
+        <div class="val"><b class="num">${done}/${TASKS.length}</b><small>今日完成</small></div></div>
+      <div><b class="h3">連續報到 ${S.streak.n} 天</b><div class="muted">每滿 7 天，貓咪多送 ${CONFIG.streakBonusFish} 條小魚乾</div>
+        <div class="streak" aria-label="本週報到">${days.map((c,i)=>`<span class="${c} ${i===6&&!c?'gift':''}">${i===6?'禮':i+1}</span>`).join('')}</div></div>
+    </section>
+    <div class="tasks">${TASKS.map(t=>{const st=taskState(t);const prog=t.need?Math.min(d.pets,t.need):0;
+      const btn= st==='done'?`<button class="task-btn ok" disabled>已領取 ✓</button>`
+        : st==='ready'?`<button class="task-btn claim" data-claim="${t.id}">領取</button>`
+        : t.id==='oil'?`<span class="btn-pair"><button class="task-btn" data-video="general">看示範</button><button class="task-btn" data-oil>我做好了</button></span>`
+        : t.id==='breath'?`<button class="task-btn" data-breath>開始</button>`
+        : `<button class="task-btn" data-go="${t.go}">去做</button>`;
+      return `<div class="task ${st==='done'?'done':''}"><span class="ic"><svg viewBox="0 0 24 24">${t.icon}</svg></span><div><b>${t.name}</b><small>${t.desc}</small>
+        <span class="reward">${fishSvg(15)} ×${t.fish}</span>${t.need&&st==='todo'?`<div class="mini-prog"><i style="width:${prog/t.need*100}%"></i></div>`:''}</div>${btn}</div>`}).join('')}</div>
+    <section class="card breath" id="breathBox" hidden>
+      <div class="orbit" id="orbit"><div><b class="num" id="bSec">60</b><span id="bLabel">準備好了嗎</span></div></div>
+      <p class="muted" id="bCue" style="margin:0">坐著或躺著都可以，一手放在胸口，一手放在肚子上。</p>
+      <button class="btn btn-ghost" id="bStop">先停下來</button>
+    </section>
+    <p class="tiny" style="text-align:center">每天以台灣時間 00:00 換日・每項任務每天可領一次</p>
+  </div>`;
+}
+
+function viewCat(){
+  const d=today();
+  const coinsFromFish=c1(S.fish*CONFIG.coinTenthsPerFeed);
+  return sky('Cat house','貓咪小屋','摸摸牠、餵牠吃小魚乾，貓咪會幫妳存芯幣。',pick(CAT_LINES.cat))+`
+  <div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3">
+    <section class="house" id="house">
+      <video id="petCat" class="cat-vid" src="assets/cat-idle.mp4" poster="assets/cat-rest.webp" muted loop playsinline preload="auto" aria-label="橘白小貓在暖燈旁的毛毯上睡著了，點一下可以摸摸牠"></video>
+      <video id="catPetVid" class="cat-vid cat-react" src="assets/cat-pet.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
+      <div class="bubble" id="houseTalk">摸摸我～（今天 ${Math.min(d.pets,99)} 下）</div>
+      <span class="pet-hint">點圖摸摸小貓 ♡</span>
+    </section>
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <span class="muted">今天摸了 <b class="num" id="petCount">${d.pets}</b> 下${d.pets<5?`（再 ${5-d.pets} 下完成任務）`:'・任務達成'}</span>
+      <button class="chip-link" id="soundBtn" aria-pressed="${S.sound}">呼嚕聲：${S.sound?'開':'關'}</button>
+    </div>
+    <section class="card feed">
+      <div class="bowl-row">
+        <div class="bowl"><svg viewBox="0 0 96 76" aria-hidden="true"><ellipse cx="48" cy="40" rx="40" ry="10" fill="#f1dcd3"/>${S.fish?`<g transform="translate(26 22)"><use href="#fish" width="22" height="22"/></g><g transform="translate(46 24) rotate(-12)"><use href="#fish" width="22" height="22"/></g>`:''}<path d="M8 40c2 18 18 28 40 28s38-10 40-28" fill="#c9a6a8"/><path d="M8 40c2 18 18 28 40 28s38-10 40-28" fill="none" stroke="#a9858a" stroke-width="1.5"/><path d="M38 56l3-4 3 4 3-4 3 4 3-4 3 4" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".8"/></svg><b class="num" id="fishCount">${S.fish}</b></div>
+        <div><b class="h3">點心碗</b>
+          <div class="rate">${fishSvg(20)}<span>1 條</span><span class="eq">→</span>${coinSvg(20)}<span>0.1 芯幣</span></div>
+          <div class="cap">碗裡最多放 ${CONFIG.bowlCap} 條・現在的可換 ${coinsFromFish} 芯幣</div></div>
+      </div>
+      <div class="feed-btns">
+        <button class="btn btn-primary" id="feedOne" ${S.fish?'':'disabled'}>餵 1 條</button>
+        <button class="btn btn-gold" id="feedAll" ${S.fish>1?'':'disabled'}>全部餵完</button>
+      </div>
+      ${S.fish?'':`<button class="btn btn-ghost" data-go="tasks">去做任務拿小魚乾</button>`}
+    </section>
+  </div>`;
+}
+
+let redeemPick=null;
+function viewCoins(){
+  if(!SERVER)return sky('Heart coins','我的芯幣','每一枚芯幣，都是妳好好照顧自己的證明。','登入之後，貓咪就能幫妳存芯幣囉！')+`<div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3"><section class="card login-card"><b class="h3">先用 LINE 登入</b><p class="muted" style="margin:0">登入後就能存芯幣、轉盤、兌換折價券。</p><button class="btn line-btn btn-block" data-login>用 LINE 登入</button></section></div>`;
+  const bal=balance();
+  const expAmt=SERVER.expiring?SERVER.expiring.tenths:0;
+  const nearest=SERVER.expiring?Date.parse(SERVER.expiring.nearest):null;
+  const coupons=S.coupons.slice().sort((a,b)=>(a.used-b.used)||(b.at-a.at));
+  const hist=S.hist.slice().sort((a,b)=>b.at-a.at).slice(0,12);
+  return sky('Heart coins','我的芯幣','每一枚芯幣，都是妳好好照顧自己的證明。',pick(CAT_LINES.coins))+`
+  <div class="gutter stack" style="position:relative;z-index:3">
+    <section class="card purse">
+      <svg class="big-coin" aria-hidden="true"><use href="#coin"/></svg>
+      <div class="bal num">${c1(bal)}<small>芯幣</small></div>
+      <div class="worth">可折抵 <b class="num">NT$${Math.floor(bal/10)*CONFIG.coinValueNTD}</b>・1 芯幣 = NT$${CONFIG.coinValueNTD}</div>
+      ${expAmt?`<div class="notice"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><b class="num">${c1(expAmt)}</b> 芯幣將在 ${fmtFull(nearest)} 到期，記得在那之前兌換使用喔。</span></div>`:''}
+    </section>
+
+    <section class="card member-card">
+      <div class="mc-qr" data-memberqr aria-label="顯示會員 QR Code">${qrSvg(location.origin+'/staff.html?m='+S.member.memberCode,120)}</div>
+      <div><span class="eyebrow">Member card</span><b class="h3" style="display:block">${esc(S.member.name||'')}</b><div class="t-code" style="font-family:var(--latin);font-size:18px;font-weight:600;letter-spacing:1.5px">${S.member.memberCode}</div><p class="tiny" style="margin:4px 0 0">到店時給芯彤掃一下，確認到店、查詢芯幣</p></div>
+    </section>
+
+    <section class="card redeem">
+      <div><b class="h3">兌換折抵券</b><div class="muted">選擇數量，產生兌換碼，到店結帳時出示給芯彤。</div></div>
+      <div class="amounts" role="group" aria-label="兌換數量">${CONFIG.redeemOptions.map(n=>`<button data-amt="${n}" aria-pressed="${redeemPick===n}" ${bal<n*10?'disabled':''}><b class="num">${n}</b><small>折 NT$${n*CONFIG.coinValueNTD}</small></button>`).join('')}</div>
+      <button class="btn btn-primary btn-block" id="redeemBtn" ${redeemPick&&bal>=redeemPick*10?'':'disabled'}>${redeemPick?`用 ${redeemPick} 芯幣兌換 NT$${redeemPick*CONFIG.coinValueNTD} 折抵券`:(bal<CONFIG.redeemOptions[0]*10?`再存 ${c1(CONFIG.redeemOptions[0]*10-bal)} 芯幣就能兌換`:'先選擇兌換數量')}</button>
+      <div class="tiny">兌換碼 ${CONFIG.redeemCodeDays} 天內有效・每消費滿 NT$${CONFIG.couponPerNTD.toLocaleString()} 可使用 1 張・每筆消費最多折抵 NT$${CONFIG.maxDiscountNTD}・不可與生日優惠同時使用</div>
+    </section>
+
+    ${CONFIG.gifts.map(g=>`<section class="card gift-card">
+      <div class="gift-top"><div class="gift-art" aria-hidden="true"><svg viewBox="0 0 60 80"><rect x="22" y="4" width="16" height="12" rx="3" fill="#c49a62"/><rect x="14" y="16" width="32" height="58" rx="10" fill="#f6dfe0" stroke="#d9b3b5"/><path d="M30 34c-5 0-7 4-5 7 2 3 7 3 9 0 2-3 1-7-4-7Z" fill="#c98a92"/><path d="M30 41v14M30 48c-3-2-6-1-7 1M30 46c3-2 6-1 7 1" stroke="#8fa585" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg></div>
+        <div><span class="pr-tag">芯幣換好禮</span><b class="h3" style="display:block;margin-top:4px">${g.name}</b><div class="muted">原價 NT$${g.price}</div></div></div>
+      <p style="margin:0;font-size:13.5px;line-height:1.8">${g.desc}</p>
+      <div class="gift-ways">${g.ways.map((w,i)=>`<button class="gift-way" data-gift="${g.id}" data-way="${i}" ${bal<w.coins*10?'disabled':''}>${w.tag?`<span class="pr-tag">${w.tag}</span>`:''}<b>${coinSvg(18)} ${w.coins}</b><small>${w.cash?`+ NT$${w.cash}`:'免加價'}</small></button>`).join('')}</div>
+      <p class="tiny" style="margin:0">兌換後會得到領取碼，${CONFIG.redeemCodeDays} 天內到店領取。數量有限，兌完為止。</p>
+    </section>`).join('')}
+
+    <section class="card wheel-card">
+      <div><b class="h3">幸運轉盤</b><div class="muted">每天免費轉 1 次，之後用 ${WHEEL.cost} 芯幣轉一次</div></div>
+      <div class="wheel"><span class="wheel-ptr" id="wheelPtr"></span>${wheelSvg()}<span class="wheel-hub"><svg width="40" height="40"><use href="#coin"/></svg></span></div>
+      ${(()=>{const free=!today().freeSpin;const can=free||bal>=WHEEL.cost*10;
+        return `<button class="btn btn-gold btn-block" id="spinBtn" ${can?'':'disabled'}>${free?'今天的免費轉盤':can?`用 ${WHEEL.cost} 芯幣再轉一次`:`今天的免費次數用完了，還差 ${c1(WHEEL.cost*10-bal)} 芯幣才能再轉`}</button>`})()}
+      <details class="odds"><summary>使用說明</summary><p class="tiny">獎項由系統隨機抽出，各獎項中獎機率不同。折價券 ${WHEEL.couponDays} 天內有效、每張限用一次、不可兌換現金。每消費滿 NT$${CONFIG.couponPerNTD.toLocaleString()} 可使用 1 張，每筆消費最多折抵 NT$${CONFIG.maxDiscountNTD}，不可與生日優惠同時使用。</p></details>
+    </section>
+
+    <section class="stack">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><b class="h3">我的票券</b><span class="tiny">${coupons.filter(c=>!c.used&&c.exp>now()).length} 張可使用</span></div>
+      <div class="calc"><label for="spendAmt">結帳試算：這次消費金額</label><div class="calc-row"><span>NT$</span><input id="spendAmt" inputmode="numeric" placeholder="例如 2500" value="${S.spendAmt||''}"></div><p id="calcOut" class="calc-out">${calcText(S.spendAmt||0)}</p></div>
+      ${coupons.length?coupons.map(c=>`<div class="ticket ${c.used||c.exp<now()?'used':''}"><div><div class="t-title">${esc(c.title)}</div><div class="t-code">${c.code}</div><div class="t-meta">${c.used?'已使用':c.exp<now()?'已過期':'有效至 '+fmtFull(c.exp)}${c.kind==='gift'?'・到店領取':'・滿 NT$'+CONFIG.couponPerNTD.toLocaleString()+' 可用'}</div></div><div class="t-val">${c.kind==='gift'?'<b>好禮</b><small>'+(c.cash?'加 NT$'+c.cash:'免加價')+'</small>':`<b class="num">${c.value}</b><small>NT$ 折抵</small>`}</div>${c.used?'<span class="stamp">已使用</span>':''}${!c.used&&c.exp>now()?`<button class="t-qr" data-couponqr="${c.code}">QR</button>`:''}</div>`).join(''):'<p class="muted">還沒有票券，兌換後會出現在這裡。</p>'}
+    </section>
+
+    <section class="card" style="padding:6px 16px">
+      <div class="hist">${hist.map(h=>`<div><b>${esc(h.label)}</b><time>${fmtFull(h.at)}</time><span class="amt num ${h.d>=0?'plus':'minus'}">${h.d>=0?'+':'−'}${c1(Math.abs(h.d))}</span></div>`).join('')}</div>
+    </section>
+
+    <details class="rules"><summary>芯幣怎麼獲得、怎麼使用？</summary>
+      <ul class="rule-list">
+        <li><span>獲得方式</span><span>完成每日任務得到小魚乾，餵給貓咪後，每條換 0.1 芯幣。每天最多 ${DAILY_FISH_MAX} 條，連續報到 7 天多送 ${CONFIG.streakBonusFish} 條。</span></li>
+        <li><span>邀請好友</span><span>好友用妳的邀請碼加入，可得 NT$${CONFIG.referNewcomerNTD} 首次體驗券；好友完成第一次到店，妳得 ${CONFIG.referInviter} 芯幣。</span></li>
+        <li><span>折抵方式</span><span>1 芯幣 = NT$${CONFIG.coinValueNTD}。滿 ${CONFIG.redeemOptions[0]} 芯幣可兌換成折價券。</span></li>
+        <li><span>使用門檻</span><span>每消費滿 NT$${CONFIG.couponPerNTD.toLocaleString()} 可使用 1 張折價券（滿 NT$2,000 可用 2 張、滿 NT$3,000 可用 3 張，以此類推）。每筆消費所有折價券合計最多折抵 NT$${CONFIG.maxDiscountNTD}。折價券不可與生日優惠同時使用。</span></li>
+        <li><span>使用期限</span><span>芯幣自獲得日起 ${CONFIG.coinLifeDays} 天內有效，先拿到的先使用；到期前 ${CONFIG.expireWarnDays} 天會提醒妳。兌換碼 ${CONFIG.redeemCodeDays} 天內有效。</span></li>
+        <li><span>注意事項</span><span>芯幣不可兌換現金、不可轉讓；小魚乾放在碗裡不會過期，但碗最多裝 ${CONFIG.bowlCap} 條。</span></li>
+      </ul>
+    </details>
+    <button class="btn btn-ghost btn-block" data-go="invite">邀請好友，一起存芯幣</button>
+  </div>`;
+}
+
+function viewReview(){
+  if(!RV.text)newReview();
+  const feels=rvFeelsFor();
+  const chip=(group,val,label,on)=>`<button data-rv="${group}" data-val="${esc(val)}" aria-pressed="${on}">${esc(label)}</button>`;
+  const reviewHref=CONFIG.googleReviewUrl||'https://www.google.com/maps/search/'+encodeURIComponent('芯彤美學 澎湖');
+  return sky('Share your story','寫下體驗心得','不知道怎麼寫也沒關係，勾選妳的感受就好。','妳的一句話，可能就是另一位媽媽最需要的安心。')+`
+  <div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3">
+    <section class="card rv">
+      <div class="rv-q"><b>這次做了哪些項目？</b><small>可複選</small></div>
+      <div class="chips">${RV_SERVICES.map(x=>chip('svc',x.id,x.name,RV.svc.includes(x.id))).join('')}</div>
+      <div class="rv-q"><b>妳現在的狀態是？</b></div>
+      <div class="chips">${RV_STAGES.map(x=>chip('stage',x.id,x.name,RV.stage===x.id)).join('')}</div>
+      <div class="rv-q"><b>做完的感受</b><small>挑真的有感覺的</small></div>
+      <div class="chips">${feels.map(f=>chip('feels',f.t,f.t,RV.feels.includes(f.t))).join('')}</div>
+      <div class="rv-q"><b>服務和環境</b><small>選填</small></div>
+      <div class="chips">${RV_STAFF.map(x=>chip('staff',x,x,RV.staff.includes(x))).join('')}${RV_PLACE.map(x=>chip('place',x,x,RV.place.includes(x))).join('')}</div>
+      <div class="rv-q"><b>用一句話說說妳自己</b><small>選填，最能讓評論有溫度</small></div>
+      <div class="field"><label for="rvOwn" style="position:absolute;left:-9999px">自己的一句話</label><input id="rvOwn" maxlength="60" value="${esc(RV.own)}" placeholder="例如：生完第二胎，好久沒有這樣放鬆了"></div>
+      <div class="seg" role="group" aria-label="評論長度"><button data-len="short" aria-pressed="${RV.len==='short'}">簡短版</button><button data-len="full" aria-pressed="${RV.len==='full'}">完整版</button></div>
+    </section>
+    <section class="card rv rv-out">
+      <div class="rv-q"><b>幫妳整理好的評論</b><small>可以直接修改</small></div>
+      <label for="rvText" class="tiny" style="position:absolute;left:-9999px">評論內容</label>
+      <textarea id="rvText">${esc(RV.text)}</textarea>
+      <div class="rv-meta"><span id="rvCount">${RV.text.length} 字</span><span>${RV.edited?'已手動修改':'每次生成都不一樣'}</span></div>
+      <div class="rv-btns"><button class="btn btn-ghost" id="rvNew">換一版</button><button class="btn btn-primary" id="rvCopy">複製評論</button></div>
+      <a class="btn btn-gold btn-block" href="${reviewHref}" target="_blank" rel="noopener noreferrer">前往 Google 留下評論</a>
+      <ol class="rv-steps"><li>按「複製評論」</li><li>按「前往 Google 留下評論」，給星星後貼上</li><li>依妳的真實感受改幾個字，再按發布</li></ol>
+      <p class="tiny" style="margin:0">請只寫妳真的有感受到的部分。評論是給下一位媽媽的參考，加入一點自己的小故事，會更有溫度。</p>
+      <p class="tiny" style="margin:0">芯彤美學提供的是非醫療的放鬆保養服務。如果有發燒、紅腫熱痛等不舒服，請先就醫。</p>
+    </section>
+  </div>`;
+}
+
+function todayDraws(){
+  const k=dayKey();let a=(S.draws||[]).filter(d=>d.date===k);
+  if(!a.length&&S.draw&&S.draw.date===k)a=[S.draw];
+  return a;
+}
+
+/* ---------- 音效（用瀏覽器即時合成，不需要額外檔案） ---------- */
+let AC=null,NOISE=null;
+function ac(){
+  if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){return null}
+    const len=AC.sampleRate*2;NOISE=AC.createBuffer(1,len,AC.sampleRate);const d=NOISE.getChannelData(0);for(let i=0;i<len;i++)d[i]=Math.random()*2-1}
+  if(AC.state==='suspended')AC.resume();
+  return AC;
+}
+function noiseHit(t,dur,freq,q,gain){
+  const c=AC,src=c.createBufferSource();src.buffer=NOISE;src.playbackRate.value=.8+Math.random()*.4;
+  const f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=freq;f.Q.value=q;
+  const g=c.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(gain,t+.004);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  src.connect(f).connect(g).connect(c.destination);src.start(t,Math.random()*1.5);src.stop(t+dur+.02);
+}
+function tone(t,freq,dur,gain,type='sine',glide){
+  const c=AC,o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(freq,t);
+  if(glide)glide(o.frequency,t);
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(gain,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(g).connect(c.destination);o.start(t);o.stop(t+dur+.05);
+}
+function sfx(kind){
+  if(!S.sound)return;const c=ac();if(!c)return;const t=c.currentTime+.01;
+  if(kind==='riffle'){for(let i=0;i<9;i++)noiseHit(t+i*.016+Math.random()*.006,.03,2600+Math.random()*1400,1.2,.22)}
+  else if(kind==='tick'){noiseHit(t,.04,3200,1.5,.25)}
+  else if(kind==='spread'){for(let i=0;i<DECK_N;i++)noiseHit(t+i*.045,.05,2200+i*60,1.4,.16)}
+  else if(kind==='flip'){noiseHit(t,.18,1400,.7,.25);[880,1320,1760].forEach((f,i)=>tone(t+.25+i*.09,f,1.2,.06))}
+  else if(kind==='meow'){
+    // 「喵～」：鋸齒波經過兩個共振峰濾波，音高先上揚再落下，加一點顫音
+    const dur=.55+Math.random()*.2,base=480+Math.random()*120;
+    const o=c.createOscillator();o.type='sawtooth';
+    o.frequency.setValueAtTime(base,t);o.frequency.linearRampToValueAtTime(base*1.55,t+dur*.3);o.frequency.linearRampToValueAtTime(base*1.15,t+dur);
+    const vib=c.createOscillator(),vg=c.createGain();vib.frequency.value=6;vg.gain.value=10;vib.connect(vg).connect(o.frequency);
+    const f1=c.createBiquadFilter();f1.type='bandpass';f1.Q.value=6;f1.frequency.setValueAtTime(700,t);f1.frequency.linearRampToValueAtTime(1100,t+dur*.35);f1.frequency.linearRampToValueAtTime(800,t+dur);
+    const f2=c.createBiquadFilter();f2.type='bandpass';f2.Q.value=8;f2.frequency.setValueAtTime(1800,t);f2.frequency.linearRampToValueAtTime(2400,t+dur*.35);f2.frequency.linearRampToValueAtTime(1900,t+dur);
+    const g1=c.createGain(),g2=c.createGain();g2.gain.value=.5;
+    const env=c.createGain();env.gain.setValueAtTime(0,t);env.gain.linearRampToValueAtTime(.32,t+.06);env.gain.setValueAtTime(.28,t+dur*.6);env.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    o.connect(f1).connect(g1).connect(env);o.connect(f2).connect(g2).connect(env);env.connect(c.destination);
+    o.start(t);vib.start(t);o.stop(t+dur+.05);vib.stop(t+dur+.05);
+  }
+  else if(kind==='purr'){
+    const src=c.createBufferSource();src.buffer=NOISE;const f=c.createBiquadFilter();f.type='lowpass';f.frequency.value=180;
+    const amp=c.createGain();amp.gain.value=0;const lfo=c.createOscillator();lfo.frequency.value=24;const lg=c.createGain();lg.gain.value=.5;
+    lfo.connect(lg).connect(amp.gain);const out=c.createGain();out.gain.setValueAtTime(0,t);out.gain.linearRampToValueAtTime(.9,t+.15);out.gain.linearRampToValueAtTime(.0001,t+1.3);
+    src.connect(f).connect(amp).connect(out).connect(c.destination);src.start(t);lfo.start(t);src.stop(t+1.4);lfo.stop(t+1.4);
+  }
+}
+
+function startRitual(){
+  if(ritualBusy)return;ritualBusy=true;ac();
+  const deck=$('#deck'),cards=[...deck.querySelectorAll('.tcard')],btn=$('#shuffleBtn'),hint=$('#deckHint');
+  btn.disabled=true;btn.textContent='洗牌中…';hint.innerHTML='貓咪正在幫妳把心意洗進牌裡…';
+  $('#rs2').classList.add('on');catSay('洗呀洗～把今天的心意都洗進去。');
+  deck.classList.add('shuffling');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce){setTimeout(spreadDeck,300);return}
+  riffleSequence(deck,cards).then(()=>setTimeout(spreadDeck,250));
+}
+/* 真實洗牌：切牌 → 鳩尾洗牌（左右交錯落下）→ 整牌，重複兩次，最後再切一次牌 */
+const stackT=(j,x=0,y=0,r=0)=>`translate(${x+j*.35}px,${y-j*.7}px) rotate(${r}deg)`;
+function move(el,to,dur,delay=0,mid,ease='cubic-bezier(.3,.7,.3,1)'){
+  return new Promise(res=>{
+    const from=el.style.transform||'none';
+    const kf=mid?[{transform:from},{transform:mid,offset:.45},{transform:to}]:[{transform:from},{transform:to}];
+    const an=el.animate(kf,{duration:dur,delay,easing:ease,fill:'both'});
+    an.onfinish=()=>{el.style.transform=to;an.cancel();res()};
+  });
+}
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function riffleSequence(deck,cards){
+  let order=cards.slice();
+  order.forEach((c,j)=>{c.style.zIndex=j;c.style.transform=stackT(j)});
+  for(let round=0;round<2;round++){
+    // 1. 切成左右兩疊，微微往內傾
+    const half=Math.floor(order.length/2)+(Math.random()<.5?0:1);
+    const L=order.slice(0,half),R=order.slice(half);
+    sfx('tick');
+    await Promise.all([
+      ...L.map((c,k)=>move(c,stackT(k,-78,6,-9),340,k*10)),
+      ...R.map((c,k)=>move(c,stackT(k,78,6,9),340,k*10))
+    ]);
+    await wait(120);
+    // 2. 兩疊的牌輪流落下，交錯疊回中間
+    const next=[];let li=0,ri=0;
+    while(li<L.length||ri<R.length){
+      const takeL=ri>=R.length||(li<L.length&&(next.length%2===0?Math.random()<.65:Math.random()<.35));
+      next.push(takeL?L[li++]:R[ri++]);
+    }
+    const ps=next.map((c,j)=>{const fromLeft=L.includes(c);
+      setTimeout(()=>{c.style.zIndex=j;if(j%2===0)sfx('riffle')},j*55);
+      return move(c,stackT(j,0,0,(Math.random()*3-1.5)),300,j*55,stackT(j,fromLeft?-30:30,-22,fromLeft?-4:4),'cubic-bezier(.4,.1,.3,1)');
+    });
+    await Promise.all(ps);
+    // 3. 整牌：把牌敲齊，整疊輕輕彈一下
+    await Promise.all(next.map((c,j)=>move(c,stackT(j),180)));
+    deck.animate([{transform:'translateY(0)'},{transform:'translateY(-8px)'},{transform:'translateY(0)'}],{duration:260,easing:'ease-out'});
+    sfx('tick');
+    order=next;await wait(200);
+  }
+  // 4. 最後切一次牌：上半疊拿起，放到下面
+  const half=Math.floor(order.length/2),top=order.slice(half),bottom=order.slice(0,half);
+  await Promise.all(top.map((c,k)=>move(c,stackT(k+half,92,-40,6),320,k*8)));
+  await Promise.all(bottom.map((c,k)=>move(c,stackT(k,-10,0,0),220)));
+  top.forEach((c,k)=>{c.style.zIndex=k});bottom.forEach((c,k)=>{c.style.zIndex=k+top.length});
+  sfx('tick');
+  await Promise.all([...top.map((c,k)=>move(c,stackT(k),300,k*8)),...bottom.map((c,k)=>move(c,stackT(k+top.length),300))]);
+  order=[...top,...bottom];
+  // 依新順序重新排列 DOM，攤牌時順序就是洗過的順序
+  order.forEach((c,j)=>{c.style.zIndex=j;deck.appendChild(c);c.dataset.pick=j});
+}
+function spreadDeck(){
+  const deck=$('#deck'),cards=[...deck.querySelectorAll('.tcard')];
+  deck.classList.remove('shuffling');void deck.offsetWidth;
+  $('#rs3').classList.add('on');
+  const span=17;sfx('spread');
+  cards.forEach((c,i)=>{const a=-span+(2*span)*i/(DECK_N-1);c.style.transitionDelay=(i*45)+'ms';c.style.transform=`rotate(${a}deg)`;c.style.zIndex=i;c.tabIndex=0});
+  setTimeout(()=>{cards.forEach(c=>c.style.transitionDelay='0ms');deck.classList.add('spread');ritualBusy=false;
+    $('#deckHint').innerHTML='憑直覺，選一張最吸引妳的牌。';catSay('慢慢看，哪一張在跟妳打招呼？');
+    const btn=$('#shuffleBtn');btn.disabled=false;btn.textContent='重新洗牌';btn.classList.replace('btn-primary','btn-ghost');
+    btn.onclick=()=>{deck.classList.remove('spread');cards.forEach((c,i)=>{c.tabIndex=-1;c.style.transform=`translate(${i*.4}px,${-i*.6}px)`});setTimeout(startRitual,450)};
+  },DECK_N*45+500);
+}
+
+function lineBookUrl(){
+  if(!CONFIG.lineId)return CONFIG.bookingUrl;
+  return 'https://line.me/R/oaMessage/'+encodeURIComponent(CONFIG.lineId)+'/?'+encodeURIComponent(CONFIG.lineMessage);
+}
+
+/* ---------- 幸運轉盤 ---------- */
+const WHEEL={cost:10,couponDays:30,prizes:[
+  {label:'NT$100',sub:'折價券',kind:'coupon',value:100,p:2,color:'#7c6a7e',ink:'#fff'},
+  {label:'小魚乾',sub:'×5',kind:'fish',value:5,p:15,color:'#f7ece4',ink:'#574a4f'},
+  {label:'NT$50',sub:'折價券',kind:'coupon',value:50,p:15,color:'#b07f78',ink:'#fff'},
+  {label:'小魚乾',sub:'×1',kind:'fish',value:1,p:28,color:'#fbf4e8',ink:'#574a4f'},
+  {label:'NT$80',sub:'折價券',kind:'coupon',value:80,p:5,color:'#9a8aa0',ink:'#fff'},
+  {label:'芯幣',sub:'+3',kind:'coin',value:3,p:10,color:'#f7ece4',ink:'#574a4f'},
+  {label:'NT$30',sub:'折價券',kind:'coupon',value:30,p:25,color:'#f3e2dc',ink:'#574a4f'}
+]};
+let wheelRot=0,wheelBusy=false;
+function wheelSvg(){
+  const n=WHEEL.prizes.length,R=140,cx=150,cy=150;
+  const seg=(i)=>{const a0=(i*360/n-90-180/n)*Math.PI/180,a1=((i+1)*360/n-90-180/n)*Math.PI/180;
+    return `M${cx},${cy} L${cx+R*Math.cos(a0)},${cy+R*Math.sin(a0)} A${R},${R} 0 0 1 ${cx+R*Math.cos(a1)},${cy+R*Math.sin(a1)} Z`};
+  return `<svg viewBox="0 0 300 300" class="wheel-svg"><g id="wheelSvg" transform="rotate(${wheelRot%360} 150 150)">
+    <circle cx="150" cy="150" r="148" fill="url(#gGold)"/>
+    ${WHEEL.prizes.map((pz,i)=>`<path d="${seg(i)}" fill="${pz.color}" stroke="#fffaf6" stroke-width="2"/>
+      <g transform="rotate(${i*360/n} 150 150)"><text x="150" y="58" text-anchor="middle" fill="${pz.ink}" font-family="Cormorant Garamond,serif" font-weight="600" font-size="19">${pz.label}</text><text x="150" y="80" text-anchor="middle" fill="${pz.ink}" font-size="13" opacity=".9">${pz.sub}</text></g>`).join('')}
+    ${Array.from({length:24},(_,i)=>{const a=i*15*Math.PI/180;return `<circle cx="${150+144*Math.cos(a)}" cy="${150+144*Math.sin(a)}" r="2.6" fill="#fff6dc"/>`}).join('')}
+  </g></svg>`;
+}
+function maybeSpinPrompt(){
+  if(!S.member||today().freeSpin||route==='coins'||S.spinPromptDay===dayKey()||$('#sheetRoot').innerHTML)return;
+  S.spinPromptDay=dayKey();save();
+  sheet(`<div class="spin-modal">
+    <div style="text-align:center"><span class="eyebrow">Daily lucky spin</span><b class="h2" style="display:block;font-size:21px">今天的免費轉盤</b><p class="muted" style="margin:4px 0 12px">每天都可以免費轉一次，抽折價券或小魚乾！</p></div>
+    <div class="wheel"><span class="wheel-ptr" id="wheelPtr"></span>${wheelSvg()}<span class="wheel-hub"><svg width="36" height="36"><use href="#coin"/></svg></span></div>
+    <button class="btn btn-gold btn-block" id="spinBtn" style="margin-top:16px">免費轉一次</button>
+    <button class="btn btn-ghost btn-block" data-close style="margin-top:8px">先不要，晚點再轉</button>
+    <p class="tiny" style="text-align:center;margin:8px 0 0">之後也可以到「芯幣」頁轉轉盤</p>
+  </div>`);
+  $('#spinBtn').onclick=spinWheel;
+}
+async function spinWheel(){
+  if(wheelBusy)return;
+  if(needLogin())return;
+  const free=!today().freeSpin;
+  if(!free&&balance()<WHEEL.cost*10){toast(`今天的免費轉盤用過了，再轉一次需要 ${WHEEL.cost} 芯幣`);return}
+  wheelBusy=true;ac();
+  const bt=$('#spinBtn');if(bt){bt.disabled=true;bt.textContent='轉動中…'}
+  const res=await api('spin',{});
+  if(res.error){wheelBusy=false;toast(res.error);if(bt){bt.disabled=false;bt.textContent='再試一次'}return}
+  $('#chipCoin').textContent=c1(res.state.coins);
+  const idx=res.idx;
+  const n=WHEEL.prizes.length,segA=360/n;
+  const start=wheelRot,base=start-(start%360);
+  const target=base+360*6+(360-idx*segA)%360+(Math.random()*segA*.6-segA*.3);
+  const svg=$('#wheelSvg'),dur=4600,t0=performance.now();let lastSeg=Math.floor((start+segA/2)/segA);
+  const ease=x=>1-Math.pow(1-x,4);
+  const frame=now2=>{
+    const x=Math.min(1,(now2-t0)/dur),ang=start+(target-start)*ease(x);
+    if(svg)svg.setAttribute('transform',`rotate(${ang%360} 150 150)`);
+    const sg=Math.floor((ang+segA/2)/segA);if(sg!==lastSeg){lastSeg=sg;sfx('tick');const pt=$('#wheelPtr');if(pt){pt.classList.remove('kick');void pt.offsetWidth;pt.classList.add('kick')}}
+    if(x<1)requestAnimationFrame(frame);else{wheelRot=target;finishSpin(res)}
+  };
+  requestAnimationFrame(frame);
+}
+function finishSpin(res){
+  const pz=res.prize;let title='',detail='';
+  if(pz.kind==='coupon'){title=`恭喜抽中 NT$${pz.value} 折價券！`;detail=`已放進「我的票券」，${WHEEL.couponDays} 天內到店出示折扣碼使用。`}
+  else if(pz.kind==='fish'){title=`抽中小魚乾 ×${pz.value}！`;detail='已經放進點心碗，記得去小屋餵貓咪。'}
+  else{title=`抽中芯幣 +${pz.value}！`;detail='已經存進妳的芯幣錢包。'}
+  applyServer(res.state);sfx('flip');
+  wheelBusy=false;render();
+  sheet(`<div style="text-align:center"><div class="win-burst">${pz.kind==='coupon'?`<b>NT$${pz.value}</b><small>折價券</small>`:pz.kind==='fish'?`<svg width="64" height="64"><use href="#fish"/></svg>`:`<svg width="64" height="64"><use href="#coin"/></svg>`}</div>
+    <b class="h2" style="display:block;font-size:21px;margin-top:12px">${title}</b><p class="muted">${detail}</p>
+    <button class="btn btn-primary btn-block" data-close>好開心，收下了</button></div>`);
+}
+
+function bestCoupons(amount){
+  const n=Math.floor((amount||0)/CONFIG.couponPerNTD);
+  const valid=S.coupons.filter(c=>c.kind!=='gift'&&!c.used&&c.exp>now()).sort((a,b)=>b.value-a.value);
+  // 找出不超過可用張數與折抵上限、金額最高的組合（金額相同時用比較少張）
+  const pool=valid.slice(0,16);let best={pick:[],total:0};
+  const dfs=(i,cur,tot)=>{
+    if(tot>best.total||(tot===best.total&&cur.length<best.pick.length))best={pick:cur.slice(),total:tot};
+    if(i>=pool.length||cur.length>=n)return;
+    for(let j=i;j<pool.length;j++){const v=pool[j].value;if(tot+v<=CONFIG.maxDiscountNTD){cur.push(pool[j]);dfs(j+1,cur,tot+v);cur.pop()}}
+  };
+  dfs(0,[],0);
+  return {n,pick:best.pick,total:best.total};
+}
+function calcText(amount){
+  if(!amount)return `輸入金額，看看這次最多可以用幾張、折多少。`;
+  const r=bestCoupons(amount);
+  if(r.n===0)return `消費滿 NT$${CONFIG.couponPerNTD.toLocaleString()} 才能使用折價券，還差 NT$${(CONFIG.couponPerNTD-amount).toLocaleString()}。`;
+  if(!r.pick.length)return `這次最多可用 ${r.n} 張，但妳目前沒有可用的折價券。`;
+  return `這次最多可用 <b>${r.n}</b> 張（每筆最多折抵 NT$${CONFIG.maxDiscountNTD}）。建議使用 ${r.pick.map(c=>'NT$'+c.value).join(' + ')}，共折抵 <b>NT$${r.total}</b>，實付 <b>NT$${(amount-r.total).toLocaleString()}</b>。`;
+}
+
+function openGift(gid,wi){
+  const g=CONFIG.gifts.find(x=>x.id===gid),w=g.ways[wi];
+  sheet(`<b class="h3" style="display:block;text-align:center">確認兌換</b>
+    <div style="text-align:center;margin:14px 0"><b class="h2" style="font-size:20px">${g.name}</b><div style="font-family:var(--latin);font-size:34px;font-weight:600;margin-top:6px">${coinSvg(30)} ${w.coins}${w.cash?` <small style="font-size:18px">+ NT$${w.cash}</small>`:''}</div>
+    <div class="muted">${w.cash?`到店領取時支付 NT$${w.cash}`:'免加價'}・${CONFIG.redeemCodeDays} 天內到店領取</div></div>
+    <div class="row" style="flex-wrap:nowrap"><button class="btn btn-ghost" style="flex:1" data-close>再想想</button><button class="btn btn-primary" style="flex:1" id="confirmGift">確認兌換</button></div>`);
+  $('#confirmGift').onclick=()=>{
+    if(!spendCoins(w.coins*10,`兌換 ${g.name}`)){toast('芯幣不足');return}
+    S.coupons.push({id:'g'+now(),kind:'gift',title:`${g.name} 領取券`,code:genCode('HSG'),value:0,cash:w.cash,at:now(),exp:now()+CONFIG.redeemCodeDays*DAY,used:false});
+    save();closeSheet();render();toast('兌換成功！到店出示領取碼');
+  };
+}
+
+
+/* ---------- 抽牌後的漢芳療推薦：脈輪對應＋符合妳現在的階段才推薦 ---------- */
+const LIFE_STAGES=[{id:'preg',name:'懷孕中'},{id:'milk',name:'哺乳中'},{id:'calm',name:'離乳中'},{id:'daily',name:'日常保養'}];
+const SUIT={orange:['preg','milk','calm','daily'],milk:['preg','milk'],calm:['calm'],full:['daily']};
+const EXTRA_ITEMS=[{name:'橙花精萃花露',ch:[3,2],ing:'橙花',use:'香氛噴霧，忙碌時噴一下、深呼吸'},{name:'白玫瑰純露',ch:[3,1],ing:'白玫瑰',use:'純露噴霧，隨身噴灑或深呼吸嗅聞'},{name:'七玫瑰潤手精華',ch:[3,1],ing:'七種玫瑰',use:'擦護手時，順便聞聞玫瑰香'}];
+function ingsFor(key,ci){
+  const list=PRODUCT_INGS[key];
+  const primary=list.filter(n=>ING[n].ch[0]===ci),also=list.filter(n=>ING[n].ch[0]!==ci&&ING[n].ch.includes(ci)),rest=list.filter(n=>!ING[n].ch.includes(ci));
+  return [...primary,...also,...rest].slice(0,3).map(n=>({n,match:ING[n].ch.includes(ci)}));
+}
+function stageRecs(st,ci){
+  const ok=Object.keys(PRODUCT_INGS).filter(k=>SUIT[k].includes(st));
+  const matching=ok.filter(k=>PRODUCT_INGS[k].some(n=>ING[n].ch.includes(ci)));
+  const pref=CHAKRA_PRODUCT[ci];
+  const score=k=>(k===pref?3:0)+(PRODUCT_INGS[k].some(n=>ING[n].ch[0]===ci)?2:0)+((k==='orange')===(ci<=2)?1:0);
+  matching.sort((a,b)=>score(b)-score(a));
+  const extras=EXTRA_ITEMS.filter(x=>x.ch.includes(ci));
+  return {ok,matching,extras};
+}
+function tarotCare(card,ch){
+  const st=S.lifeStage;
+  const stageChips=`<div class="stage-pick"><b>妳現在的階段是？</b><span class="tiny">貓咪會挑適合妳這個時期的漢芳療</span>
+    <div class="chips" role="group" aria-label="選擇現在的階段">${LIFE_STAGES.map(x=>`<button data-life="${x.id}" aria-pressed="${x.id===st}">${x.name}</button>`).join('')}</div></div>`;
+  if(!st)return stageChips+`<p class="muted" style="text-align:center;margin:0">選好階段後，就會出現今天的香氣和保養建議。</p>`;
+  const {ok,matching,extras}=stageRecs(st,card.c);
+  const chips=n=>`<div class="ing-ch">${ING[n].ch.map(i=>`<span class="${i===card.c?'on':''}" style="--cc:${CHAKRAS[i].color}">${CHAKRAS[i].name}</span>`).join('')}</div>`;
+  const extraHtml=list=>list.length?`<div class="alt-prods"><span class="herb-tag">香氛小物也很適合</span>${list.map(x=>`<div class="alt-prod"><b>${x.name}</b><span>${x.ing}・${x.use}</span></div>`).join('')}</div>`:'';
+  const matched=matching.length>0;
+  const key=matched?matching[0]:ok.find(k=>k!=='orange')||ok[0];
+  const pr=PRODUCTS[key],care=key==='orange'?(st==='preg'?'legs':'belly'):(st==='preg'?'breastPreg':'breast');
+  const list=ingsFor(key,card.c),main=list[0],others=list.slice(1);
+  const otherProds=matching.slice(1).map(k=>({name:PRODUCTS[k].name,ing:PRODUCT_INGS[k].filter(n=>ING[n].ch.includes(card.c)).slice(0,2).join('、'),use:PRODUCTS[k].sub}));
+  return stageChips+`
+    ${matched?'':`<p class="care-note" style="margin:0">今天的${ch.name}香氣，在妳現在的階段剛好沒有直接對應的產品，先用這款適合妳這個時期的漢芳療陪妳：</p>`}
+    <div class="oil">
+      <div class="drop" style="color:${ch.color}"><svg><use href="#drop"/></svg></div>
+      <div><span class="pr-tag">${main.match?'今日關鍵香氣':'今日推薦香氣'}</span><h4 style="margin-top:6px">${main.n}</h4>${ING[main.n].la?`<div class="latin">${ING[main.n].la}</div>`:''}
+        ${chips(main.n)}<p>${ING[main.n].feel}</p>
+        ${others.length?`<div class="sub-ings">${others.map(o=>`<div class="sub-ing"><b>${o.n}</b>${ING[o.n].la?` <i>${ING[o.n].la}</i>`:''}<span class="sub-tag">${o.match?'也對應'+ch.name:'搭配香氣'}</span>${chips(o.n)}<p>${ING[o.n].feel}</p></div>`).join('')}</div>`:''}
+        <p class="alt">這幾種香氣都在漢芳療<b>【${pr.name}】</b>裡，適合${LIFE_STAGES.find(x=>x.id===st).name}的妳，今天就用它來保養${CARE[care].area}。</p></div>
+    </div>
+    ${otherProds.length?`<div class="alt-prods"><span class="herb-tag">也適合妳、也對應${ch.name}</span>${otherProds.map(x=>`<div class="alt-prod"><b>${x.name}</b><span>${x.ing}・${x.use}</span></div>`).join('')}</div>`:''}
+    <div class="herb">
+      <span class="herb-tag">今日漢芳療居家保養・${CARE[care].area}</span>
+      ${productBox(key,care,card.c)}
+      <ol class="care-steps">${CARE[care].steps.map(x=>`<li>${x}</li>`).join('')}</ol>
+      <p class="care-note">${CARE[care].note}</p>
+      <div class="rv-btns"><button class="btn btn-ghost" data-video="${care==='breastPreg'?'breast':care==='legs'?'general':care}">▶ 看示範</button><a class="btn btn-primary" href="${lineBookUrl()}" target="_blank" rel="noopener noreferrer">預約課程</a></div>
+      <p class="care-note" style="text-align:center;margin-top:-2px">${CARE[care].cta.replace('預約','可預約：')}</p>
+    </div>
+    ${extraHtml(extras)}`;
+}
+
+function productBox(key,care,ci){
+  const pr=PRODUCTS[key];
+  const chips='';
+  return `<div class="product">
+    <div class="pr-head"><span class="pr-tag">建議使用</span><b>${pr.name}</b><small>${pr.sub}</small></div>
+    ${chips}
+    <dl class="spec"><dt>精油</dt><dd>${pr.oils}</dd><dt>基底油</dt><dd>${pr.base}</dd><dt>對應脈輪</dt><dd>${pr.chakra}</dd></dl>
+    <p>${pr.feel}</p>
+    ${pr.plus&&['calm','daily'].includes(S.lifeStage)?`<p class="care-note">${pr.plus}</p>`:''}
+    ${pr.note&&!(S.lifeStage==='preg'&&key==='milk')?`<p class="care-note">⚠ ${S.lifeStage==='preg'||key!=='orange'?pr.note:pr.note.replace('懷孕期間只在下肢與局部肌膚溫和塗抹，請避免按壓腹部；','')}</p>`:''}
+  </div>`;
+}
+function openVideo(kind){
+  const url=CARE_VIDEOS[kind]||CARE_VIDEOS.general;
+  if(url){sheet(`<b class="h3" style="display:block;text-align:center">芯彤的示範影片</b><p class="muted" style="text-align:center">影片會在新視窗打開。</p><a class="btn btn-primary btn-block" href="${url}" target="_blank" rel="noopener noreferrer">開始觀看</a>`);return}
+  sheet(`<div style="text-align:center"><img src="assets/cat-oil.webp" alt="" style="border-radius:16px;margin-bottom:12px"><b class="h3" style="display:block">示範影片拍攝中</b><p class="muted">芯彤正在準備${kind==='belly'?'腹部':kind==='breast'?'乳房':'居家'}保養的示範影片，拍好後就會放在這裡。</p><button class="btn btn-ghost btn-block" data-close>我知道了</button></div>`);
+}
+
+
+/* ======================================================================
+   香氣翻牌配對（漢芳療產品 × 代表香氣）
+   ====================================================================== */
+const MATCH_PAIRS=[
+  {id:'orange',prod:'橘肌緻',ing:'薑',color:'#e39a52',fact:'薑對應海底輪與臍輪，帶著平衡、溫暖與行動的「地氣能量」。橘肌緻用它搭配葡萄柚、黑胡椒、廣藿香和玫瑰天竺葵，主要照顧中焦與下焦。'},
+  {id:'milk',prod:'乳泌泌',ing:'羅馬洋甘菊',color:'#cdb466',fact:'羅馬洋甘菊對應心輪與太陽神經叢，富含酯類，香氣柔和安撫。乳泌泌質地溫和，孕婦和敏感肌膚也適合使用。'},
+  {id:'calm',prod:'乳靜靜',ing:'香蜂草',color:'#8fae7f',fact:'香蜂草對應眉心輪與心輪，清涼地撫平躁動，讓忙碌的思緒安靜下來。乳靜靜是專為離乳階段設計的保養油。'},
+  {id:'full',prod:'豐盈盈',ing:'千葉玫瑰',color:'#d48896',fact:'千葉玫瑰又叫「五月玫瑰」，對應心輪與臍輪。花瓣層層緊密包裹，象徵「先愛自己、先照顧好自己」的內斂溫潤能量。'},
+  {id:'neroli',prod:'橙花精萃花露',ing:'橙花',color:'#e9b867',fact:'橙花對應心輪與太陽神經叢，氣味溫暖清明又高雅，富含「快樂分子」，忙碌時噴一下，帶來幸福的感受。'},
+  {id:'rose7',prod:'七玫瑰潤手精華',ing:'白玫瑰',color:'#e0a8b2',fact:'七玫瑰集合了白玫瑰、大馬士革玫瑰、千葉玫瑰等玫瑰香氣，對應心輪與臍輪。白玫瑰清新明亮，像散去心中的烏雲。'}
+];
+let G=null;
+function newGame(){
+  const cards=shuffle(MATCH_PAIRS.flatMap(pr=>[{pid:pr.id,type:'prod'},{pid:pr.id,type:'ing'}]));
+  G={cards,open:[],matched:new Set(),moves:0,lock:false,last:null,done:false};
+}
+const bottleSvg=c=>`<svg viewBox="0 0 40 56" aria-hidden="true"><rect x="15" y="2" width="10" height="8" rx="2" fill="#c49a62"/><rect x="9" y="10" width="22" height="42" rx="8" fill="${c}" opacity=".9"/><rect x="13" y="24" width="14" height="14" rx="3" fill="#fffaf6" opacity=".85"/><path d="M20 27c-2.4 0-3.4 2-2.4 3.4 1 1.4 3.8 1.4 4.8 0 1-1.4 0-3.4-2.4-3.4Z" fill="${c}"/></svg>`;
+const leafSvg=c=>`<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 42V20" stroke="#8fa585" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M24 30c-7 0-11-5-11-11 6 0 11 4 11 11Z" fill="#a9c29b"/><path d="M24 26c6 0 10-4 10-10-5 0-10 4-10 10Z" fill="#bcd2ae"/><circle cx="24" cy="12" r="6" fill="${c}"/><circle cx="24" cy="12" r="2.4" fill="#fff6dc"/></svg>`;
+function viewPlay(){
+  if(!G)newGame();
+  const d=today();
+  const best=S.bestMoves?`${S.bestMoves} 步`:'—';
+  const stars=G.done?(G.moves<=8?3:G.moves<=12?2:1):0;
+  const lastPair=G.last?MATCH_PAIRS.find(x=>x.id===G.last):null;
+  return sky('Aroma memory','香氣翻牌','翻開兩張牌，找出漢芳療產品和它的代表香氣。','翻翻看～找到一對，我就告訴妳一個香氣小秘密！')+`
+  <div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3">
+    <section class="card play-stats">
+      <div><small>步數</small><b class="num" id="gMoves">${G.moves}</b></div>
+      <div><small>配對</small><b class="num" id="gPairs">${G.matched.size} / ${MATCH_PAIRS.length}</b></div>
+      <div><small>最佳紀錄</small><b class="num">${best}</b></div>
+    </section>
+    <div class="mgrid" id="mgrid">${G.cards.map((c,i)=>{const pr=MATCH_PAIRS.find(x=>x.id===c.pid);const on=G.open.includes(i)||G.matched.has(c.pid);
+      return `<button class="mcard ${on?'on':''} ${G.matched.has(c.pid)?'got':''}" data-m="${i}" aria-label="${on?(c.type==='prod'?pr.prod:pr.ing):'蓋著的牌'}">
+        <span class="m-inner"><span class="m-face m-back"><svg viewBox="0 0 48 48"><use href="#coin"/></svg></span>
+        <span class="m-face m-front" style="--mc:${pr.color}">${c.type==='prod'?bottleSvg(pr.color):leafSvg(pr.color)}<b>${c.type==='prod'?pr.prod:pr.ing}</b><small>${c.type==='prod'?'漢芳療':'代表香氣'}</small></span></span></button>`}).join('')}</div>
+    <section class="card fact" id="gFact" ${lastPair?'':'hidden'}>${lastPair?factHtml(lastPair):''}</section>
+    ${G.done?`<section class="card play-done"><div class="stars">${[1,2,3].map(n=>`<span class="${n<=stars?'on':''}">★</span>`).join('')}</div>
+      <b class="h3">${G.moves} 步完成！${stars===3?'妳是香氣達人':stars===2?'記性很好喔':'越玩越熟悉'}</b>
+      <p class="muted" style="margin:0">${d.tasks.game?'今天的小魚乾已經領過了，可以繼續玩、挑戰最佳紀錄。':'到「今日任務」領取 2 條小魚乾吧！'}</p>
+      <div class="rv-btns"><button class="btn btn-ghost" id="gAgain">再玩一局</button><button class="btn btn-primary" data-go="tasks">去領小魚乾</button></div></section>`:''}
+    <p class="tiny" style="text-align:center">今天玩了 ${d.games||0} 局・本月 ${monthCount('games')} 局</p>
+  </div>`;
+}
+function factHtml(pr){return `<div class="fact-head">${bottleSvg(pr.color)}<div><span class="pr-tag" style="background:${pr.color}">配對成功</span><b>${pr.prod} × ${pr.ing}</b></div></div><p>${pr.fact}</p>`}
+function flipMatch(i){
+  if(!G||G.lock||G.done)return;const c=G.cards[i];
+  if(G.open.includes(i)||G.matched.has(c.pid))return;
+  ac();sfx('tick');
+  G.open.push(i);const el=document.querySelector(`[data-m="${i}"]`);el.classList.add('on');
+  if(G.open.length<2)return;
+  G.moves++;$('#gMoves').textContent=G.moves;
+  const [a,b]=G.open.map(x=>G.cards[x]);
+  if(a.pid===b.pid){
+    G.matched.add(a.pid);G.open=[];G.last=a.pid;
+    document.querySelectorAll(`.mcard`).forEach(m=>{const k=+m.dataset.m;if(G.cards[k].pid===a.pid)m.classList.add('got')});
+    $('#gPairs').textContent=`${G.matched.size} / ${MATCH_PAIRS.length}`;
+    const f=$('#gFact');f.hidden=false;f.innerHTML=factHtml(MATCH_PAIRS.find(x=>x.id===a.pid));f.classList.remove('pop');void f.offsetWidth;f.classList.add('pop');
+    sfx('flip');
+    if(G.matched.size===MATCH_PAIRS.length){
+      G.done=true;const d=today();d.games=(d.games||0)+1;d.gameDone=true;
+      if(!S.bestMoves||G.moves<S.bestMoves)S.bestMoves=G.moves;
+      save();setTimeout(()=>{const y=scrollY;render();window.scrollTo(0,y);checkBadges()},900);
+    }
+  }else{
+    G.lock=true;
+    setTimeout(()=>{G.open.forEach(x=>{const m=document.querySelector(`[data-m="${x}"]`);if(m)m.classList.remove('on')});G.open=[];G.lock=false},850);
+  }
+}
+
+/* ======================================================================
+   貓咪長大＋小屋布置
+   ====================================================================== */
+const CAT_LEVELS=[
+  {lv:1,name:'小奶貓',xp:0,line:'我還小小的，要妳多陪陪我喔。'},
+  {lv:2,name:'好奇小貓',xp:30,line:'我開始對小屋裡的東西好奇了，那顆毛線球是給我的嗎？'},
+  {lv:3,name:'活潑貓咪',xp:80,line:'我長大一點了！晚上幫妳把星星燈打開。'},
+  {lv:4,name:'優雅大貓',xp:160,line:'我現在是很穩重的大貓了，會好好守著妳。'},
+  {lv:5,name:'小屋守護貓',xp:300,line:'謝謝妳一直照顧我，換我陪妳走每一個季節。'}
+];
+const DECOR=[
+  {id:'yarn',name:'毛線球',lv:2},{id:'lights',name:'星星燈串',lv:3},{id:'tree',name:'小聖誕樹',lv:4},{id:'frame',name:'全家福相框',lv:5}
+];
+function catLevel(){const xp=S.catXp||0;let cur=CAT_LEVELS[0];for(const l of CAT_LEVELS)if(xp>=l.xp)cur=l;return cur}
+function decorOverlay(){
+  const on=id=>S.decor&&S.decor[id]&&catLevel().lv>=DECOR.find(x=>x.id===id).lv;
+  let h='';
+  if(on('lights'))h+=`<svg class="dc dc-lights" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 6 Q75 34 150 10 T300 8" stroke="#6b5a4f" stroke-width="1.2" fill="none"/>${[18,48,78,108,138,168,198,228,258,286].map((x,i)=>{const y=6+Math.sin(i*.9)*9+10;return `<circle cx="${x}" cy="${y}" r="4.2" fill="${['#ffd98a','#f6b5b5','#bfe0c4','#ffe7a6'][i%4]}"><animate attributeName="opacity" values="1;.45;1" dur="${1.6+i%3*.5}s" repeatCount="indefinite"/></circle>`}).join('')}</svg>`;
+  if(on('tree'))h+=`<svg class="dc dc-tree" viewBox="0 0 60 80" aria-hidden="true"><path d="M30 4 52 40H40l14 22H6l14-22H8Z" fill="#6f9a6a"/><rect x="25" y="62" width="10" height="12" fill="#8b6a52"/><circle cx="30" cy="6" r="4" fill="#ffd98a"/><circle cx="22" cy="36" r="3" fill="#e7787a"/><circle cx="38" cy="50" r="3" fill="#ffd98a"/><circle cx="28" cy="54" r="3" fill="#e7787a"/></svg>`;
+  if(on('yarn'))h+=`<svg class="dc dc-yarn" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="22" r="15" fill="#d98f9a"/><path d="M8 16c8 2 16 10 20 20M12 10c8 4 14 12 16 22M24 8c-2 10 2 20 8 24M6 26c10-2 20 0 28-6" stroke="#f4c9cf" stroke-width="1.6" fill="none"/><path d="M33 28c6 4 6 10 2 10" stroke="#d98f9a" stroke-width="1.6" fill="none"/></svg>`;
+  if(on('frame'))h+=`<svg class="dc dc-frame" viewBox="0 0 50 44" aria-hidden="true"><rect x="2" y="2" width="46" height="40" rx="4" fill="#c49a62"/><rect x="7" y="7" width="36" height="30" rx="2" fill="#fbf1e6"/><circle cx="18" cy="20" r="4" fill="#b07f78"/><circle cx="31" cy="19" r="4.6" fill="#7c6a7e"/><circle cx="25" cy="27" r="3" fill="#e9b867"/><path d="M12 34c2-5 10-5 12 0M24 34c2-6 12-6 14 0" fill="#d9c7c0"/></svg>`;
+  return h;
+}
+function growthCard(){
+  const cur=catLevel(),xp=S.catXp||0,next=CAT_LEVELS.find(l=>l.xp>xp);
+  const pct=next?Math.round((xp-cur.xp)/(next.xp-cur.xp)*100):100;
+  return `<section class="card growth">
+    <div class="g-head"><div><span class="eyebrow">Lv.${cur.lv}</span><b class="h3" style="display:block">${cur.name}</b></div><span class="tiny">經驗值 <b class="num">${xp}</b>${next?` / ${next.xp}`:''}</span></div>
+    <div class="progress"><i style="width:${pct}%"></i></div>
+    <p class="muted" style="margin:0">${next?`再餵 ${next.xp-xp} 條小魚乾，就會長成「${next.name}」，解鎖${DECOR.find(x=>x.lv===next.lv).name}。`:'貓咪已經長成最可靠的小屋守護貓了！'}</p>
+    <div class="talk" style="margin:0"><div class="talk-cat"><img src="assets/cat-rest.webp" alt=""></div><div class="bubble">${cur.line}</div></div>
+    <div><b style="font-weight:500">小屋布置</b><span class="tiny">　點一下擺上或收起</span></div>
+    <div class="decor-grid">${DECOR.map(dc=>{const unlocked=cur.lv>=dc.lv,onn=unlocked&&S.decor&&S.decor[dc.id];
+      return `<button class="decor ${onn?'on':''}" data-decor="${dc.id}" ${unlocked?'':'disabled'} aria-pressed="${!!onn}"><span class="d-ic">${decorIcon(dc.id)}</span><b>${dc.name}</b><small>${unlocked?(onn?'已擺上':'點我擺上'):`Lv.${dc.lv} 解鎖`}</small></button>`}).join('')}</div>
+    <p class="tiny" style="margin:0">每餵 1 條小魚乾，貓咪得到 1 點經驗值。</p>
+  </section>`;
+}
+function decorIcon(id){return {yarn:'<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="#d98f9a"/><path d="M9 15c8 2 15 9 18 18M13 9c7 4 13 11 15 21M6 24c10-2 19 0 27-6" stroke="#f4c9cf" stroke-width="1.6" fill="none"/></svg>',
+  lights:'<svg viewBox="0 0 40 40"><path d="M2 10Q20 30 38 10" stroke="#6b5a4f" fill="none"/><circle cx="8" cy="16" r="4" fill="#ffd98a"/><circle cx="20" cy="21" r="4" fill="#f6b5b5"/><circle cx="32" cy="16" r="4" fill="#bfe0c4"/></svg>',
+  tree:'<svg viewBox="0 0 40 40"><path d="M20 3 33 22h-7l8 11H6l8-11H7Z" fill="#6f9a6a"/><rect x="17" y="33" width="6" height="5" fill="#8b6a52"/><circle cx="20" cy="4" r="2.6" fill="#ffd98a"/></svg>',
+  frame:'<svg viewBox="0 0 40 40"><rect x="4" y="6" width="32" height="28" rx="3" fill="#c49a62"/><rect x="8" y="10" width="24" height="20" fill="#fbf1e6"/><circle cx="16" cy="18" r="3" fill="#b07f78"/><circle cx="25" cy="18" r="3.4" fill="#7c6a7e"/></svg>'}[id]}
+function levelUp(l){
+  const dc=DECOR.find(x=>x.lv===l.lv);if(dc){S.decor=S.decor||{};S.decor[dc.id]=true;save()}
+  sfx('flip');
+  sheet(`<div style="text-align:center"><div class="win-burst"><b>Lv.${l.lv}</b><small>${l.name}</small></div><b class="h2" style="display:block;font-size:21px;margin-top:12px">貓咪長大了！</b><p class="muted">${l.line}</p>${dc?`<p style="margin:0 0 14px">解鎖新的小屋布置：<b>${dc.name}</b></p>`:''}<button class="btn btn-primary btn-block" data-close>去看看小屋</button></div>`);
+  if(route==='cat'){const y=scrollY;render();window.scrollTo(0,y)}
+}
+
+/* ======================================================================
+   媽媽小幫手：喝水打卡＋心情日曆
+   ====================================================================== */
+const MOODS=[
+  {id:'happy',name:'開心',color:'#e7b75f',reply:'看到妳開心，我的尾巴都翹起來了！把今天的好心情記住喔。'},
+  {id:'calm',name:'平靜',color:'#8fae8b',reply:'平平靜靜的一天也很珍貴，我陪妳慢慢過。'},
+  {id:'tired',name:'有點累',color:'#a99bb5',reply:'辛苦了。今天能休息就休息，家事可以等一等。'},
+  {id:'low',name:'想哭',color:'#7f97b5',reply:'想哭就哭沒關係，我會窩在妳旁邊。如果這種心情持續了兩個星期以上，記得找家人、朋友或醫師聊一聊。'},
+  {id:'anxious',name:'焦慮',color:'#d08b7f',reply:'先跟我一起慢慢吐一口氣。如果焦慮常常讓妳睡不好、吃不下，記得找信任的人或醫師聊一聊。'}
+];
+function monthKey(k=dayKey()){return k.slice(0,7)}
+function monthDays(mk=monthKey()){
+  const [y,m]=mk.split('-').map(Number);const n=new Date(Date.UTC(y,m,0)).getUTCDate();const first=new Date(Date.UTC(y,m-1,1)).getUTCDay();
+  return {y,m,n,first,keys:Array.from({length:n},(_,i)=>`${mk}-${String(i+1).padStart(2,'0')}`)};
+}
+function monthCount(field,mk=monthKey()){return Object.entries(S.days||{}).filter(([k])=>k.startsWith(mk)).reduce((a,[,v])=>a+(field==='games'?(v.games||0):field==='water'?((v.water||0)>=(S.waterGoal||8)?1:0):field==='mood'?(v.mood?1:0):0),0)}
+function viewMom(){
+  const d=today(),goal=S.waterGoal||8,w=d.water||0,md=monthDays();
+  const mood=MOODS.find(x=>x.id===d.mood);
+  const wk=['日','一','二','三','四','五','六'];
+  return sky('Mom helper','媽媽小幫手','記得喝水，也記得問問自己今天好不好。',mood?mood.reply:'今天心情怎麼樣？點一下讓我知道。')+`
+  <div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3">
+    <section class="card water">
+      <div class="rv-q"><b>今天喝了幾杯水？</b><small>1 杯約 250ml</small></div>
+      <div class="cups">${Array.from({length:goal},(_,i)=>`<button class="cup ${i<w?'full':''}" data-cup="${i}" aria-label="第 ${i+1} 杯"><svg viewBox="0 0 30 36"><path d="M4 4h22l-3 28H7Z" fill="#fff" stroke="#b9cbd6" stroke-width="1.5"/><path class="wtr" d="M5.6 14h18.8l-2 17.2H7.6Z" fill="#9cc3d8"/></svg></button>`).join('')}</div>
+      <div class="water-row"><span><b class="num" style="font-size:22px;font-family:var(--latin)">${w}</b> / ${goal} 杯${w>=goal?'・今天達標了！':''}</span>
+        <span class="goal-ctl"><button data-goal="-1" aria-label="目標減少">−</button><span>目標 ${goal} 杯</span><button data-goal="1" aria-label="目標增加">＋</button></span></div>
+      <p class="tiny" style="margin:0">哺乳期的媽媽通常需要比平常多喝一點水，口渴就喝，不用勉強一次喝很多。</p>
+    </section>
+    <section class="card mood">
+      <div class="rv-q"><b>今天的心情</b><small>點一下記錄</small></div>
+      <div class="mood-row">${MOODS.map(m=>`<button data-mood="${m.id}" aria-pressed="${d.mood===m.id}" style="--mc:${m.color}"><i></i>${m.name}</button>`).join('')}</div>
+    </section>
+    <section class="card cal">
+      <div class="rv-q"><b>${md.m} 月心情日曆</b><small>記錄 ${monthCount('mood')} 天・喝水達標 ${monthCount('water')} 天</small></div>
+      <div class="cal-grid">${wk.map(x=>`<span class="cal-h">${x}</span>`).join('')}${'<span></span>'.repeat(md.first)}${md.keys.map((k,i)=>{const v=(S.days||{})[k]||{};const mo=MOODS.find(x=>x.id===v.mood);const isT=k===dayKey();
+        const fut=k>dayKey();
+        return `<button class="cal-d ${isT?'today':''} ${k===momDay?'sel':''}" data-day="${k}" ${fut?'disabled':''} style="${mo?`--mc:${mo.color}`:''}" aria-label="${md.m} 月 ${i+1} 日${mo?'，'+mo.name:''}"><b class="num">${i+1}</b>${mo?'<i></i>':''}${(v.water||0)>=goal?'<em>💧</em>':''}${v.diary?'<u></u>':''}</button>`}).join('')}</div>
+      <div class="legend">${MOODS.map(m=>`<span><i style="background:${m.color}"></i>${m.name}</span>`).join('')}<span>💧 喝水達標</span><span><u class="dot-diary"></u> 有寫日記</span></div>
+    </section>
+    ${dayDetail()}
+    ${waterHistory()}
+  </div>`;
+}
+let momDay=null,waterRange=7;
+function dayDetail(){
+  const k=momDay||dayKey(),v=(S.days||{})[k]||{},mo=MOODS.find(x=>x.id===v.mood),goal=S.waterGoal||8,isT=k===dayKey();
+  const [y,m,dd]=k.split('-').map(Number);
+  return `<section class="card diary">
+    <div class="rv-q"><b>${m} 月 ${dd} 日${isT?'（今天）':''}的日記</b><small>${isT?'寫給今天的自己':'點日曆可以看其他天'}</small></div>
+    <div class="day-sum">
+      <span class="ds-chip" style="${mo?`--mc:${mo.color}`:''}">${mo?`<i></i>${mo.name}`:'沒有記錄心情'}</span>
+      <span class="ds-chip water-chip">💧 喝了 <b class="num">${v.water||0}</b> 杯${(v.water||0)>=goal?'・達標':''}</span>
+    </div>
+    <label for="diaryText" style="position:absolute;left:-9999px">心情日記</label>
+    <textarea id="diaryText" maxlength="500" placeholder="${isT?'今天發生了什麼事？開心的、累的、想對寶寶或自己說的話，都可以寫下來。':'這天沒有寫日記，現在補寫也可以。'}">${esc(v.diary||'')}</textarea>
+    <div class="rv-meta"><span id="diaryCount">${(v.diary||'').length} / 500 字</span><span id="diarySaved">${v.diary?'已儲存':'會自動儲存'}</span></div>
+    <p class="tiny" style="margin:0">🔒 日記只存在妳自己的手機裡，芯彤和其他人都看不到。</p>
+  </section>`;
+}
+function waterHistory(){
+  const goal=S.waterGoal||8,n=waterRange,t=now();
+  const days=Array.from({length:n},(_,i)=>{const k=dayKey(t-(n-1-i)*DAY);return {k,v:((S.days||{})[k]||{}).water||0}});
+  const logged=days.filter(d=>d.v>0);
+  const avg=logged.length?(logged.reduce((a,d)=>a+d.v,0)/logged.length):0;
+  const hit=days.filter(d=>d.v>=goal).length;
+  let best=0,run=0;days.forEach(d=>{run=d.v>=goal?run+1:0;best=Math.max(best,run)});
+  // chart geometry
+  const W=340,H=168,L=26,R=8,T=14,B=26,pw=W-L-R,ph=H-T-B;
+  const max=Math.max(goal+2,...days.map(d=>d.v));
+  const step=pw/n,bw=Math.max(3,step-2);
+  const yv=v=>T+ph-(v/max)*ph;
+  const gy=yv(goal);
+  const lbl=(d,i)=>{const [,mm,dd]=d.k.split('-').map(Number);if(n===7)return `${mm}/${dd}`;return (i%5===0||i===n-1)?`${mm}/${dd}`:''};
+  const bars=days.map((d,i)=>{const x=L+i*step+(step-bw)/2,h=Math.max(0,T+ph-yv(d.v));
+    const r=Math.min(4,bw/2,h);
+    const path=h>0?`M${x},${T+ph} V${T+ph-h+r} Q${x},${T+ph-h} ${x+r},${T+ph-h} H${x+bw-r} Q${x+bw},${T+ph-h} ${x+bw},${T+ph-h+r} V${T+ph} Z`:'';
+    return `${path?`<path d="${path}" fill="var(--water)" opacity="${d.v>=goal?1:.55}"/>`:''}
+      <rect class="hit" x="${L+i*step}" y="${T}" width="${step}" height="${ph}" data-tip="${lbl({k:d.k},0)||d.k.slice(5).replace('-','/')}・${d.v} 杯${d.v>=goal?'（達標）':''}" data-x="${L+i*step+step/2}"/>
+      <text x="${L+i*step+step/2}" y="${H-8}" text-anchor="middle" class="ax">${lbl(d,i)}</text>`}).join('');
+  return `<section class="card whist">
+    <div class="rv-q"><b>喝水紀錄</b><div class="seg mini" role="group" aria-label="顯示天數"><button data-wr="7" aria-pressed="${n===7}">7 天</button><button data-wr="30" aria-pressed="${n===30}">30 天</button></div></div>
+    <div class="wstats">
+      <div><small>平均每天</small><b class="num">${avg?avg.toFixed(1):'—'}</b><span>杯</span></div>
+      <div><small>達標天數</small><b class="num">${hit}</b><span>/ ${n} 天</span></div>
+      <div><small>最長連續達標</small><b class="num">${best}</b><span>天</span></div>
+    </div>
+    <div class="chart" id="wChart">
+      <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="最近 ${n} 天每天喝水杯數的長條圖，目標 ${goal} 杯">
+        <line x1="${L}" x2="${W-R}" y1="${T+ph}" y2="${T+ph}" class="base"/>
+        <text x="${L-6}" y="${T+ph+4}" text-anchor="end" class="ax">0</text>
+        ${bars}
+        <line x1="${L}" x2="${W-R}" y1="${gy}" y2="${gy}" class="goal"/>
+        <text x="${L-6}" y="${gy+4}" text-anchor="end" class="ax">${goal}</text>
+        <text x="${W-R}" y="${gy-5}" text-anchor="end" class="goal-l">目標 ${goal} 杯</text>
+      </svg>
+      <div class="tip" id="wTip" hidden></div>
+    </div>
+    <details class="odds"><summary>用表格看</summary><table class="wtable"><thead><tr><th>日期</th><th>杯數</th></tr></thead><tbody>${days.slice().reverse().map(d=>`<tr><td>${d.k.slice(5).replace('-','/')}</td><td class="num">${d.v}${d.v>=goal?' ✓':''}</td></tr>`).join('')}</tbody></table></details>
+  </section>`;
+}
+
+/* ======================================================================
+   月度徽章
+   ====================================================================== */
+const BADGES=[
+  {id:'streak',name:'報到小天使',desc:'連續報到 30 天',need:30,color:'#c49a62',icon:'M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9Z',val:()=>Math.min(S.streak.n||0,30)},
+  {id:'draw',name:'塔羅探索家',desc:'本月抽滿 10 張牌',need:10,color:'#7c6a7e',icon:'M7 3h10a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Zm5 5-1.2 2.4-2.6.4 1.9 1.8-.5 2.6 2.4-1.2 2.4 1.2-.5-2.6 1.9-1.8-2.6-.4Z',val:()=>(S.draws||[]).filter(x=>x.date&&x.date.startsWith(monthKey())).length},
+  {id:'water',name:'喝水達人',desc:'本月喝水達標 15 天',need:15,color:'#6f9fbd',icon:'M12 3c3.6 4.5 6 7.9 6 11a6 6 0 0 1-12 0c0-3.1 2.4-6.5 6-11Z',val:()=>monthCount('water')},
+  {id:'game',name:'香氣小學徒',desc:'本月玩香氣翻牌 10 局',need:10,color:'#b07f78',icon:'M12 21c-5-3.4-8-6.6-8-10.2C4 8 6 6 8.4 6c1.5 0 2.7.8 3.6 2 .9-1.2 2.1-2 3.6-2C18 6 20 8 20 10.8 20 14.4 17 17.6 12 21Z',val:()=>monthCount('games')}
+];
+const BADGE_REWARD_FISH=5;
+function monthBadges(mk=monthKey()){const got=(S.badges||{})[mk]||{};return BADGES.map(b=>({...b,done:!!got[b.id],v:mk===monthKey()?b.val():(got[b.id]?b.need:0)}))}
+function medalSvg(b,size=56){
+  const c=b.done?b.color:'#d8cfcc';
+  return `<svg class="medal ${b.done?'got':''}" width="${size}" height="${size}" viewBox="0 0 48 48" aria-hidden="true"><path d="M15 2h7l3 10-6 3ZM33 2h-7l-3 10 6 3Z" fill="${b.done?'#d98f9a':'#e6dcd9'}"/><circle cx="24" cy="29" r="16" fill="${c}"/><circle cx="24" cy="29" r="12.5" fill="none" stroke="#fff" stroke-opacity=".6" stroke-dasharray="1.5 2"/><g transform="translate(12 17)"><path d="${b.icon}" fill="#fff" fill-opacity="${b.done?1:.7}"/></g></svg>`;
+}
+async function checkBadges(){
+  if(!SERVER)return;
+  const mk=monthKey();S.badges=S.badges||{};S.badges[mk]=S.badges[mk]||{};
+  const b=BADGES.find(x=>!S.badges[mk][x.id]&&x.val()>=x.need);
+  if(!b)return;
+  const r=await api('badge',{id:b.id});
+  if(r.error){if(r.status===409){S.badges[mk][b.id]=1;save()}return}
+  applyServer(r.state);S.badges[mk][b.id]=1;save();sfx('flip');
+  sheet(`<div style="text-align:center">${medalSvg({...b,done:true},110)}<b class="h2" style="display:block;font-size:21px;margin-top:8px">獲得徽章「${b.name}」！</b><p class="muted">${b.desc}，好厲害！貓咪送妳 ${BADGE_REWARD_FISH} 條小魚乾。</p><button class="btn btn-primary btn-block" data-close>收下徽章</button></div>`);
+  if(route==='badges'||route==='home'){const y=scrollY;render();window.scrollTo(0,y)}
+}
+
+function viewBadges(){
+  const cur=monthBadges(),md=monthDays();
+  const past=Object.keys(S.badges||{}).filter(k=>k!==monthKey()).sort().reverse();
+  return sky('Monthly badges','本月徽章',`${md.m} 月的小目標，每個月重新開始。`,'集徽章的時候，也是在好好照顧自己喔！')+`
+  <div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3">
+    <div class="badge-grid">${cur.map(b=>`<section class="card badge-card ${b.done?'got':''}">${medalSvg(b,64)}<b>${b.name}</b><small>${b.desc}</small>
+      <div class="progress"><i style="width:${Math.min(100,b.v/b.need*100)}%;${b.done?`background:${b.color}`:''}"></i></div><span class="tiny num">${b.done?'已獲得 ✓':`${b.v} / ${b.need}`}</span></section>`).join('')}</div>
+    <p class="tiny" style="text-align:center">每拿到一枚徽章，貓咪送 ${BADGE_REWARD_FISH} 條小魚乾・每月 1 日重新計算</p>
+    <section class="card" style="padding:16px 18px"><b class="h3">徽章收藏</b>
+      ${past.length?past.map(mk=>`<div class="past-row"><span>${mk.replace('-',' 年 ')} 月</span><span>${monthBadges(mk).map(b=>medalSvg(b,30)).join('')}</span></div>`).join(''):'<p class="muted">之前的月份拿到的徽章會收藏在這裡。</p>'}
+    </section>
+  </div>`;
+}
+
+/* ======================================================================
+   保養小教室：文章
+   新增文章：在 ARTICLES 裡加一筆。blocks 可用 ['p',段落] ['h',小標] ['ol',[步驟]] ['ul',[清單]] ['note',小提醒]
+   ====================================================================== */
+const ARTICLES=[
+  {id:'3to6',cat:'保養觀念',mins:4,title:'為什麼保養需要給自己 3–6 個月的時間？',
+   summary:'身體的變化是慢慢累積的，照顧自己也值得用同樣溫柔的速度。',
+   blocks:[
+    ['p','很多媽媽第一次來工作室時都會問：「要做幾次才會有感覺？」我的回答通常是：給自己 3 到 6 個月。這不是要妳一直花錢，而是身體和習慣，本來就需要時間。'],
+    ['h','身體的變化，是十個月慢慢累積的'],
+    ['p','懷孕的十個月裡，身體一點一點為寶寶騰出空間；生產之後，荷爾蒙、作息和睡眠也都在重新調整。變化是慢慢來的，照顧自己，也值得用同樣溫柔的速度。'],
+    ['h','肌膚有自己的節奏'],
+    ['p','一般來說，肌膚的代謝週期大約是 28 天，隨著年齡增長還會再拉長。這代表任何保養，都需要經過幾個週期，才能慢慢感受到肌膚狀態的不同。'],
+    ['h','一個習慣，平均需要 66 天'],
+    ['p','倫敦大學學院的研究發現，一個新習慣平均需要大約 66 天，才會變成自然而然的日常。把居家保養、腹式呼吸變成每天的小儀式，差不多就是兩到三個月的時間。'],
+    ['h','3–6 個月可以這樣安排'],
+    ['ol',['第 1 個月：認識自己的身體，學會居家保養的手法。','第 2–3 個月：建立固定的節奏，到店保養搭配在家練習。','第 4–6 個月：保養變成生活的一部分，妳會更懂得在忙碌中替自己留一段時間。']],
+    ['p','每個人的身體狀況都不一樣，感受也會不同。比起急著看到改變，更重要的是在這段時間裡，妳有好好陪伴自己。'],
+    ['note','本文為日常保養觀念分享，不涉及醫療效果；身體若有任何不適，請先諮詢醫師。']
+   ]},
+  {id:'first',cat:'新朋友必看',mins:3,title:'第一次來芯彤美學，會做些什麼？',
+   summary:'從預約、聊聊妳的狀況，到帶回家的小功課，一次說清楚。',
+   blocks:[
+    ['p','第一次預約保養，難免會有點緊張。先讓妳知道會發生什麼事，來的時候就能更放鬆。'],
+    ['h','1. 透過 LINE 預約'],
+    ['p','告訴我們妳目前的狀態（懷孕中、產後幾個月或幾年），以及想體驗的項目，我們會幫妳安排合適的時間。'],
+    ['h','2. 先坐下來聊一聊'],
+    ['p','到店後，會先花一點時間了解妳的作息、哺乳狀況和身體的感受，再一起決定今天的保養內容。'],
+    ['h','3. 在安心的空間裡保養'],
+    ['p','全程在獨立的空間進行，過程中會隨時確認力道和感受，任何不舒服都可以直接說。'],
+    ['h','4. 帶回家的小功課'],
+    ['p','結束後會分享簡單的居家保養方法，讓妳回家後也能繼續照顧自己。'],
+    ['ul',['建議穿著寬鬆、方便穿脫的衣服。','如果有發燒、紅腫熱痛等不適，請先就醫，再來保養。']]
+   ]},
+  {id:'breath',cat:'居家練習',mins:2,title:'一分鐘腹式呼吸，給忙碌媽媽的小練習',
+   summary:'照顧寶寶的日子，常常連好好呼吸都忘了。這個練習隨時都能做。',
+   blocks:[
+    ['p','腹式呼吸是一個隨時隨地都能做的小練習，只需要一分鐘，就能讓自己慢下來。'],
+    ['ol',['坐著或躺著，一手放在胸口，一手放在肚子上。','用鼻子慢慢吸氣 4 秒，讓肚子像氣球一樣鼓起來。','輕輕停住 2 秒。','用嘴巴慢慢吐氣 6 秒，肚子往內收。','重複 5 次左右。']],
+    ['p','練習時，胸口的手盡量不動，只讓肚子上的手跟著起伏。剛生產完或剖腹產的媽媽，用自己舒服的方式就好，不舒服就回到自然的呼吸。'],
+    ['note','小角落的「今日任務」裡有「腹式呼吸 1 分鐘」，可以跟著貓咪一起做，還能領小魚乾。']
+   ]}
+];
+let articleId=null;
+function viewArticles(){
+  const a=ARTICLES.find(x=>x.id===articleId);
+  if(a){
+    const body=a.blocks.map(([t,v])=>t==='p'?`<p>${v}</p>`:t==='h'?`<h3>${v}</h3>`:t==='ol'?`<ol>${v.map(x=>`<li>${x}</li>`).join('')}</ol>`:t==='ul'?`<ul>${v.map(x=>`<li>${x}</li>`).join('')}</ul>`:`<p class="a-note">${v}</p>`).join('');
+    return `<div class="gutter article-wrap">
+      <button class="chip-link a-back" data-article="">← 回保養小教室</button>
+      <article class="article">
+        <span class="pr-tag">${a.cat}</span>
+        <h1 class="a-title" tabindex="-1" id="pageTitle">${a.title}</h1>
+        <div class="a-meta">芯彤美學・閱讀約 ${a.mins} 分鐘</div>
+        <div class="a-body">${body}</div>
+      </article>
+      <div class="talk" style="margin:0"><div class="talk-cat"><img src="assets/cat-rest.webp" alt=""></div><div class="bubble">看完了嗎？有想問的都可以傳 LINE 給芯彤喔。</div></div>
+      <div class="rv-btns" style="margin-top:14px"><a class="btn btn-primary" href="${lineBookUrl()}" target="_blank" rel="noopener noreferrer">LINE 問問芯彤</a><button class="btn btn-ghost" data-article="">看其他文章</button></div>
+    </div>`;
+  }
+  return sky('Care notes','保養小教室','芯彤寫給妳的保養觀念和小知識。','泡杯熱茶，挑一篇慢慢看吧。')+`
+  <div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3">
+    ${ARTICLES.map(x=>`<button class="card a-card" data-article="${x.id}"><span class="pr-tag">${x.cat}</span><b>${x.title}</b><span class="muted">${x.summary}</span><small>閱讀約 ${x.mins} 分鐘 →</small></button>`).join('')}
+  </div>`;
+}
+
+/* ======================================================================
+   店家核銷頁（示範）：正式版會改成店家帳號登入，資料來自雲端資料庫
+   ====================================================================== */
+const STAFF_PIN='0000';
+let staffIn=false,staffFound=null,staffAmt='',staffBday=false,staffMsg='';
+function couponStatus(c){if(!c)return 'none';if(c.used)return 'used';if(c.exp<now())return 'expired';return 'valid'}
+function staffCheck(c){
+  if(c.kind==='gift')return {ok:true,lines:[`到店領取${c.cash?`，請收加價 NT$${c.cash}`:'，免加價'}`]};
+  const amt=parseInt(staffAmt)||0,lines=[];let ok=true;
+  if(!amt){return {ok:false,lines:['請先輸入這次的消費金額']}}
+  const allow=Math.floor(amt/CONFIG.couponPerNTD);
+  const usedToday=(S.redeemLog||[]).filter(r=>r.day===dayKey()&&r.amt===amt&&r.kind!=='gift');
+  const usedSum=usedToday.reduce((a,r)=>a+r.value,0);
+  if(allow<1){ok=false;lines.push(`消費未滿 NT$${CONFIG.couponPerNTD.toLocaleString()}，不能使用折價券`)}
+  else lines.push(`這筆消費可使用 ${allow} 張折價券`);
+  if(usedToday.length>=allow&&allow>0){ok=false;lines.push(`這筆消費已經用了 ${usedToday.length} 張，達到可用張數`)}
+  if(usedSum+c.value>CONFIG.maxDiscountNTD){ok=false;lines.push(`加上這張會超過單筆折抵上限 NT$${CONFIG.maxDiscountNTD}（已折 NT$${usedSum}）`)}
+  if(staffBday){ok=false;lines.push('這筆消費已使用生日優惠，折價券不能同時使用')}
+  if(ok)lines.push(`可以折抵 NT$${c.value}，實收 NT$${(amt-usedSum-c.value).toLocaleString()}`);
+  return {ok,lines};
+}
+function viewStaff(){
+  if(!staffIn)return `<div class="gutter staff-wrap">
+    <div class="staff-head"><span class="pr-tag" style="background:var(--mauve)">店家專用</span><h1 class="a-title" id="pageTitle" tabindex="-1">店家核銷頁</h1><p class="muted">芯彤美學 Heart studio・折扣碼核銷</p></div>
+    <form class="card staff-card" id="pinForm"><div class="field"><label for="staffPin">請輸入店家密碼</label><input id="staffPin" inputmode="numeric" type="password" maxlength="6" placeholder="示範密碼 0000"></div>
+      <button class="btn btn-primary btn-block" type="submit">進入核銷頁</button><p class="tiny" style="margin:0">正式版會改成店家帳號登入，只有芯彤和員工能進來。</p>${staffMsg?`<p class="staff-err">${staffMsg}</p>`:''}</form>
+    <button class="chip-link" data-go="home" style="margin-top:14px">← 回小角落</button></div>`;
+  const c=staffFound,st=couponStatus(c);
+  const log=(S.redeemLog||[]).filter(r=>r.day===dayKey()).slice().reverse();
+  const stLabel={valid:['有效','ok'],used:['已使用','bad'],expired:['已過期','bad'],none:['查無此折扣碼','bad']}[st];
+  let detail='';
+  if(staffFound!==null){
+    if(!c)detail=`<section class="card staff-card"><div class="st-badge bad">查無此折扣碼</div><p class="muted" style="margin:0">請確認客人出示的折扣碼是否輸入正確。</p></section>`;
+    else{const chk=st==='valid'?staffCheck(c):null;
+      detail=`<section class="card staff-card">
+        <div class="st-top"><div class="st-badge ${stLabel[1]}">${stLabel[0]}</div><span class="st-code">${c.code}</span></div>
+        <dl class="st-info"><dt>票券</dt><dd>${esc(c.title)}</dd><dt>面額</dt><dd>${c.kind==='gift'?'好禮領取':'NT$'+c.value}</dd><dt>會員</dt><dd>${esc((S.member&&S.member.name)||'—')}</dd><dt>取得日期</dt><dd>${fmtFull(c.at)}</dd><dt>有效期限</dt><dd>${fmtFull(c.exp)}</dd>${c.used?`<dt>核銷時間</dt><dd>${fmtFull(c.usedAt||c.at)} ${c.usedAt?new Intl.DateTimeFormat('zh-TW',{timeZone:tz,hour:'2-digit',minute:'2-digit',hour12:false}).format(c.usedAt):''}</dd>`:''}</dl>
+        ${st==='valid'?`${c.kind==='gift'?'':`<div class="field"><label for="staffAmt">這次消費金額</label><div class="calc-row"><span>NT$</span><input id="staffAmt" inputmode="numeric" value="${staffAmt}" placeholder="例如 2500"></div></div>
+          <label class="st-check"><input type="checkbox" id="staffBday" ${staffBday?'checked':''}> 這筆消費有使用生日優惠</label>`}
+          <ul class="st-rules ${chk.ok?'ok':'bad'}">${chk.lines.map(l=>`<li>${l}</li>`).join('')}</ul>
+          <button class="btn btn-primary btn-block" id="doRedeem" ${chk.ok?'':'disabled'}>確認核銷</button>`:''}
+      </section>`}
+  }
+  return `<div class="gutter staff-wrap">
+    <div class="staff-head row" style="justify-content:space-between;align-items:center"><div><span class="pr-tag" style="background:var(--mauve)">店家專用</span><h1 class="a-title" id="pageTitle" tabindex="-1" style="font-size:22px">店家核銷頁</h1></div><button class="chip-link" id="staffOut">登出</button></div>
+    <div class="st-sum"><div><small>今日核銷</small><b class="num">${log.length}</b><span>張</span></div><div><small>今日折抵</small><b class="num">NT$${log.reduce((a,r)=>a+r.value,0)}</b></div></div>
+    <form class="card staff-card" id="codeForm">
+      <div class="field"><label for="staffCode">輸入客人出示的折扣碼</label><input id="staffCode" autocomplete="off" autocapitalize="characters" placeholder="例如 HSL-7K2M-Q8PD" value="${c?c.code:''}"></div>
+      <div class="rv-btns"><button class="btn btn-ghost" type="button" disabled title="正式版開放">掃 QR（正式版）</button><button class="btn btn-primary" type="submit">查詢</button></div>
+    </form>
+    ${detail}
+    <section class="card staff-card"><b class="h3">今日核銷紀錄</b>
+      ${log.length?log.map(r=>`<div class="st-log"><div><b>${esc(r.title)}</b><small>${r.code}・${r.time}${r.amt?`・消費 NT$${r.amt.toLocaleString()}`:''}</small></div><span class="num">${r.kind==='gift'?'領取':'−NT$'+r.value}</span></div>`).join(''):'<p class="muted" style="margin:0">今天還沒有核銷紀錄。</p>'}
+    </section>
+    ${(S.coupons||[]).length?`<details class="odds"><summary>示範用：這支手機裡的折扣碼</summary><ul>${S.coupons.map(x=>`<li><span>${x.code}</span><span>${couponStatus(x)==='valid'?'有效':couponStatus(x)==='used'?'已使用':'已過期'}</span></li>`).join('')}</ul></details>`:''}
+    <p class="tiny" style="text-align:center">示範版只能查到這支手機裡的折扣碼；正式版會連到雲端，查得到所有客人的折扣碼。</p>
+  </div>`;
+}
+function bindStaff(){
+  const pf=$('#pinForm');if(pf)pf.onsubmit=e=>{e.preventDefault();if($('#staffPin').value===STAFF_PIN){staffIn=true;staffMsg=''}else staffMsg='密碼不正確';render(true)};
+  const so=$('#staffOut');if(so)so.onclick=()=>{staffIn=false;staffFound=null;staffAmt='';staffBday=false;render(true)};
+  const cf=$('#codeForm');if(cf)cf.onsubmit=e=>{e.preventDefault();const v=$('#staffCode').value.trim().toUpperCase().replace(/\s/g,'');staffFound=S.coupons.find(x=>x.code===v)||0;staffAmt='';staffBday=false;render()};
+  const sa=$('#staffAmt');if(sa)sa.onchange=()=>{staffAmt=sa.value.replace(/[^0-9]/g,'');const y=scrollY;render();window.scrollTo(0,y)};
+  const sb=$('#staffBday');if(sb)sb.onchange=()=>{staffBday=sb.checked;const y=scrollY;render();window.scrollTo(0,y)};
+  const dr=$('#doRedeem');if(dr)dr.onclick=()=>{
+    const c=staffFound;if(!c||couponStatus(c)!=='valid')return;
+    c.used=true;c.usedAt=now();
+    const time=new Intl.DateTimeFormat('zh-TW',{timeZone:tz,hour:'2-digit',minute:'2-digit',hour12:false}).format(c.usedAt);
+    S.redeemLog=S.redeemLog||[];S.redeemLog.push({day:dayKey(),code:c.code,title:c.title,value:c.kind==='gift'?0:c.value,kind:c.kind,amt:parseInt(staffAmt)||0,time});
+    save();
+    const note=c.kind==='gift'?`小角落領取券 ${c.code}`:`小角落折價券 ${c.code} 折 NT$${c.value}`;
+    sheet(`<div style="text-align:center"><div class="win-burst"><b>✓</b><small>核銷完成</small></div>
+      <b class="h2" style="display:block;font-size:20px;margin-top:12px">${c.kind==='gift'?'可以把好禮交給客人了':`請在夯客結帳時折抵 NT$${c.value}`}</b>
+      <p class="muted">把下面這行貼到夯客的結帳備註，方便對帳：</p>
+      <div class="link-box" id="hcNote">${note}</div>
+      <div class="rv-btns" style="margin-top:12px"><button class="btn btn-ghost" id="copyNote">複製備註</button><button class="btn btn-primary" data-close>完成</button></div></div>`);
+    $('#copyNote').onclick=()=>{try{navigator.clipboard.writeText(note).then(()=>toast('已複製'),()=>{selectText($('#hcNote'))})}catch(e){selectText($('#hcNote'))}};
+    render();
+  };
+}
+
+function viewInvite(){
+  const m=S.member;
+  if(!m) return sky('Invite','邀請好友','先加入會員，就有自己的邀請碼。',pick(CAT_LINES.invite))+`<div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3"><button class="btn btn-primary btn-block" id="joinBtn">加入會員</button></div>`;
+  const link=CONFIG.inviteBase+m.code;
+  return sky('Invite friends','邀請好友','把小角落分享給也需要被照顧的她。',pick(CAT_LINES.invite))+`
+  <div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3">
+    <section class="card invite-hero">
+      <div class="eyebrow">My invite code</div>
+      <div class="code-box"><b class="num" id="myCode">${m.code}</b><button id="copyCode">複製連結</button></div>
+      <div class="link-box" id="linkBox">${link}</div>
+      <div class="metrics" style="grid-template-columns:1fr 1fr">
+        <div class="metric"><b style="color:var(--rose)">NT$${CONFIG.referNewcomerNTD}</b><small>好友的首次體驗券</small></div>
+        <div class="metric"><b>${coinSvg(22)} ${CONFIG.referInviter}</b><small>妳得到的芯幣</small></div>
+      </div>
+    </section>
+    <section class="card" style="padding:16px 18px">
+      <b class="h3">怎麼邀請？</b>
+      <div class="steps" style="margin-top:6px">
+        <div><span><b>傳連結給朋友</b><p>複製上面的連結，用 LINE 或 IG 傳給她。</p></span></div>
+        <div><span><b>朋友用 LINE 加入會員</b><p>她會立刻收到 NT$${CONFIG.referNewcomerNTD} 首次體驗券（${CONFIG.referCouponDays} 天內、限用一次）。</p></span></div>
+        <div><span><b>朋友完成第一次到店</b><p>妳的帳戶自動加入 ${CONFIG.referInviter} 芯幣。</p></span></div>
+      </div>
+    </section>
+    <section class="card" style="padding:16px 18px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><b class="h3">我邀請的朋友</b><span class="tiny"></span></div>
+      <div class="friends">${S.invites.length?S.invites.map(f=>`<div><span>${esc(f.name)}</span><span class="pill ${f.status==='done'?'ok':'wait'}">${f.status==='done'?`已到店・+${CONFIG.referInviter} 芯幣`:'已加入・等待首次到店'}</span></div>`).join(''):'<p class="muted">還沒有朋友加入，傳個連結給她吧。</p>'}</div>
+    </section>
+  </div>`;
+}
+
+/* ======================================================================
+   render & 互動
+   ====================================================================== */
+function render(nav){
+  stopBreath(false);
+  const views={home:viewHome,cards:viewCards,tasks:viewTasks,cat:viewCat,coins:viewCoins,invite:viewInvite,review:viewReview,play:viewPlay,mom:viewMom,badges:viewBadges,articles:viewArticles};
+  const main=$('#main');
+  main.innerHTML=`<div class="page">${views[route]()}</div>`;
+  $('#chipCoin').textContent=c1(balance());
+  $('#chipFish').textContent=S.fish;
+  document.querySelectorAll('.nav button').forEach(b=>{const on=b.dataset.go===route||(route==='invite'&&b.dataset.go==='coins')||(['review','play','mom','badges','articles','staff'].includes(route)&&b.dataset.go==='home');on?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current')});
+  $('#dotCards').hidden=!!(S.draw&&S.draw.date===dayKey());
+  $('#dotTasks').hidden=!TASKS.some(t=>taskState(t)==='ready');
+  if(nav){window.scrollTo({top:0,behavior:'instant'});const h=$('#pageTitle');if(h)h.focus({preventScroll:true})}
+  bind();
+}
+
+function bind(){
+  document.querySelectorAll('[data-claim]').forEach(b=>b.onclick=()=>claim(b.dataset.claim,b));
+  document.querySelectorAll('[data-video]').forEach(b=>b.onclick=()=>openVideo(b.dataset.video));
+  document.querySelectorAll('[data-life]').forEach(b=>b.onclick=()=>{S.lifeStage=b.dataset.life;save();const y=scrollY;render();window.scrollTo(0,y)});
+  document.querySelectorAll('[data-bstage]').forEach(b=>b.onclick=()=>{S.breastStage=b.dataset.bstage;save();const y=scrollY;render();window.scrollTo(0,y)});
+  const oil=$('[data-oil]');if(oil)oil.onclick=()=>{today().oilDone=true;save();claim('oil',oil)};
+  const br=$('[data-breath]');if(br)br.onclick=startBreath;
+  const bs=$('#bStop');if(bs)bs.onclick=()=>stopBreath(true);
+
+  // cards
+  document.querySelectorAll('[data-deck]').forEach(b=>b.onclick=()=>{S.deckTab=b.dataset.deck;save();render()});
+  const wn=$('#warmNext');if(wn)wn.onclick=()=>{S.warmShift=(S.warmShift||0)+1;save();render()};
+  const sb2=$('#shuffleBtn');if(sb2)sb2.onclick=startRitual;
+  const dm=$('#drawMore');if(dm)dm.onclick=()=>{drawAgain=true;render();const t=$('.seg');if(t)t.scrollIntoView({behavior:'smooth',block:'start'})};
+  document.querySelectorAll('[data-showdraw]').forEach(b=>b.onclick=()=>{S.draw=todayDraws()[+b.dataset.showdraw];S.draw.seen=true;save();const y=scrollY;render();window.scrollTo(0,y)});
+  const sx=$('#sfxBtn');if(sx)sx.onclick=()=>{S.sound=!S.sound;save();sx.textContent='音效：'+(S.sound?'開':'關');sx.setAttribute('aria-pressed',S.sound);if(S.sound)sfx('tick')};
+  document.querySelectorAll('[data-pick]').forEach((b,i,all)=>b.onclick=()=>{
+    if(fanPicked||!$('#deck').classList.contains('spread'))return;fanPicked=true;
+    $('#rs4').classList.add('on');
+    all.forEach((x,j)=>{x.style.pointerEvents='none';if(j!==i)x.style.opacity='0';else{x.style.zIndex=50;x.style.transformOrigin='50% 50%';x.style.transform='translateY(-6px) scale(1.25)'}});
+    const last=S.draw&&S.draw.date===dayKey()?S.draw.card:-1;
+    let card;do{card=Math.floor(Math.random()*TAROT.length)}while(card===last);
+    const q=($('#askQ')||{value:''}).value.trim();
+    S.draw={date:dayKey(),card,seen:false,q};
+    S.draws=(S.draws||[]).slice(-400);S.draws.push(S.draw);setTimeout(checkBadges,2200);
+    drawAgain=false;save();sfx('flip');
+    setTimeout(()=>{fanPicked=false;render();requestAnimationFrame(()=>setTimeout(()=>{const f=$('#flip');if(f){f.classList.add('on');S.draw.seen=true;save()}},150));
+      setTimeout(()=>toast('抽到了！去任務頁領小魚乾吧'),1400)},800);
+  });
+
+  // cat
+  const pc=$('#petCat');
+  if(pc&&pc.tagName==='VIDEO'){
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const pl=pc.play();if(pl)pl.catch(()=>{})}
+    const rv=$('#catPetVid');
+    if(rv)rv.onended=()=>{rv.classList.remove('on')};
+  }
+  if(pc)pc.onclick=e=>{
+    const rv=$('#catPetVid');
+    if(rv&&!(rv.classList.contains('on')&&!rv.ended)){try{rv.currentTime=0;rv.classList.add('on');const q=rv.play();if(q)q.catch(()=>rv.classList.remove('on'))}catch(err){}}
+    const d=today();d.pets++;save();
+    const house=$('#house');house.classList.remove('purr');void house.offsetWidth;house.classList.add('purr');
+    const r=house.getBoundingClientRect();const h=document.createElement('span');h.className='float';h.textContent='♡';
+    h.style.left=(e.clientX-r.left-10)+'px';h.style.top=(e.clientY-r.top-20)+'px';house.appendChild(h);setTimeout(()=>h.remove(),1200);
+    $('#houseTalk').textContent=pick(CAT_LINES.pet);
+    $('#petCount').textContent=d.pets;
+    if(S.sound){ac();const a=$('#purr');let ok=false;try{a.currentTime=0;const pr=a.play();if(pr)pr.then(()=>{ok=true},()=>sfx('purr'));else ok=true}catch(err){sfx('purr')}
+      if(d.pets%3===1)setTimeout(()=>sfx('meow'),120)}
+    if(d.pets===5){toast('摸摸任務完成！到任務頁領小魚乾');$('#dotTasks').hidden=false}
+  };
+  const sb=$('#soundBtn');if(sb)sb.onclick=()=>{S.sound=!S.sound;save();sb.textContent='呼嚕聲：'+(S.sound?'開':'關');sb.setAttribute('aria-pressed',S.sound)};
+  const f1=$('#feedOne');if(f1)f1.onclick=()=>feed(1,f1);
+  const fa=$('#feedAll');if(fa)fa.onclick=()=>feed(S.fish,fa);
+
+  // coins
+  document.querySelectorAll('[data-amt]').forEach(b=>b.onclick=()=>{redeemPick=+b.dataset.amt;render()});
+  const rb=$('#redeemBtn');if(rb)rb.onclick=()=>openRedeem(redeemPick);
+  const spb=$('#spinBtn');if(spb)spb.onclick=spinWheel;
+  document.querySelectorAll('[data-login]').forEach(b=>b.onclick=()=>openLogin());
+  const mq=$('[data-memberqr]');if(mq)mq.onclick=()=>showQr('我的會員卡',location.origin+'/staff.html?m='+S.member.memberCode,S.member.memberCode,'到店時請芯彤掃這個 QR Code');
+  document.querySelectorAll('[data-couponqr]').forEach(b=>b.onclick=()=>showQr('折扣碼',location.origin+'/staff.html?c='+b.dataset.couponqr,b.dataset.couponqr,'結帳時請芯彤掃這個 QR Code'));
+  document.querySelectorAll('[data-article]').forEach(b=>b.onclick=()=>{articleId=b.dataset.article||null;render(true)});
+  document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>flipMatch(+b.dataset.m));
+  const ga=$('#gAgain');if(ga)ga.onclick=()=>{newGame();render(true)};
+  document.querySelectorAll('[data-decor]').forEach(b=>b.onclick=()=>{S.decor=S.decor||{};S.decor[b.dataset.decor]=!S.decor[b.dataset.decor];save();const y=scrollY;render();window.scrollTo(0,y)});
+  document.querySelectorAll('[data-cup]').forEach(b=>b.onclick=()=>{const d=today(),i=+b.dataset.cup,goal=S.waterGoal||8;const was=d.water||0;d.water=(i<was)?i:i+1;save();ac();sfx('tick');
+    if(was<goal&&d.water>=goal){toast('今天喝水達標了！');setTimeout(checkBadges,600)}const y=scrollY;render();window.scrollTo(0,y)});
+  document.querySelectorAll('[data-goal]').forEach(b=>b.onclick=()=>{S.waterGoal=Math.max(4,Math.min(14,(S.waterGoal||8)+ +b.dataset.goal));save();const y=scrollY;render();window.scrollTo(0,y)});
+  document.querySelectorAll('[data-day]').forEach(b=>b.onclick=()=>{momDay=b.dataset.day;const y=scrollY;render();window.scrollTo(0,y);const dd=$('.diary');if(dd)dd.scrollIntoView({behavior:'smooth',block:'nearest'})});
+  const dt=$('#diaryText');if(dt){let tm;dt.oninput=()=>{const k=momDay||dayKey();S.days[k]=S.days[k]||{tasks:{},pets:0,fed:0};S.days[k].diary=dt.value;$('#diaryCount').textContent=dt.value.length+' / 500 字';$('#diarySaved').textContent='儲存中…';clearTimeout(tm);tm=setTimeout(()=>{save();const e=$('#diarySaved');if(e)e.textContent='已儲存'},500)}}
+  document.querySelectorAll('[data-wr]').forEach(b=>b.onclick=()=>{waterRange=+b.dataset.wr;const y=scrollY;render();window.scrollTo(0,y)});
+  const wc=$('#wChart');if(wc){const tip=$('#wTip');const show=e=>{const r=e.target.closest('.hit');if(!r){tip.hidden=true;return}const box=wc.getBoundingClientRect(),sv=wc.querySelector('svg').getBoundingClientRect();tip.textContent=r.dataset.tip;tip.hidden=false;const x=(+r.dataset.x/340)*sv.width;tip.style.left=Math.max(40,Math.min(box.width-40,x))+'px';wc.querySelectorAll('.hit').forEach(h=>h.classList.toggle('on',h===r))};
+    wc.addEventListener('pointermove',show);wc.addEventListener('pointerdown',show);wc.addEventListener('pointerleave',()=>{tip.hidden=true;wc.querySelectorAll('.hit').forEach(h=>h.classList.remove('on'))})}
+  document.querySelectorAll('[data-mood]').forEach(b=>b.onclick=()=>{const d=today();d.mood=b.dataset.mood;save();const y=scrollY;render();window.scrollTo(0,y)});
+  document.querySelectorAll('[data-gift]').forEach(b=>b.onclick=()=>openGift(b.dataset.gift,+b.dataset.way));
+  const sa=$('#spendAmt');if(sa)sa.oninput=()=>{const v=parseInt(sa.value.replace(/[^0-9]/g,''))||0;S.spendAmt=v;save();$('#calcOut').innerHTML=calcText(v)};
+
+  // review
+  document.querySelectorAll('[data-rv]').forEach(b=>b.onclick=()=>{
+    const g=b.dataset.rv,v=b.dataset.val;
+    if(g==='stage')RV.stage=v;
+    else{const arr=RV[g];const i=arr.indexOf(v);i>=0?arr.splice(i,1):arr.push(v);if(g==='svc'&&!arr.length)arr.push(v)}
+    if(g==='svc'){const ok=new Set(rvFeelsFor().map(f=>f.t));RV.feels=RV.feels.filter(f=>ok.has(f))}
+    const y=scrollY;newReview();render();window.scrollTo(0,y);
+  });
+  document.querySelectorAll('[data-len]').forEach(b=>b.onclick=()=>{RV.len=b.dataset.len;const y=scrollY;newReview();render();window.scrollTo(0,y)});
+  const ro=$('#rvOwn');if(ro){ro.onchange=()=>{RV.own=ro.value;const y=scrollY;newReview();render();window.scrollTo(0,y)}}
+  const rt=$('#rvText');if(rt)rt.oninput=()=>{RV.text=rt.value;RV.edited=true;$('#rvCount').textContent=rt.value.length+' 字'};
+  const rn=$('#rvNew');if(rn)rn.onclick=()=>{const y=scrollY;newReview();render();window.scrollTo(0,y);toast('換好新的一版了')};
+  const rc=$('#rvCopy');if(rc)rc.onclick=()=>{const t=$('#rvText');
+    const ok=()=>{rc.textContent='已複製 ✓';setTimeout(()=>rc.textContent='複製評論',1600)};
+    const fb=()=>{t.focus();t.select();toast('已選取文字，請長按複製')};
+    try{navigator.clipboard.writeText(t.value).then(ok,fb)}catch(e){fb()}};
+  // invite
+  const cc=$('#copyCode');if(cc)cc.onclick=()=>{const t=$('#linkBox').textContent;
+    const ok=()=>{cc.textContent='已複製 ✓';setTimeout(()=>cc.textContent='複製連結',1600)};
+    try{navigator.clipboard.writeText(t).then(ok,()=>{selectText($('#linkBox'));toast('已選取連結，請手動複製')})}catch(e){selectText($('#linkBox'));toast('已選取連結，請手動複製')}};
+  const jb=$('#joinBtn');if(jb)jb.onclick=()=>openJoin('');
+}
+function selectText(el){const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r)}
+
+async function feed(n,btn){
+  if(needLogin())return;
+  if(!S.fish){$('#houseTalk').textContent=pick(CAT_LINES.feedEmpty);return}
+  n=Math.min(n,S.fish);if(btn)btn.disabled=true;
+  const r=await api('feed',{n});
+  if(r.error){toast(r.error);if(btn)btn.disabled=false;return}
+  today().fed=(today().fed||0)+n;
+  flyTo(btn,$('#petCat'),'fish',Math.min(n,4));
+  setTimeout(()=>{
+    const house=$('#house');if(house){house.classList.remove('purr');void house.offsetWidth;house.classList.add('purr');$('#houseTalk').textContent=pick(CAT_LINES.feed)}
+    flyTo($('#petCat'),$('.wallet-chip'),'coin',Math.min(n,3));
+    setTimeout(()=>{applyServer(r.state);toast(`貓咪吃了 ${n} 條，存入 ${c1(n*CONFIG.coinTenthsPerFeed)} 芯幣`);render()},900);
+  },700);
+}
+
+function flyTo(from,to,sym,count){
+  if(!from||!to)return;
+  const a=from.getBoundingClientRect(),b=to.getBoundingClientRect();
+  for(let i=0;i<count;i++){
+    const el=document.createElementNS('http://www.w3.org/2000/svg','svg');el.setAttribute('class','fly');
+    el.innerHTML=`<use href="#${sym}"/>`;
+    el.style.left=(a.left+a.width/2-14+(i-count/2)*10)+'px';el.style.top=(a.top+a.height/2-14)+'px';
+    document.body.appendChild(el);
+    setTimeout(()=>{el.style.transform=`translate(${b.left+b.width/2-(a.left+a.width/2)}px,${b.top+b.height/2-(a.top+a.height/2)}px) scale(.6)`;el.style.opacity='.2'},30+i*90);
+    setTimeout(()=>el.remove(),1000+i*90);
+  }
+}
+function flyFish(from,count){flyTo(from,$('.wallet-chip'),'fish',count)}
+
+/* 呼吸 1 分鐘 */
+function startBreath(){
+  const box=$('#breathBox');box.hidden=false;box.scrollIntoView({behavior:'smooth',block:'center'});
+  const orbit=$('#orbit');let left=60,phaseT=0;
+  const phases=[['鼻子吸氣・肚子鼓起',4,1],['輕輕停住',2,1],['嘴巴吐氣・肚子收回',6,.7]];let p=0;
+  const cues=['吸氣時，讓肚子像氣球一樣慢慢鼓起來。','吐氣時，肚子慢慢往內收，像在吹涼一杯熱茶。','胸口的手盡量不動，只讓肚子上的手起伏。','肩膀放鬆，如果覺得不舒服，就回到自然的呼吸。'];
+  const tick=()=>{
+    if(phaseT<=0){const ph=phases[p%3];$('#bLabel').textContent=ph[0];orbit.style.setProperty('--s',ph[2]);orbit.style.setProperty('--d',ph[1]+'s');phaseT=ph[1];p++}
+    $('#bSec').textContent=left;
+    if(left%15===0)$('#bCue').textContent=cues[(60-left)/15%cues.length];
+    left--;phaseT--;
+    if(left<0){stopBreath(false);today().breathDone=true;save();toast('腹式呼吸完成！可以領 2 條小魚乾了');render()}
+  };
+  tick();breathTimer=setInterval(tick,1000);
+}
+function stopBreath(rerender){if(breathTimer){clearInterval(breathTimer);breathTimer=null;if(rerender)render()}}
+
+/* 兌換確認 sheet */
+function openRedeem(n){
+  if(!n)return;
+  sheet(`<b class="h3" style="display:block;text-align:center">確認兌換</b>
+    <div style="text-align:center;margin:16px 0"><div style="font-family:var(--latin);font-size:42px;font-weight:600">${coinSvg(36)} ${n}</div><div class="muted">兌換 NT$${n*CONFIG.coinValueNTD} 折抵券・${CONFIG.redeemCodeDays} 天內到店使用</div></div>
+    <div class="row" style="flex-wrap:nowrap"><button class="btn btn-ghost" style="flex:1" data-close>再想想</button><button class="btn btn-primary" style="flex:1" id="confirmRedeem">確認兌換</button></div>`);
+  $('#confirmRedeem').onclick=async()=>{
+    const b=$('#confirmRedeem');b.disabled=true;
+    const r=await api('redeem',{coins:n});
+    if(r.error){toast(r.error);b.disabled=false;return}
+    applyServer(r.state);redeemPick=null;closeSheet();render();toast('兌換成功！到店時出示折扣碼');
+  };
+}
+function openJoin(ref){openLogin(ref)}
+function sheet(html){
+  $('#sheetRoot').innerHTML=`<div class="sheet-bg" id="sheetBg"><div class="sheet" role="dialog" aria-modal="true"><div class="grab"></div>${html}</div></div>`;
+  $('#sheetBg').onclick=e=>{if(e.target.id==='sheetBg'||e.target.closest('[data-close]'))closeSheet()};
+  const f=$('#sheetRoot input,#sheetRoot button.btn-primary');if(f)setTimeout(()=>f.focus(),300);
+}
+function closeSheet(){$('#sheetRoot').innerHTML=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
+
+let toastT;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),2400)}
+
+$('#logoutBtn').onclick=async()=>{await api('logout',{});SERVER=null;S.member=null;S.coupons=[];S.hist=[];S.fish=0;save();render();toast('已登出')};
+window.addEventListener('scroll',()=>$('#topbar').classList.toggle('scrolled',scrollY>8),{passive:true});
+
+// 啟動
+(async function start(){
+  const q=new URLSearchParams(location.search);
+  const ref=(q.get('ref')||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+  if(ref){try{sessionStorage.setItem('hc_ref',ref)}catch(e){};history.replaceState(null,'',location.pathname+location.hash)}
+  const h=location.hash.slice(1);
+  route=ROUTES.includes(h)?h:'home';
+  render();
+  const me=await api('me');
+  if(me&&me.member){applyServer(me);$('#logoutBtn').hidden=false;render();
+    if(me.member.needsProfile||h==='profile'){openProfile();return}
+    setTimeout(maybeSpinPrompt,700);
+  }else{
+    if(h==='login-failed')toast('LINE 登入沒有成功，請再試一次');
+    if(ref||h==='login-failed')setTimeout(()=>openLogin(ref),500);
+  }
+})();
+</script>
+
+</body>
+</html>
