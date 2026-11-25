@@ -310,6 +310,7 @@ export default async (req) => {
   const method = req.method;
   const body = method === 'POST' ? await req.json().catch(() => ({})) : {};
   try {
+    if (path === 'health') return json({ ok: MISSING().length === 0 && !!env('STAFF_PIN'), missing: [...MISSING(), ...(env('STAFF_PIN') ? [] : ['STAFF_PIN'])] });
     if (path === 'login') return login(req);
     if (path === 'callback') return callback(req);
     if (path === 'logout' && method === 'POST') return json({ ok: true }, 200, { 'set-cookie': cookie('hc_session', '', 0) });
