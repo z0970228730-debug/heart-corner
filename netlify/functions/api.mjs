@@ -106,11 +106,13 @@ async function login(req) {
 async function callback(req) {
   const url = new URL(req.url);
   const code = url.searchParams.get('code'), st = await verify(url.searchParams.get('state') || '');
-  if (!code || !st || st.nonce !== readCookie(req, 'hc_nonce')) return new Response(null, { status: 302, headers: { location: `${site()}/#login-failed` } });
+  if (!code || !st || st.nonce !== readCookie(req, 'hc_nonce')) return new Response(null, { status: 302, headers: { location: `${site()}/#login-failed-state` } });
   const tok = await fetch('https://api.line.me/oauth2/v2.1/token', { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ grant_type: 'authorization_code', code, redirect_uri: `${site()}/api/callback`, client_id: env('LINE_CHANNEL_ID'), client_secret: env('LINE_CHANNEL_SECRET') }) }).then(r => r.json());
-  if (!tok.id_token) return new Response(null, { status: 302, headers: { location: `${site()}/#login-failed` } });
+  if (!tok.id_token) console.error('LINE token error', tok.error, tok.error_description);
+  if (!tok.id_token) return new Response(null, { status: 302, headers: { location: `${site()}/#login-failed-token` } });
   const prof = await fetch('https://api.line.me/oauth2/v2.1/verify', { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ id_token: tok.id_token, client_id: env('LINE_CHANNEL_ID'), nonce: st.nonce }) }).then(r => r.json());
-  if (!prof.sub) return new Response(null, { status: 302, headers: { location: `${site()}/#login-failed` } });
+  if (!prof.sub) console.error('LINE verify error', prof.error, prof.error_description);
+  if (!prof.sub) return new Response(null, { status: 302, headers: { location: `${site()}/#login-failed-verify` } });
 
   const d = db();
   let { data: m } = await d.from('members').select('id,phone').eq('line_user_id', prof.sub).maybeSingle();
@@ -122,9 +124,9 @@ async function callback(req) {
         line_user_id: prof.sub, display_name: prof.name || '', picture_url: prof.picture || null,
         member_code: 'HSM-' + rand(6), referral_code: 'HS' + rand(5), referred_by: referrer
       }).select('id,phone').single();
-      if (!error) m = data;
+      if (!error) m = data; else console.error('member insert error', error.message);
     }
-    if (!m) return new Response(null, { status: 302, headers: { location: `${site()}/#login-failed` } });
+    if (!m) return new Response(null, { status: 302, headers: { location: `${site()}/#login-failed-db` } });
     await d.rpc('add_coins', { p_member: m.id, p_tenths: RULES.welcomeCoins * 10, p_label: '加入會員禮', p_merge: null, p_days: RULES.coinLifeDays });
     if (referrer) await d.from('coupons').insert({ member_id: m.id, code: couponCode('HSW'), kind: 'welcome', title: '新朋友首次體驗券', value: RULES.welcomeCouponNTD, needs_min_spend: RULES.welcomeNeedsMinSpend, expires_at: new Date(Date.now() + RULES.welcomeCouponDays * DAY).toISOString() });
   } else {
@@ -310,7 +312,18 @@ export default async (req) => {
   const method = req.method;
   const body = method === 'POST' ? await req.json().catch(() => ({})) : {};
   try {
-    if (path === 'health') return json({ ok: MISSING().length === 0 && !!env('STAFF_PIN'), missing: [...MISSING(), ...(env('STAFF_PIN') ? [] : ['STAFF_PIN'])] });
+    if (path === 'health') {
+      const missing = [...MISSING(), ...(env('STAFF_PIN') ? [] : ['STAFF_PIN'])];
+      let dbStatus = 'skipped';
+      if (!missing.includes('SUPABASE_URL') && !missing.includes('SUPABASE_SERVICE_ROLE_KEY')) {
+        const k = env('SUPABASE_SERVICE_ROLE_KEY') || '';
+        const keyType = k.startsWith('sb_secret_') ? 'secret' : k.startsWith('sb_publishable_') ? 'publishable(錯誤)' : (() => { try { return JSON.parse(atob(k.split('.')[1].replace(/-/g, '+').replace(/_/g, '/'))).role || 'unknown'; } catch { return 'unknown'; } })();
+        const { error } = await db().from('members').select('id', { count: 'exact', head: true });
+        const probe = await db().rpc('spend_coins', { p_member: '00000000-0000-0000-0000-000000000000', p_tenths: 1, p_label: 'health' });
+        dbStatus = { keyType, read: error ? error.message : 'ok', functions: probe.error ? probe.error.message : 'ok' };
+      }
+      return json({ ok: missing.length === 0, missing, db: dbStatus, callback: `${site()}/api/callback` });
+    }
     if (path === 'login') return login(req);
     if (path === 'callback') return callback(req);
     if (path === 'logout' && method === 'POST') return json({ ok: true }, 200, { 'set-cookie': cookie('hc_session', '', 0) });
