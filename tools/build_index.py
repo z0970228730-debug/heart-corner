@@ -237,6 +237,7 @@ s = s[:a] + r"""// 啟動
     setTimeout(maybeSpinPrompt,700);
   }else{
     if(h==='login-failed')toast('LINE 登入沒有成功，請再試一次');
+    if(h==='login-setup')toast('LINE 登入還在設定中，請稍後再試');
     if(ref||h==='login-failed')setTimeout(()=>openLogin(ref),500);
   }
 })();""" + s[b:]

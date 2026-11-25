@@ -91,8 +91,10 @@ async function state(mid) {
 }
 
 /* ---------------- LINE 登入 ---------------- */
+const MISSING = () => ['SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY', 'SESSION_SECRET', 'SITE_URL', 'LINE_CHANNEL_ID', 'LINE_CHANNEL_SECRET'].filter(k => !env(k));
 async function login(req) {
   const url = new URL(req.url);
+  if (MISSING().length) { console.error('缺少環境變數：' + MISSING().join(', ')); return new Response(null, { status: 302, headers: { location: `${url.origin}/#login-setup` } }); }
   const ref = (url.searchParams.get('ref') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12);
   const nonce = rand(16);
   const st = await sign({ ref, nonce }, '10m');
