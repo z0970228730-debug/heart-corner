@@ -156,3 +156,15 @@ begin
   perform add_coins(p_member, p_n, '餵貓咪累積', 'feed-' || p_day, 365);
   return true;
 end $$;
+
+-- 授權：只有伺服器程式（service_role）可以讀寫，一般訪客（anon、authenticated）完全不能存取
+-- （Supabase 新專案預設不開放資料表，需要明確授權）
+grant usage on schema public to service_role;
+grant all on all tables in schema public to service_role;
+grant all on all sequences in schema public to service_role;
+grant execute on all functions in schema public to service_role;
+alter default privileges in schema public grant all on tables to service_role;
+alter default privileges in schema public grant all on sequences to service_role;
+alter default privileges in schema public grant execute on functions to service_role;
+revoke all on all tables in schema public from anon, authenticated;
+revoke execute on all functions in schema public from anon, authenticated;
