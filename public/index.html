@@ -316,10 +316,6 @@ a.btn{text-decoration:none}
 
 /* ---------- 貓咪小屋 ---------- */
 .house{position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lift)}
-.house img,.house .cat-vid{width:100%;aspect-ratio:3/2;object-fit:cover;cursor:pointer;display:block;background:#e9dcd6}
-.house .cat-react{position:absolute;inset:0;height:100%;opacity:0;pointer-events:none;transition:opacity .25s}
-.house .cat-react.on{opacity:1}
-@keyframes purr{30%{transform:scale(1.02) rotate(-.3deg)}60%{transform:scale(1.01) rotate(.3deg)}}
 .house .bubble{position:absolute;top:14px;left:14px;max-width:72%;pointer-events:none}
 .house .pet-hint{position:absolute;right:12px;bottom:12px;padding:6px 14px;border-radius:99px;background:rgba(255,250,246,.92);font-size:13px;font-weight:500;color:var(--mauve-deep);pointer-events:none}
 .float{position:absolute;pointer-events:none;font-size:22px;color:var(--rose);animation:floatUp 1.2s ease-out forwards;z-index:5}
@@ -668,6 +664,7 @@ details.odds li{display:flex;justify-content:space-between;border-bottom:1px das
 @media (min-width:700px){.shell{margin-block:0}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
+<link rel="stylesheet" href="assets/cat-motion.css">
 
 
 </head>
@@ -733,6 +730,7 @@ details.odds li{display:flex;justify-content:space-between;border-bottom:1px das
 <div id="sheetRoot"></div>
 <audio id="purr" src="assets/cat-purr.mp3" preload="none"></audio>
 
+<script src="assets/cat-motion.js"></script>
 <script>
 'use strict';
 /* ======================================================================
@@ -1041,6 +1039,7 @@ if(!S.days)S.days={};
 
 function today(){const k=dayKey();if(!S.days[k])S.days[k]={tasks:{},pets:0,fed:0,breathDone:false,oilDone:false};return S.days[k]}
 let SERVER=null;
+let activeCatMotion=null, feedInFlight=false;
 async function api(path,body){
   const opt=body===undefined?{credentials:'same-origin'}:{method:'POST',credentials:'same-origin',headers:{'content-type':'application/json'},body:JSON.stringify(body)};
   let r;try{r=await fetch('/api/'+path,opt)}catch(e){return {error:'網路連線不穩，請稍後再試'}}
@@ -1482,13 +1481,13 @@ function viewCat(){
   return sky('Cat house','貓咪小屋','摸摸牠、餵牠吃小魚乾，貓咪會幫妳存芯幣。',pick(CAT_LINES.cat))+`
   <div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3">
     <section class="house" id="house">
-      <video id="petCat" class="cat-vid" src="assets/cat-idle.mp4" poster="assets/cat-rest.webp" muted loop playsinline preload="auto" aria-label="橘白小貓在暖燈旁的毛毯上睡著了，點一下可以摸摸牠"></video>
-      <video id="catPetVid" class="cat-vid cat-react" src="assets/cat-pet.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
-      <div class="bubble" id="houseTalk">摸摸我～（今天 ${Math.min(d.pets,99)} 下）</div>
+      ${CatMotion.markup()}
+      <div class="bubble" id="houseTalk" role="status">摸摸我～（今天 ${Math.min(d.pets,99)} 下）</div>
+      <span class="cat-mood" id="catMood" aria-hidden="true">暖暖午睡</span>
       <span class="pet-hint">點圖摸摸小貓 ♡</span>
     </section>
     <div class="row" style="justify-content:space-between;align-items:center">
-      <span class="muted">今天摸了 <b class="num" id="petCount">${d.pets}</b> 下${d.pets<5?`（再 ${5-d.pets} 下完成任務）`:'・任務達成'}</span>
+      <span class="muted" id="petProgress">今天摸了 <b class="num" id="petCount">${d.pets}</b> 下<span id="petRemaining">${d.pets<5?`（再 ${5-d.pets} 下完成任務）`:'・任務達成'}</span></span>
       <button class="chip-link" id="soundBtn" aria-pressed="${S.sound}">呼嚕聲：${S.sound?'開':'關'}</button>
     </div>
     <section class="card feed">
@@ -1499,8 +1498,8 @@ function viewCat(){
           <div class="cap">碗裡最多放 ${CONFIG.bowlCap} 條・現在的可換 ${coinsFromFish} 芯幣</div></div>
       </div>
       <div class="feed-btns">
-        <button class="btn btn-primary" id="feedOne" ${S.fish?'':'disabled'}>餵 1 條</button>
-        <button class="btn btn-gold" id="feedAll" ${S.fish>1?'':'disabled'}>全部餵完</button>
+        <button class="btn btn-primary" id="feedOne" ${S.fish&&!feedInFlight?'':'disabled'}>餵 1 條</button>
+        <button class="btn btn-gold" id="feedAll" ${S.fish>1&&!feedInFlight?'':'disabled'}>全部餵完</button>
       </div>
       ${S.fish?'':`<button class="btn btn-ghost" data-go="tasks">去做任務拿小魚乾</button>`}
     </section>
@@ -2361,11 +2360,11 @@ function viewInvite(){
    ====================================================================== */
 function render(nav){
   stopBreath(false);
+  if(activeCatMotion){activeCatMotion.destroy();activeCatMotion=null}
   const views={home:viewHome,cards:viewCards,tasks:viewTasks,cat:viewCat,coins:viewCoins,invite:viewInvite,review:viewReview,play:viewPlay,mom:viewMom,badges:viewBadges,articles:viewArticles};
   const main=$('#main');
   main.innerHTML=`<div class="page">${views[route]()}</div>`;
-  $('#chipCoin').textContent=c1(balance());
-  $('#chipFish').textContent=S.fish;
+  refreshWalletHeader();
   document.querySelectorAll('.nav button').forEach(b=>{const on=b.dataset.go===route||(route==='invite'&&b.dataset.go==='coins')||(['review','play','mom','badges','articles','staff'].includes(route)&&b.dataset.go==='home');on?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current')});
   $('#dotCards').hidden=!!(S.draw&&S.draw.date===dayKey());
   $('#dotTasks').hidden=!TASKS.some(t=>taskState(t)==='ready');
@@ -2405,21 +2404,21 @@ function bind(){
 
   // cat
   const pc=$('#petCat');
-  if(pc&&pc.tagName==='VIDEO'){
-    if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const pl=pc.play();if(pl)pl.catch(()=>{})}
-    const rv=$('#catPetVid');
-    if(rv)rv.onended=()=>{rv.classList.remove('on')};
-  }
+  if(pc)activeCatMotion=CatMotion.mount(pc,{onPose:(_,label)=>{$('#catMood').textContent=label}});
   if(pc)pc.onclick=e=>{
-    const rv=$('#catPetVid');
-    if(rv&&!(rv.classList.contains('on')&&!rv.ended)){try{rv.currentTime=0;rv.classList.add('on');const q=rv.play();if(q)q.catch(()=>rv.classList.remove('on'))}catch(err){}}
+    const reaction=activeCatMotion?.pet();
     const d=today();d.pets++;save();
-    const house=$('#house');house.classList.remove('purr');void house.offsetWidth;house.classList.add('purr');
-    const r=house.getBoundingClientRect();const h=document.createElement('span');h.className='float';h.textContent='♡';
-    h.style.left=(e.clientX-r.left-10)+'px';h.style.top=(e.clientY-r.top-20)+'px';house.appendChild(h);setTimeout(()=>h.remove(),1200);
-    $('#houseTalk').textContent=pick(CAT_LINES.pet);
+    const house=$('#house');
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+      const r=house.getBoundingClientRect(),h=document.createElement('span');h.className='float';h.textContent='♡';
+      h.style.left=(e.detail?e.clientX-r.left-10:r.width*.65)+'px';
+      h.style.top=(e.detail?e.clientY-r.top-20:r.height*.45)+'px';
+      house.appendChild(h);setTimeout(()=>h.remove(),1200);
+    }
+    if(reaction)$('#houseTalk').textContent=pick(CAT_LINES.pet);
     $('#petCount').textContent=d.pets;
-    if(S.sound){ac();const a=$('#purr');let ok=false;try{a.currentTime=0;const pr=a.play();if(pr)pr.then(()=>{ok=true},()=>sfx('purr'));else ok=true}catch(err){sfx('purr')}
+    $('#petRemaining').textContent=d.pets<5?`（再 ${5-d.pets} 下完成任務）`:'・任務達成';
+    if(S.sound){ac();const a=$('#purr');try{a.currentTime=0;const pr=a.play();if(pr)pr.catch(()=>sfx('purr'))}catch(err){sfx('purr')}
       if(d.pets%3===1)setTimeout(()=>sfx('meow'),120)}
     if(d.pets===5){toast('摸摸任務完成！到任務頁領小魚乾');$('#dotTasks').hidden=false}
   };
@@ -2475,31 +2474,76 @@ function bind(){
 function selectText(el){const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r)}
 
 async function feed(n,btn){
+  if(feedInFlight)return;
   if(needLogin())return;
   if(!S.fish){$('#houseTalk').textContent=pick(CAT_LINES.feedEmpty);return}
-  n=Math.min(n,S.fish);if(btn)btn.disabled=true;
+  n=Math.min(n,S.fish);
+  if(n<=0)return;
+  const origin=activeCatMotion;
+  feedInFlight=true;updateFeedControls();
   const r=await api('feed',{n});
-  if(r.error){toast(r.error);if(btn)btn.disabled=false;return}
+  if(r.error){feedInFlight=false;updateFeedControls();toast(r.error);return}
   today().fed=(today().fed||0)+n;
-  flyTo(btn,$('#petCat'),'fish',Math.min(n,4));
-  setTimeout(()=>{
-    const house=$('#house');if(house){house.classList.remove('purr');void house.offsetWidth;house.classList.add('purr');$('#houseTalk').textContent=pick(CAT_LINES.feed)}
-    flyTo($('#petCat'),$('.wallet-chip'),'coin',Math.min(n,3));
-    setTimeout(()=>{applyServer(r.state);toast(`貓咪吃了 ${n} 條，存入 ${c1(n*CONFIG.coinTenthsPerFeed)} 芯幣`);render()},900);
-  },700);
+  applyServer(r.state);
+  const canAnimate=origin&&activeCatMotion===origin;
+  if(canAnimate){
+    const stage=$('#petCat'),talk=$('#houseTalk');
+    talk.textContent=n===1?'聞到香香的小魚乾了！':'哇～今天是小魚乾大餐！';
+    const clearFish=flyTo(btn,stage,'fish',Math.min(n,4));
+    let clearCoin=()=>{};
+    const ms=n===1?1600:2100;
+    const coinTimer=setTimeout(()=>{
+      if(activeCatMotion!==origin)return;
+      talk.textContent=pick(CAT_LINES.feed);
+      clearCoin=flyTo(stage,$('.wallet-chip'),'coin',Math.min(n,3));
+    },ms);
+    await origin.feed(n);
+    clearTimeout(coinTimer);
+    clearFish();clearCoin();
+  }
+  feedInFlight=false;
+  if((route==='cat'&&(!canAnimate||activeCatMotion===origin))||
+     (route==='coins'&&!wheelBusy))render();
+  else{
+    // A pending request may complete after the user has left the cat house.
+    // Refresh balances without resetting an unrelated running task or form.
+    refreshWalletHeader();updateFeedControls();
+    if(route==='home'){
+      const fish=$('.metric[data-go="cat"] .num'),coin=$('.metric[data-go="coins"] .num');
+      const badge=$('.tile[data-go="cat"] .badge');
+      if(fish)fish.textContent=S.fish;
+      if(coin)coin.textContent=c1(balance());
+      if(badge)badge.textContent=S.fish+' 條待餵';
+    }
+  }
+  toast(`貓咪吃了 ${n} 條，存入 ${c1(n*CONFIG.coinTenthsPerFeed)} 芯幣`);
+}
+
+function refreshWalletHeader(){
+  $('#chipCoin').textContent=c1(balance());
+  $('#chipFish').textContent=S.fish;
+}
+
+function updateFeedControls(){
+  const f1=$('#feedOne'),fa=$('#feedAll');
+  if(f1)f1.disabled=feedInFlight||!S.fish;
+  if(fa)fa.disabled=feedInFlight||S.fish<2;
 }
 
 function flyTo(from,to,sym,count){
-  if(!from||!to)return;
+  if(!from||!to||matchMedia('(prefers-reduced-motion: reduce)').matches)return ()=>{};
   const a=from.getBoundingClientRect(),b=to.getBoundingClientRect();
+  const nodes=[],timers=[];
   for(let i=0;i<count;i++){
     const el=document.createElementNS('http://www.w3.org/2000/svg','svg');el.setAttribute('class','fly');
     el.innerHTML=`<use href="#${sym}"/>`;
     el.style.left=(a.left+a.width/2-14+(i-count/2)*10)+'px';el.style.top=(a.top+a.height/2-14)+'px';
     document.body.appendChild(el);
-    setTimeout(()=>{el.style.transform=`translate(${b.left+b.width/2-(a.left+a.width/2)}px,${b.top+b.height/2-(a.top+a.height/2)}px) scale(.6)`;el.style.opacity='.2'},30+i*90);
-    setTimeout(()=>el.remove(),1000+i*90);
+    nodes.push(el);
+    timers.push(setTimeout(()=>{el.style.transform=`translate(${b.left+b.width/2-(a.left+a.width/2)}px,${b.top+b.height/2-(a.top+a.height/2)}px) scale(.6)`;el.style.opacity='.2'},30+i*90));
+    timers.push(setTimeout(()=>el.remove(),1000+i*90));
   }
+  return ()=>{timers.forEach(clearTimeout);nodes.forEach(el=>el.remove())};
 }
 function flyFish(from,count){flyTo(from,$('.wallet-chip'),'fish',count)}
 

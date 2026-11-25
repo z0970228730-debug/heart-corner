@@ -59,3 +59,20 @@
 ## 調整規則
 芯幣價值、轉盤機率、任務獎勵、折價券門檻等數字，都在 `netlify/functions/api.mjs` 最上面的 `RULES`。
 網頁上顯示的同一組數字在 `public/index.html` 的 `CONFIG` 與 `WHEEL`，兩邊要一起改。
+
+## 貓咪小屋動畫與本機預覽
+
+貓咪的動畫控制位於 `public/assets/cat-motion.js`，水彩圖層與動畫樣式位於
+`public/assets/cat-motion.css`。保留原本的待機、摸摸影片與呼嚕聲，新增三張同場景、
+同角色的好奇／吃魚／滿足 WebP 素材。動畫控制不會新增任務、魚乾或芯幣。
+餵食成功後才會播放反應；仍由既有 API 與 Supabase 計算餘額。
+
+- `npm test`：動畫順序、互動覆蓋、餵食與生命週期測試。
+- `npm run check`：JavaScript 語法檢查。
+- `npm run test:browser`：以本機 Chrome 驗證整合操作（可用
+  `CAT_BROWSER_EXECUTABLE` 指定 Chromium/Edge），所有會員及餵食資料都是本機模擬。
+- `node tools/build_cat_preview.mjs cat-preview.html`：產出可直接用瀏覽器開啟的
+  單檔互動預覽，使用虛擬會員及點心碗，不連線會員 API。不要將此預覽檔部署為正式頁面。
+
+動畫尊重系統的「減少動態效果」偏好；在該模式下使用水彩靜態反應，
+摸摸、任務進度與餵食獎勵行為保持不變。
