@@ -51,8 +51,8 @@
       if (!alive || busy || !(count > 0)) return Promise.resolve(false);
       busy = true;
       const steps = count === 1
-        ? [['anticipate', 650], ['nibble', 950], ['satisfied', 1500]]
-        : [['anticipate', 650], ['feast', 1450], ['celebrate', 1800]];
+        ? [['anticipate', 240], ['nibble', 420], ['satisfied', 640]]
+        : [['anticipate', 240], ['feast', 560], ['celebrate', 700]];
       return new Promise(resolve => {
         settle = resolve;
         sequence(steps, () => {
@@ -87,35 +87,33 @@
     </span>`;
     return `<button type="button" class="cat-stage" id="petCat" data-pose="rest" data-visual="rest"
       aria-label="摸摸橘白小貓" aria-describedby="petProgress">
-      <span class="cat-backdrop" aria-hidden="true"><img src="assets/cat-rest.webp" alt="" draggable="false"></span>
       ${layer('rest', 'cat-rest.webp', ['breath'])}
-      <video class="cat-video cat-video--idle" src="assets/cat-idle.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
       ${layer('curious', 'cat-curious-v2.webp', ['breath', 'ear', 'ear-other', 'tail'])}
       ${layer('eat', 'cat-eating-v2.webp', ['breath', 'ear', 'tail', 'nibble'])}
       ${layer('happy', 'cat-happy-v2.webp', ['breath', 'ear', 'tail'])}
-      <video class="cat-video cat-video--pet" src="assets/cat-pet.mp4" muted playsinline preload="metadata" aria-hidden="true"></video>
+      <video class="cat-video cat-video--pet" src="assets/cat-pet.mp4" muted playsinline preload="none" aria-hidden="true"></video>
       <span class="cat-effects" aria-hidden="true"><i>✧</i><i>♡</i><i>✦</i></span>
     </button>`;
   }
 
   function mount(stage, { onPose } = {}) {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const idle = stage.querySelector('.cat-video--idle');
     const pet = stage.querySelector('.cat-video--pet');
     let current = 'rest', destroyed = false, playVersion = 0;
     function syncPlayback() {
       const version = ++playVersion;
       stage.removeAttribute('data-video');
-      const target = current === 'rest' ? idle : ['blink', 'purr'].includes(current) ? pet : null;
-      for (const v of [idle, pet]) if (v !== target || media.matches || document.hidden) v.pause();
-      if (!target || media.matches || document.hidden || destroyed) return;
+      if (!['blink', 'purr'].includes(current) || media.matches || document.hidden || destroyed) {
+        pet.pause();
+        return;
+      }
       const reveal = () => {
-        if (!destroyed && version === playVersion && !media.matches && !document.hidden && !target.paused)
-          stage.dataset.video = target === idle ? 'idle' : 'pet';
+        if (!destroyed && version === playVersion && !media.matches && !document.hidden && !pet.paused)
+          stage.dataset.video = 'pet';
       };
       try {
-        if (target === pet) target.currentTime = 0;
-        const playing = target.play();
+        pet.currentTime = 0;
+        const playing = pet.play();
         if (playing) playing.then(reveal, () => {});
         else reveal();
       } catch (_) { /* Keep the watercolor fallback visible. */ }
@@ -140,7 +138,6 @@
       destroyed = true;
       motion.destroy();
       ++playVersion;
-      idle.pause();
       pet.pause();
       media.removeEventListener?.('change', onMedia);
       if (!media.removeEventListener) media.removeListener?.(onMedia);

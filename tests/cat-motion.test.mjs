@@ -50,11 +50,11 @@ test('feeding a single fish has a complete three-stage reaction', async () => {
   const h = harness();
   const done = h.motion.feed(1);
   assert.equal(h.poses.at(-1), 'anticipate');
-  h.advance(700);
+  h.advance(250);
   assert.equal(h.poses.at(-1), 'nibble');
-  h.advance(1000);
+  h.advance(450);
   assert.equal(h.poses.at(-1), 'satisfied');
-  h.advance(2000);
+  h.advance(700);
   assert.equal(await done, true);
   assert.equal(h.poses.at(-1), 'rest');
 });

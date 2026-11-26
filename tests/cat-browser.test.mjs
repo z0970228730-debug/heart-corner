@@ -96,12 +96,14 @@ test('cat page: five touches, one task reward, one fish, all fish and visible va
   });
   assert.equal(locked, true);
   await page.waitForFunction(() => document.querySelector('#fishCount')?.textContent === '4');
+  await page.waitForFunction(() => !document.querySelector('#feedOne').disabled);
   assert.ok((await page.evaluate(() => window.catTestPoses)).includes('nibble'));
   assert.deepEqual(fixture.calls.filter(c => c.path === 'feed').map(c => c.body.n), [1]);
   assert.equal(await page.locator('#chipCoin').textContent(), '0.1');
   await watchPoses();
   await page.locator('#feedAll').click();
   await page.waitForFunction(() => document.querySelector('#fishCount')?.textContent === '0');
+  await page.waitForFunction(() => window.catTestPoses.includes('celebrate'));
   const poses = await page.evaluate(() => window.catTestPoses);
   assert.ok(poses.includes('feast') && poses.includes('celebrate'));
   assert.deepEqual(fixture.calls.filter(c => c.path === 'feed').map(c => c.body.n), [1, 4]);
@@ -148,7 +150,6 @@ test('cat page: errors keep rewards unchanged; reduced motion and route changes 
   await page.locator('#petCat').focus();
   await page.keyboard.press('Enter');
   assert.equal(await page.locator('#petCount').textContent(), '1');
-  assert.equal(await page.locator('.cat-video--idle').evaluate(v => v.paused), true);
   assert.equal(await page.locator('.cat-video--pet').evaluate(v => v.paused), true);
   await page.locator('#feedOne').click();
   await page.waitForFunction(() => !document.querySelector('#feedOne').disabled);
@@ -196,4 +197,22 @@ test('cat page: a deferred feed refreshes the open wallet', { timeout: 300000 },
   assert.equal(await page.locator('#chipFish').textContent(), '3');
   assert.match(await page.locator('.hist').textContent(), /餵貓咪累積/);
   assert.deepEqual(errors, []);
+});
+
+test('confirmed feeding updates the bowl during the animation and keeps the cat mounted', { timeout: 300000 }, async t => {
+  const { page } = await setup(t);
+  const stage = await page.locator('#petCat').elementHandle();
+  const firstReaction = await page.evaluate(() => new Promise(resolve => {
+    const stage = document.querySelector('#petCat');
+    const observer = new MutationObserver(() => {
+      if (stage.dataset.pose !== 'anticipate') return;
+      observer.disconnect();
+      resolve({ fish: document.querySelector('#fishCount').textContent, coins: document.querySelector('#chipCoin').textContent });
+    });
+    observer.observe(stage, { attributes: true, attributeFilter: ['data-pose'] });
+    document.querySelector('#feedOne').click();
+  }));
+  assert.deepEqual(firstReaction, { fish: '3', coins: '0.1' });
+  await page.waitForFunction(() => !document.querySelector('#feedOne').disabled);
+  assert.equal(await stage.evaluate(el => el === document.querySelector('#petCat')), true);
 });

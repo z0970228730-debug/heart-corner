@@ -670,7 +670,7 @@ details.odds li{display:flex;justify-content:space-between;border-bottom:1px das
 </head>
 <body>
 <div class="intro-screen" id="introScreen" hidden aria-label="水晶球歡迎動畫">
-  <video class="intro-video" id="introVideo" muted playsinline preload="auto" poster="/assets/intro-poster.webp" aria-hidden="true"><source src="/assets/welcome-intro.mp4" type="video/mp4"></video>
+  <video class="intro-video" id="introVideo" muted playsinline preload="none" poster="/assets/intro-poster.webp" aria-hidden="true"><source src="/assets/welcome-intro.mp4" type="video/mp4"></video>
   <p class="intro-sr" id="introTranscript">嗨，妳來啦！今天過得還好嗎？歡迎回到芯彤的小角落。</p>
   <div class="intro-fallback" id="introFallback" hidden>
     <img src="/assets/hero-globe.webp" alt="水晶球裡的小貓正在向妳問好">
@@ -1492,16 +1492,16 @@ function viewCat(){
     </div>
     <section class="card feed">
       <div class="bowl-row">
-        <div class="bowl"><svg viewBox="0 0 96 76" aria-hidden="true"><ellipse cx="48" cy="40" rx="40" ry="10" fill="#f1dcd3"/>${S.fish?`<g transform="translate(26 22)"><use href="#fish" width="22" height="22"/></g><g transform="translate(46 24) rotate(-12)"><use href="#fish" width="22" height="22"/></g>`:''}<path d="M8 40c2 18 18 28 40 28s38-10 40-28" fill="#c9a6a8"/><path d="M8 40c2 18 18 28 40 28s38-10 40-28" fill="none" stroke="#a9858a" stroke-width="1.5"/><path d="M38 56l3-4 3 4 3-4 3 4 3-4 3 4" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".8"/></svg><b class="num" id="fishCount">${S.fish}</b></div>
+        <div class="bowl"><svg viewBox="0 0 96 76" aria-hidden="true"><ellipse cx="48" cy="40" rx="40" ry="10" fill="#f1dcd3"/><g id="bowlFish" visibility="${S.fish?'visible':'hidden'}"><g transform="translate(26 22)"><use href="#fish" width="22" height="22"/></g><g transform="translate(46 24) rotate(-12)"><use href="#fish" width="22" height="22"/></g></g><path d="M8 40c2 18 18 28 40 28s38-10 40-28" fill="#c9a6a8"/><path d="M8 40c2 18 18 28 40 28s38-10 40-28" fill="none" stroke="#a9858a" stroke-width="1.5"/><path d="M38 56l3-4 3 4 3-4 3 4 3-4 3 4" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".8"/></svg><b class="num" id="fishCount">${S.fish}</b></div>
         <div><b class="h3">點心碗</b>
           <div class="rate">${fishSvg(20)}<span>1 條</span><span class="eq">→</span>${coinSvg(20)}<span>0.1 芯幣</span></div>
-          <div class="cap">碗裡最多放 ${CONFIG.bowlCap} 條・現在的可換 ${coinsFromFish} 芯幣</div></div>
+          <div class="cap">碗裡最多放 ${CONFIG.bowlCap} 條・現在的可換 <span id="fishValue">${coinsFromFish}</span> 芯幣</div></div>
       </div>
       <div class="feed-btns">
         <button class="btn btn-primary" id="feedOne" ${S.fish&&!feedInFlight?'':'disabled'}>餵 1 條</button>
         <button class="btn btn-gold" id="feedAll" ${S.fish>1&&!feedInFlight?'':'disabled'}>全部餵完</button>
       </div>
-      ${S.fish?'':`<button class="btn btn-ghost" data-go="tasks">去做任務拿小魚乾</button>`}
+      <button class="btn btn-ghost" id="fishTasks" data-go="tasks" ${S.fish?'hidden':''}>去做任務拿小魚乾</button>
     </section>
   </div>`;
 }
@@ -2410,15 +2410,16 @@ function bind(){
     const d=today();d.pets++;save();
     const house=$('#house');
     if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
-      const r=house.getBoundingClientRect(),h=document.createElement('span');h.className='float';h.textContent='♡';
-      h.style.left=(e.detail?e.clientX-r.left-10:r.width*.65)+'px';
-      h.style.top=(e.detail?e.clientY-r.top-20:r.height*.45)+'px';
-      house.appendChild(h);setTimeout(()=>h.remove(),1200);
+      house.querySelector('.float')?.remove();
+      const h=document.createElement('span');h.className='float';h.textContent='♡';
+      h.style.left=e.detail?(e.offsetX-10)+'px':'65%';
+      h.style.top=e.detail?(e.offsetY-20)+'px':'45%';
+      house.appendChild(h);h.addEventListener('animationend',()=>h.remove(),{once:true});
     }
     if(reaction)$('#houseTalk').textContent=pick(CAT_LINES.pet);
     $('#petCount').textContent=d.pets;
     $('#petRemaining').textContent=d.pets<5?`（再 ${5-d.pets} 下完成任務）`:'・任務達成';
-    if(S.sound){ac();const a=$('#purr');try{a.currentTime=0;const pr=a.play();if(pr)pr.catch(()=>sfx('purr'))}catch(err){sfx('purr')}
+    if(S.sound){ac();const a=$('#purr');if(a.paused){try{const pr=a.play();if(pr)pr.catch(()=>sfx('purr'))}catch(err){sfx('purr')}}
       if(d.pets%3===1)setTimeout(()=>sfx('meow'),120)}
     if(d.pets===5){toast('摸摸任務完成！到任務頁領小魚乾');$('#dotTasks').hidden=false}
   };
@@ -2485,25 +2486,25 @@ async function feed(n,btn){
   if(r.error){feedInFlight=false;updateFeedControls();toast(r.error);return}
   today().fed=(today().fed||0)+n;
   applyServer(r.state);
+  refreshWalletHeader();
+  if(route==='cat'){
+    $('#fishCount').textContent=S.fish;
+    $('#fishValue').textContent=c1(S.fish*CONFIG.coinTenthsPerFeed);
+    $('#bowlFish').setAttribute('visibility',S.fish?'visible':'hidden');
+    $('#fishTasks').hidden=Boolean(S.fish);
+  }
+  toast(`貓咪吃了 ${n} 條，存入 ${c1(n*CONFIG.coinTenthsPerFeed)} 芯幣`);
   const canAnimate=origin&&activeCatMotion===origin;
   if(canAnimate){
     const stage=$('#petCat'),talk=$('#houseTalk');
     talk.textContent=n===1?'聞到香香的小魚乾了！':'哇～今天是小魚乾大餐！';
-    const clearFish=flyTo(btn,stage,'fish',Math.min(n,4));
-    let clearCoin=()=>{};
-    const ms=n===1?1600:2100;
-    const coinTimer=setTimeout(()=>{
-      if(activeCatMotion!==origin)return;
-      talk.textContent=pick(CAT_LINES.feed);
-      clearCoin=flyTo(stage,$('.wallet-chip'),'coin',Math.min(n,3));
-    },ms);
-    await origin.feed(n);
-    clearTimeout(coinTimer);
-    clearFish();clearCoin();
+    const clearFish=flyTo(btn,stage,'fish',Math.min(n,3));
+    const finished=await origin.feed(n);
+    clearFish();
+    if(finished&&activeCatMotion===origin)talk.textContent=pick(CAT_LINES.feed);
   }
   feedInFlight=false;
-  if((route==='cat'&&(!canAnimate||activeCatMotion===origin))||
-     (route==='coins'&&!wheelBusy))render();
+  if(route==='coins'&&!wheelBusy)render();
   else{
     // A pending request may complete after the user has left the cat house.
     // Refresh balances without resetting an unrelated running task or form.
@@ -2516,7 +2517,6 @@ async function feed(n,btn){
       if(badge)badge.textContent=S.fish+' 條待餵';
     }
   }
-  toast(`貓咪吃了 ${n} 條，存入 ${c1(n*CONFIG.coinTenthsPerFeed)} 芯幣`);
 }
 
 function refreshWalletHeader(){
