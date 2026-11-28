@@ -533,6 +533,7 @@ button.cal-d:disabled{opacity:.4;cursor:default}
 .pet-pick button[aria-pressed="true"]{border-color:var(--rose);background:#fbf1ee;font-weight:500}
 .pet-globe .hero-img,.pet-globe .tile img,.pet-globe .warm-art img,.pet-globe .house .cat-vid,.pet-globe .studio img{object-fit:contain;background:linear-gradient(180deg,#8d879e,#e9dcd6)}
 .pet-globe .talk-cat img{transform:scale(1.25);object-position:50% 50%}
+.pet-plain .talk-cat img{transform:none;object-position:50% 50%}
 
 /* 開場畫面 */
 .intro-screen{position:fixed;inset:0;z-index:120;background:linear-gradient(180deg,#726f8a 0%,#726f8a 12%,#f5eae3 88%,#f5eae3 100%);display:grid;place-items:center;transition:opacity .6s ease}
@@ -996,8 +997,8 @@ const CAT_LINES = {
 
 /* 陪伴的小動物：之後新增動物時，在 PETS 加一筆、放好圖片即可 */
 const PETS={
-  cat:{id:'cat',name:'貓咪',img:{window:'assets/cat-window.webp',rest:'assets/cat-rest.webp',letter:'assets/cat-letter.webp',oil:'assets/cat-oil.webp',globe:'assets/hero-globe.webp'},video:true,globe:false},
-  rabbit:{id:'rabbit',name:'兔兔',img:{window:'assets/pet-rabbit.webp',rest:'assets/pet-rabbit.webp',letter:'assets/pet-rabbit.webp',oil:'assets/pet-rabbit.webp',globe:'assets/pet-rabbit.webp'},video:false,globe:true}
+  cat:{id:'cat',name:'貓咪',img:{window:'assets/cat-window.webp',rest:'assets/cat-rest.webp',letter:'assets/cat-letter.webp',oil:'assets/cat-oil.webp',globe:'assets/hero-globe.webp',avatar:'assets/cat-rest.webp'},video:true,globe:false,plainAvatar:false},
+  rabbit:{id:'rabbit',name:'兔兔',img:{window:'assets/rabbit-window.webp',rest:'assets/rabbit-window.webp',letter:'assets/rabbit-window.webp',oil:'assets/rabbit-window.webp',globe:'assets/pet-rabbit.webp',avatar:'assets/rabbit-avatar.webp'},video:false,globe:false,plainAvatar:true}
 };
 const RABBIT_LINES={
   cat:['在毛毯上窩著，等妳來坐一下。','摸摸我的頭，我的耳朵會輕輕動喔。'],
@@ -1025,10 +1026,10 @@ function applyPetSymbol(){
   const sym=document.getElementById('fish');if(!sym)return;
   if(!sym.dataset.orig)sym.dataset.orig=sym.innerHTML;
   sym.innerHTML=S.pet==='rabbit'?'<path d="M7 26 L21 9 Q26 6 25.5 11 L9 27.5 Q5 29.5 7 26Z" fill="#e8873a" stroke="#c0662a" stroke-width="1"/><path d="M12.5 20.5l2.2 1.8M16 16.5l2.2 1.8M19 12.8l1.8 1.6" stroke="#c0662a" stroke-width="1.1" stroke-linecap="round"/><path d="M22.5 8.5l1-5M24 9.5l5-2.2M23.4 9l4.2-4.5" stroke="#7aa35a" stroke-width="2.2" stroke-linecap="round"/>':sym.dataset.orig;
-  document.body.classList.toggle('pet-globe',!!pet().globe);
+  document.body.classList.toggle('pet-globe',!!pet().globe);document.body.classList.toggle('pet-plain',!!pet().plainAvatar);
 }
 function petPicker(){
-  return `<div class="pet-pick" data-noswap role="group" aria-label="選擇陪伴妳的小動物">${Object.values(PETS).map(x=>`<button type="button" data-pet="${x.id}" aria-pressed="${(S.pet||'cat')===x.id}"><img src="${x.img.rest}" alt=""><span>${x.name}</span></button>`).join('')}</div>`;
+  return `<div class="pet-pick" data-noswap role="group" aria-label="選擇陪伴妳的小動物">${Object.values(PETS).map(x=>`<button type="button" data-pet="${x.id}" aria-pressed="${(S.pet||'cat')===x.id}"><img src="${x.img.avatar}" alt=""><span>${x.name}</span></button>`).join('')}</div>`;
 }
 
 /* ======================================================================
@@ -1380,7 +1381,7 @@ const fishSvg=(s=18)=>`<svg class="coin" width="${s}" height="${s}" aria-hidden=
 const snow=()=>`<div class="snow" aria-hidden="true">${[[8,12,11],[22,78,16],[46,16,8],[14,62,9],[60,88,12],[36,40,7]].map(([t,l,s],i)=>`<span style="top:${t}%;left:${l}%;font-size:${s}px;animation-delay:${i*.6}s">✦</span>`).join('')}</div>`;
 function sky(eyebrow,title,sub,line){
   return `<section class="sky gutter">${snow()}<div class="eyebrow">${eyebrow}</div><h2 class="h2" tabindex="-1" id="pageTitle">${title}</h2>${sub?`<p>${sub}</p>`:''}
-  <div class="talk"><div class="talk-cat"><img src="${petImg('rest')}" alt=""></div><div class="bubble pop" id="catTalk">${line}</div></div></section>`;
+  <div class="talk"><div class="talk-cat"><img src="${petImg('avatar')}" alt=""></div><div class="bubble pop" id="catTalk">${line}</div></div></section>`;
 }
 function catSay(text){const b=$('#catTalk');if(!b)return;b.classList.remove('pop');void b.offsetWidth;b.innerHTML=petStr(text);b.classList.add('pop')}
 
@@ -1476,7 +1477,7 @@ function viewCards(){
         <div class="keys">${card.k.map(k=>`<span>${k}</span>`).join('')}</div>
         <p class="meaning">${card.m}</p>
         <div class="insight"><div class="ins-row"><span class="ins-tag">給妳的提問</span><p>${card.q}</p></div><div class="ins-row"><span class="ins-tag">今日小行動</span><p>${card.act}</p></div></div>
-        <div class="talk" style="margin:0"><div class="talk-cat"><img src="${petImg('rest')}" alt=""></div><div class="bubble">${card.cat}</div></div>
+        <div class="talk" style="margin:0"><div class="talk-cat"><img src="${petImg('avatar')}" alt=""></div><div class="bubble">${card.cat}</div></div>
         <div class="divider">今日漢芳療 × 脈輪</div>
         <div class="chakra-card">
           <span class="ck-dot" style="background:${ch.color}"></span>
@@ -2067,7 +2068,7 @@ function growthCard(){
     <div class="g-head"><div><span class="eyebrow">Lv.${cur.lv}</span><b class="h3" style="display:block">${cur.name}</b></div><span class="tiny">經驗值 <b class="num">${xp}</b>${next?` / ${next.xp}`:''}</span></div>
     <div class="progress"><i style="width:${pct}%"></i></div>
     <p class="muted" style="margin:0">${next?`再餵 ${next.xp-xp} 條小魚乾，就會長成「${next.name}」，解鎖${DECOR.find(x=>x.lv===next.lv).name}。`:'貓咪已經長成最可靠的小屋守護貓了！'}</p>
-    <div class="talk" style="margin:0"><div class="talk-cat"><img src="${petImg('rest')}" alt=""></div><div class="bubble">${cur.line}</div></div>
+    <div class="talk" style="margin:0"><div class="talk-cat"><img src="${petImg('avatar')}" alt=""></div><div class="bubble">${cur.line}</div></div>
     <div><b style="font-weight:500">小屋布置</b><span class="tiny">　點一下擺上或收起</span></div>
     <div class="decor-grid">${DECOR.map(dc=>{const unlocked=cur.lv>=dc.lv,onn=unlocked&&S.decor&&S.decor[dc.id];
       return `<button class="decor ${onn?'on':''}" data-decor="${dc.id}" ${unlocked?'':'disabled'} aria-pressed="${!!onn}"><span class="d-ic">${decorIcon(dc.id)}</span><b>${dc.name}</b><small>${unlocked?(onn?'已擺上':'點我擺上'):`Lv.${dc.lv} 解鎖`}</small></button>`}).join('')}</div>
@@ -2284,7 +2285,7 @@ function viewArticles(){
         <div class="a-meta">芯彤美學・閱讀約 ${a.mins} 分鐘</div>
         <div class="a-body">${body}</div>
       </article>
-      <div class="talk" style="margin:0"><div class="talk-cat"><img src="${petImg('rest')}" alt=""></div><div class="bubble">看完了嗎？有想問的都可以傳 LINE 給芯彤喔。</div></div>
+      <div class="talk" style="margin:0"><div class="talk-cat"><img src="${petImg('avatar')}" alt=""></div><div class="bubble">看完了嗎？有想問的都可以傳 LINE 給芯彤喔。</div></div>
       <div class="rv-btns" style="margin-top:14px"><a class="btn btn-primary" href="${lineBookUrl()}" target="_blank" rel="noopener noreferrer">LINE 問問芯彤</a><button class="btn btn-ghost" data-article="">看其他文章</button></div>
     </div>`;
   }
