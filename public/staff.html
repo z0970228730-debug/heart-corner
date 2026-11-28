@@ -135,13 +135,14 @@ async function findCoupon(code){
   const c=r.coupon,st=r.status,lab={valid:['有效','ok'],used:['已使用','bad'],expired:['已過期','bad']}[st];
   box.innerHTML=`<section class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><span class="badge ${lab[1]}">${lab[0]}</span><span class="code">${esc(c.code)}</span></div>
-    <dl><dt>票券</dt><dd>${esc(c.title)}</dd><dt>面額</dt><dd>NT$${c.value}</dd><dt>會員</dt><dd>${esc(r.member.name||'—')}</dd><dt>有效期限</dt><dd>${fmtD(c.expires)}</dd>${c.usedAt?`<dt>核銷時間</dt><dd>${fmt(c.usedAt)}</dd>`:''}<dt>使用條件</dt><dd>${c.minSpend?'每滿 NT$1,000 可用 1 張，每筆最多折 NT$300':'無消費門檻'}・不可與生日優惠同時使用</dd></dl>
+    <dl><dt>票券</dt><dd>${esc(c.title)}</dd><dt>面額</dt><dd>NT$${c.value}</dd><dt>會員</dt><dd>${esc(r.member.name||'—')}</dd><dt>有效期限</dt><dd>${fmtD(c.expires)}</dd>${c.usedAt?`<dt>核銷時間</dt><dd>${fmt(c.usedAt)}</dd>`:''}<dt>使用條件</dt><dd>${c.minSpend?'每滿 NT$1,000 可用 1 張，每筆最多折 NT$300':'無消費門檻'}・不可與生日優惠、首次體驗同時使用</dd></dl>
     ${st==='valid'?`<div class="field"><label for="spend">這次消費金額</label><input id="spend" inputmode="numeric" placeholder="例如 2500"></div>
       <label class="chk"><input type="checkbox" id="bday"> 這筆消費有使用生日優惠</label>
+      <label class="chk"><input type="checkbox" id="trial"> 這筆消費有使用首次體驗優惠</label>
       <button class="btn btn-p" id="doIt">確認核銷</button><p class="muted" id="err"></p>`:''}
   </section>`;
   const b=$('#doIt');if(b)b.onclick=async()=>{b.disabled=true;$('#err').textContent='';
-    const x=await api('redeem',{code:c.code,spend:parseInt(($('#spend').value||'').replace(/\D/g,''))||0,birthday:$('#bday').checked});
+    const x=await api('redeem',{code:c.code,spend:parseInt(($('#spend').value||'').replace(/\D/g,''))||0,birthday:$('#bday').checked,firstTrial:$('#trial').checked});
     if(x.error){$('#err').textContent=x.error;b.disabled=false;return}
     box.innerHTML=`<section class="card" style="text-align:center"><span class="badge ok" style="justify-self:center">核銷完成</span><b style="font-size:18px">請在夯客結帳時折抵 NT$${x.value}</b><p class="muted">把這行貼到夯客的結帳備註：</p><div class="note" id="note">${esc(x.note)}</div><button class="btn btn-g" id="cp">複製備註</button></section>`;
     $('#cp').onclick=()=>{navigator.clipboard?.writeText(x.note).then(()=>toast('已複製'),()=>toast('請長按備註手動複製'))};

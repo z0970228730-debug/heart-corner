@@ -249,9 +249,11 @@ async function staffRedeem(body) {
   const st = couponStatus(c);
   if (st !== 'valid') return fail(st === 'used' ? '這張已經使用過了' : '這張已經過期了', 409);
   if (body.birthday) return fail('這筆消費已使用生日優惠，折價券不能同時使用');
+  if (body.firstTrial) return fail('這筆消費已使用首次體驗優惠，折價券不能同時使用');
   // 同一位客人、同一筆消費（3 小時內、相同金額）已經用了幾張
   const since = new Date(Date.now() - 3 * 3600 * 1000).toISOString();
-  const { data: same } = await d.from('coupons').select('value').eq('member_id', c.member_id).eq('used_spend', spend).gt('used_at', since);
+  const { data: same } = await d.from('coupons').select('value,kind').eq('member_id', c.member_id).eq('used_spend', spend).gt('used_at', since);
+  if ((same || []).some(x => x.kind === 'welcome') || (c.kind === 'welcome' && (same || []).length)) return fail('首次體驗券不能和其他折價券同時使用');
   const usedN = (same || []).length, usedSum = (same || []).reduce((a, x) => a + x.value, 0);
   if (c.needs_min_spend) {
     if (!spend) return fail('請輸入這次的消費金額');

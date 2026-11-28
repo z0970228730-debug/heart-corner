@@ -1533,7 +1533,7 @@ function viewCoins(){
       <div><b class="h3">兌換折抵券</b><div class="muted">選擇數量，產生兌換碼，到店結帳時出示給芯彤。</div></div>
       <div class="amounts" role="group" aria-label="兌換數量">${CONFIG.redeemOptions.map(n=>`<button data-amt="${n}" aria-pressed="${redeemPick===n}" ${bal<n*10?'disabled':''}><b class="num">${n}</b><small>折 NT$${n*CONFIG.coinValueNTD}</small></button>`).join('')}</div>
       <button class="btn btn-primary btn-block" id="redeemBtn" ${redeemPick&&bal>=redeemPick*10?'':'disabled'}>${redeemPick?`用 ${redeemPick} 芯幣兌換 NT$${redeemPick*CONFIG.coinValueNTD} 折抵券`:(bal<CONFIG.redeemOptions[0]*10?`再存 ${c1(CONFIG.redeemOptions[0]*10-bal)} 芯幣就能兌換`:'先選擇兌換數量')}</button>
-      <div class="tiny">兌換碼 ${CONFIG.redeemCodeDays} 天內有效・每消費滿 NT$${CONFIG.couponPerNTD.toLocaleString()} 可使用 1 張・每筆消費最多折抵 NT$${CONFIG.maxDiscountNTD}・不可與生日優惠同時使用</div>
+      <div class="tiny">兌換碼 ${CONFIG.redeemCodeDays} 天內有效・每消費滿 NT$${CONFIG.couponPerNTD.toLocaleString()} 可使用 1 張・每筆消費最多折抵 NT$${CONFIG.maxDiscountNTD}・不可與生日優惠、首次體驗同時使用</div>
     </section>
 
     ${CONFIG.gifts.map(g=>`<section class="card gift-card">
@@ -1549,7 +1549,7 @@ function viewCoins(){
       <div class="wheel"><span class="wheel-ptr" id="wheelPtr"></span>${wheelSvg()}<span class="wheel-hub"><svg width="40" height="40"><use href="#coin"/></svg></span></div>
       ${(()=>{const free=!today().freeSpin;const can=free||bal>=WHEEL.cost*10;
         return `<button class="btn btn-gold btn-block" id="spinBtn" ${can?'':'disabled'}>${free?'今天的免費轉盤':can?`用 ${WHEEL.cost} 芯幣再轉一次`:`今天的免費次數用完了，還差 ${c1(WHEEL.cost*10-bal)} 芯幣才能再轉`}</button>`})()}
-      <details class="odds"><summary>使用說明</summary><p class="tiny">獎項由系統隨機抽出，各獎項中獎機率不同。折價券 ${WHEEL.couponDays} 天內有效、每張限用一次、不可兌換現金。每消費滿 NT$${CONFIG.couponPerNTD.toLocaleString()} 可使用 1 張，每筆消費最多折抵 NT$${CONFIG.maxDiscountNTD}，不可與生日優惠同時使用。</p></details>
+      <details class="odds"><summary>使用說明</summary><p class="tiny">獎項由系統隨機抽出，各獎項中獎機率不同。折價券 ${WHEEL.couponDays} 天內有效、每張限用一次、不可兌換現金。每消費滿 NT$${CONFIG.couponPerNTD.toLocaleString()} 可使用 1 張，每筆消費最多折抵 NT$${CONFIG.maxDiscountNTD}，不可與生日優惠、首次體驗同時使用。</p></details>
     </section>
 
     <section class="stack">
@@ -1567,7 +1567,7 @@ function viewCoins(){
         <li><span>獲得方式</span><span>完成每日任務得到小魚乾，餵給貓咪後，每條換 0.1 芯幣。每天最多 ${DAILY_FISH_MAX} 條，連續報到 7 天多送 ${CONFIG.streakBonusFish} 條。</span></li>
         <li><span>邀請好友</span><span>好友用妳的邀請碼加入，可得 NT$${CONFIG.referNewcomerNTD} 首次體驗券；好友完成第一次到店，妳得 ${CONFIG.referInviter} 芯幣。</span></li>
         <li><span>折抵方式</span><span>1 芯幣 = NT$${CONFIG.coinValueNTD}。滿 ${CONFIG.redeemOptions[0]} 芯幣可兌換成折價券。</span></li>
-        <li><span>使用門檻</span><span>每消費滿 NT$${CONFIG.couponPerNTD.toLocaleString()} 可使用 1 張折價券（滿 NT$2,000 可用 2 張、滿 NT$3,000 可用 3 張，以此類推）。每筆消費所有折價券合計最多折抵 NT$${CONFIG.maxDiscountNTD}。折價券不可與生日優惠同時使用。</span></li>
+        <li><span>使用門檻</span><span>每消費滿 NT$${CONFIG.couponPerNTD.toLocaleString()} 可使用 1 張折價券（滿 NT$2,000 可用 2 張、滿 NT$3,000 可用 3 張，以此類推）。每筆消費所有折價券合計最多折抵 NT$${CONFIG.maxDiscountNTD}。折價券不可與生日優惠、首次體驗同時使用。</span></li>
         <li><span>使用期限</span><span>芯幣自獲得日起 ${CONFIG.coinLifeDays} 天內有效，先拿到的先使用；到期前 ${CONFIG.expireWarnDays} 天會提醒妳。兌換碼 ${CONFIG.redeemCodeDays} 天內有效。</span></li>
         <li><span>注意事項</span><span>芯幣不可兌換現金、不可轉讓；小魚乾放在碗裡不會過期，但碗最多裝 ${CONFIG.bowlCap} 條。</span></li>
       </ul>
