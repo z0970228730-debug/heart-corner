@@ -1436,7 +1436,7 @@ function viewCards(){
           <div><b>${ch.name}</b> <span class="ck-sk">${ch.sk}・${ch.en} Chakra</span><div class="ck-meta">位置：${ch.pos}　元素：${ch.elem}</div><div class="ck-meta">主題：${ch.theme}</div></div>
         </div>
         ${tarotCare(card,ch)}
-        <p class="tiny" style="margin:0">精油與香氣建議為日常保養參考，不取代醫療。孕期請把濃度降到 0.5%（10ml 基底油加 1 滴）；哺乳期塗抹後請在餵奶前擦拭乾淨；寶寶在旁時以擴香為主。使用前可先在手臂內側做小範圍測試。</p>
+        <p class="tiny" style="margin:0">精油與香氣建議為日常保養參考，不取代醫療。哺乳期塗抹後請在餵奶前擦拭乾淨；寶寶在旁時以擴香為主。使用前可先在手臂內側做小範圍測試。</p>
       </article>
       ${tds.length>1?`<section class="history"><b class="h3">今天抽過的牌</b><div class="hist-cards">${tds.map((d,i)=>`<button data-showdraw="${i}" aria-pressed="${d===S.draw}"><img src="assets/tarot/${TAROT[d.card%TAROT.length].img}.webp" alt="${TAROT[d.card%TAROT.length].zh}"><span>${d.q?esc(d.q):TAROT[d.card%TAROT.length].zh}</span></button>`).join('')}</div></section>`:''}
       <button class="btn btn-primary btn-block" id="drawMore">還有想問的？再抽一張</button>
@@ -1464,7 +1464,7 @@ function viewTasks(){
         : st==='ready'?`<button class="task-btn claim" data-claim="${t.id}">領取</button>`
         : t.id==='oil'?`<span class="btn-pair"><button class="task-btn" data-video="general">看示範</button><button class="task-btn" data-oil>我做好了</button></span>`
         : t.id==='breath'?`<button class="task-btn" data-breath>開始</button>`
-        : `<button class="task-btn" data-go="${t.go}">去做</button>`;
+        : `<button class="task-btn" data-go="${t.go}">${({cards:'去抽牌',cat:'去摸摸',play:'去翻牌'})[t.go]||'做任務'}</button>`;
       return `<div class="task ${st==='done'?'done':''}"><span class="ic"><svg viewBox="0 0 24 24">${t.icon}</svg></span><div><b>${t.name}</b><small>${t.desc}</small>
         <span class="reward">${fishSvg(15)} ×${t.fish}</span>${t.need&&st==='todo'?`<div class="mini-prog"><i style="width:${prog/t.need*100}%"></i></div>`:''}</div>${btn}</div>`}).join('')}</div>
     <section class="card breath" id="breathBox" hidden>
