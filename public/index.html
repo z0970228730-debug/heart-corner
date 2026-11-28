@@ -1017,8 +1017,8 @@ const CAT_LINES = {
 
 /* 陪伴的小動物：之後新增動物時，在 PETS 加一筆、放好圖片即可 */
 const PETS={
-  cat:{id:'cat',name:'貓咪',img:{window:'assets/cat-window.webp',rest:'assets/cat-rest.webp',letter:'assets/cat-letter.webp',oil:'assets/cat-oil.webp',globe:'assets/hero-globe.webp',avatar:'assets/cat-rest.webp'},video:true,globe:false,plainAvatar:false},
-  rabbit:{id:'rabbit',name:'兔兔',img:{window:'assets/rabbit-window.webp',rest:'assets/rabbit-rest.webp',letter:'assets/rabbit-cards.webp',oil:'assets/rabbit-cocoa.webp',globe:'assets/rabbit-cottage.webp',avatar:'assets/rabbit-avatar.webp',react:'assets/rabbit-happy.webp'},video:false,globe:false,plainAvatar:true}
+  cat:{id:'cat',name:'貓咪',img:{window:'assets/cat-window.webp',rest:'assets/cat-rest.webp',letter:'assets/cat-letter.webp',oil:'assets/cat-oil.webp',globe:'assets/hero-globe.webp',mood:'assets/hero-globe.webp',avatar:'assets/cat-rest.webp'},video:true,globe:false,plainAvatar:false},
+  rabbit:{id:'rabbit',name:'兔兔',img:{window:'assets/rabbit-window.webp',rest:'assets/rabbit-rest.webp',letter:'assets/rabbit-cards.webp',oil:'assets/rabbit-cocoa.webp',globe:'assets/rabbit-cottage.webp',mood:'assets/rabbit-mood.webp',avatar:'assets/rabbit-avatar.webp',react:'assets/rabbit-happy.webp'},video:false,globe:false,plainAvatar:true}
 };
 const RABBIT_LINES={
   cat:['在毛毯上窩著，等妳來坐一下。','摸摸我的頭，我的耳朵會輕輕動喔。'],
@@ -1441,7 +1441,7 @@ function viewHome(){
         <button class="tile" data-go="cards"><img src="${petImg('letter')}" alt="" loading="lazy"><span class="badge ${drawn?'done':''}">${drawn?`今日已抽 ${todayDraws().length} 張`:'每日指引'}</span><b>今日牌卡</b><small>塔羅指引・精油建議</small></button>
         <button class="tile" data-go="cat"><img src="${petImg('rest')}" alt="" loading="lazy"><span class="badge">${S.fish} 條待餵</span><b>貓咪小屋</b><small>摸摸牠、餵小魚乾</small></button>
         <button class="tile" data-go="play"><img src="${petImg('oil')}" alt="" loading="lazy"><span class="badge ${today().gameDone?'done':''}">${today().gameDone?'今日已玩':'1 分鐘小遊戲'}</span><b>香氣翻牌</b><small>配對漢芳療的香氣</small></button>
-        <button class="tile" data-go="mom"><img src="${petImg('globe')}" alt="" loading="lazy"><span class="badge">${today().water||0} / ${S.waterGoal||8} 杯水</span><b>芯情調色盤</b><small>心情・日記・喝水</small></button>
+        <button class="tile" data-go="mom"><img src="${petImg('mood')}" alt="" loading="lazy"><span class="badge">${today().water||0} / ${S.waterGoal||8} 杯水</span><b>芯情調色盤</b><small>心情・日記・喝水</small></button>
         <button class="tile tile-wide badge-tile" data-go="badges"><span class="tw-copy"><b>本月徽章</b><small>已獲得 ${monthBadges().filter(b=>b.done).length} / ${BADGES.length} 枚・每枚送 ${BADGE_REWARD_FISH} 條小魚乾</small></span><span class="mini-medals">${monthBadges().map(b=>medalSvg(b,30)).join('')}</span></button>
         <button class="tile tile-wide" data-go="articles"><span class="tw-copy"><b>保養小教室</b><small>芯彤寫給妳的保養觀念和小知識</small></span><span class="gift" style="font-size:22px">${ARTICLES.length} 篇</span></button>
         <button class="tile tile-wide" data-go="review"><span class="tw-copy"><b>寫下這次的體驗心得</b><small>勾選感受，小幫手幫妳整理成評論</small></span><span class="gift" style="font-size:24px">✎</span></button>
