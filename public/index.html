@@ -317,7 +317,7 @@ a.btn{text-decoration:none}
 /* ---------- 貓咪小屋 ---------- */
 .house{position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lift)}
 .house img,.house .cat-vid{width:100%;aspect-ratio:3/2;object-fit:cover;cursor:pointer;display:block;background:#e9dcd6}
-.house .cat-react{position:absolute;inset:0;height:100%;opacity:0;pointer-events:none;transition:opacity .25s}
+.house .cat-react{position:absolute;inset:0;height:100%;opacity:0;pointer-events:none;transition:opacity .35s}
 .house .cat-react.on{opacity:1}
 @keyframes purr{30%{transform:scale(1.02) rotate(-.3deg)}60%{transform:scale(1.01) rotate(.3deg)}}
 .house .bubble{position:absolute;top:14px;left:14px;max-width:72%;pointer-events:none}
@@ -542,7 +542,7 @@ button.cal-d:disabled{opacity:.4;cursor:default}
 .intro-video[hidden]{display:none!important}
 .intro-sr{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 .intro-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:30px 30px 90px}
-.intro-fallback img{width:min(65vw,45svh,280px);border-radius:50%;filter:drop-shadow(0 15px 29px rgba(85,61,93,.25));animation:bob 3.5s ease-in-out infinite}
+.intro-fallback img{aspect-ratio:1;object-fit:cover;width:min(65vw,45svh,280px);border-radius:50%;filter:drop-shadow(0 15px 29px rgba(85,61,93,.25));animation:bob 3.5s ease-in-out infinite}
 .intro-talk{padding:14px 26px;background:#fff9f3;border:1px solid #ebdcd5;border-radius:24px;box-shadow:0 12px 30px rgba(97,68,90,.13);text-align:center;font-size:18px;line-height:2;color:#795f67;letter-spacing:1.3px}
 .intro-skip{position:absolute;right:max(20px,env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));min-height:44px;padding:10px 20px;border-radius:28px;border:1px solid rgba(255,248,245,.6);background:rgba(255,250,246,.88);color:#816875;font-size:14px;letter-spacing:1px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 body.intro-open{overflow:hidden}
@@ -998,7 +998,7 @@ const CAT_LINES = {
 /* 陪伴的小動物：之後新增動物時，在 PETS 加一筆、放好圖片即可 */
 const PETS={
   cat:{id:'cat',name:'貓咪',img:{window:'assets/cat-window.webp',rest:'assets/cat-rest.webp',letter:'assets/cat-letter.webp',oil:'assets/cat-oil.webp',globe:'assets/hero-globe.webp',avatar:'assets/cat-rest.webp'},video:true,globe:false,plainAvatar:false},
-  rabbit:{id:'rabbit',name:'兔兔',img:{window:'assets/rabbit-window.webp',rest:'assets/rabbit-rest.webp',letter:'assets/rabbit-window.webp',oil:'assets/rabbit-rest.webp',globe:'assets/pet-rabbit.webp',avatar:'assets/rabbit-avatar.webp'},video:false,globe:false,plainAvatar:true}
+  rabbit:{id:'rabbit',name:'兔兔',img:{window:'assets/rabbit-window.webp',rest:'assets/rabbit-rest.webp',letter:'assets/rabbit-cards.webp',oil:'assets/rabbit-cocoa.webp',globe:'assets/rabbit-cottage.webp',avatar:'assets/rabbit-avatar.webp',react:'assets/rabbit-happy.webp'},video:false,globe:false,plainAvatar:true}
 };
 const RABBIT_LINES={
   cat:['在毛毯上窩著，等妳來坐一下。','摸摸我的頭，我的耳朵會輕輕動喔。'],
@@ -1532,7 +1532,7 @@ function viewCat(){
     <section class="card pet-card"><div class="rv-q"><b>陪伴我的小動物</b><small>隨時可以換，芯幣不受影響</small></div>${petPicker()}</section>
     <section class="house" id="house">
 ${pet().video?`<video id="petCat" class="cat-vid" src="assets/cat-idle.mp4" poster="assets/cat-rest.webp" muted loop playsinline preload="auto" aria-label="橘白小貓在暖燈旁的毛毯上睡著了，點一下可以摸摸牠"></video>
-      <video id="catPetVid" class="cat-vid cat-react" src="assets/cat-pet.mp4" muted playsinline preload="auto" aria-hidden="true"></video>`:`<img id="petCat" class="cat-vid" src="${petImg('rest')}" alt="小動物在毛毯上休息，點一下可以摸摸牠">`}
+      <video id="catPetVid" class="cat-vid cat-react" src="assets/cat-pet.mp4" muted playsinline preload="auto" aria-hidden="true"></video>`:`<img id="petCat" class="cat-vid" src="${petImg('rest')}" alt="小動物在毛毯上休息，點一下可以摸摸牠">${pet().img.react?`<img id="petReact" class="cat-vid cat-react" src="${petImg('react')}" alt="" aria-hidden="true">`:''}`}
       <div class="bubble" id="houseTalk">摸摸我～（今天 ${Math.min(d.pets,99)} 下）</div>
       <span class="pet-hint">點圖摸摸小貓 ♡</span>
     </section>
@@ -2463,6 +2463,8 @@ function bind(){
     if(rv)rv.onended=()=>{rv.classList.remove('on')};
   }
   if(pc)pc.onclick=e=>{
+    const pr2=$('#petReact');
+    if(pr2){pr2.classList.add('on');clearTimeout(window._reactT);window._reactT=setTimeout(()=>pr2.classList.remove('on'),2600)}
     const rv=$('#catPetVid');
     if(rv&&!(rv.classList.contains('on')&&!rv.ended)){try{rv.currentTime=0;rv.classList.add('on');const q=rv.play();if(q)q.catch(()=>rv.classList.remove('on'))}catch(err){}}
     const d=today();d.pets++;save();
