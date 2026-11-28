@@ -525,6 +525,15 @@ button.cal-d:disabled{opacity:.4;cursor:default}
 .t-qr{position:absolute;right:10px;top:10px;font-size:11px;padding:2px 8px;border-radius:99px;border:1px solid var(--line);background:#fff;color:var(--mauve-deep)}
 .demo a{font-size:11.5px;color:var(--sub);text-decoration:underline;text-underline-offset:3px}
 
+/* 小動物選擇 */
+.pet-card{padding:16px 18px;display:grid;gap:10px}
+.pet-pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+.pet-pick button{display:grid;justify-items:center;gap:4px;padding:10px 6px;border-radius:var(--r-md);border:1.5px solid var(--line);background:#fff;font-size:14px}
+.pet-pick img{width:56px;height:56px;border-radius:50%;object-fit:cover}
+.pet-pick button[aria-pressed="true"]{border-color:var(--rose);background:#fbf1ee;font-weight:500}
+.pet-globe .hero-img,.pet-globe .tile img,.pet-globe .warm-art img,.pet-globe .house .cat-vid,.pet-globe .studio img{object-fit:contain;background:linear-gradient(180deg,#8d879e,#e9dcd6)}
+.pet-globe .talk-cat img{transform:scale(1.25);object-position:50% 50%}
+
 /* 開場畫面 */
 .intro-screen{position:fixed;inset:0;z-index:120;background:linear-gradient(180deg,#726f8a 0%,#726f8a 12%,#f5eae3 88%,#f5eae3 100%);display:grid;place-items:center;transition:opacity .6s ease}
 .intro-screen.done{opacity:0;pointer-events:none}
@@ -985,6 +994,43 @@ const CAT_LINES = {
   invite:['把小角落分享給也需要被照顧的朋友吧！'],
 };
 
+/* 陪伴的小動物：之後新增動物時，在 PETS 加一筆、放好圖片即可 */
+const PETS={
+  cat:{id:'cat',name:'貓咪',img:{window:'assets/cat-window.webp',rest:'assets/cat-rest.webp',letter:'assets/cat-letter.webp',oil:'assets/cat-oil.webp',globe:'assets/hero-globe.webp'},video:true,globe:false},
+  rabbit:{id:'rabbit',name:'兔兔',img:{window:'assets/pet-rabbit.webp',rest:'assets/pet-rabbit.webp',letter:'assets/pet-rabbit.webp',oil:'assets/pet-rabbit.webp',globe:'assets/pet-rabbit.webp'},video:false,globe:true}
+};
+const RABBIT_LINES={
+  cat:['在毛毯上窩著，等妳來坐一下。','摸摸我的頭，我的耳朵會輕輕動喔。'],
+  pet:['嗯～好舒服。','再摸一下下嘛～','妳的手好溫暖。','（耳朵輕輕抖了一下）','今天有妳陪，真好。'],
+  feed:['好香的小胡蘿蔔！謝謝妳～','喀滋喀滋……這根特別甜！','吃飽了，幫妳存了一點芯幣喔。'],
+  feedEmpty:['盤子空空的……去做個小任務帶點小胡蘿蔔回來好嗎？']
+};
+const PET_SWAP={rabbit:[['貓咪小屋','兔兔小屋'],['小貓咪','小兔兔'],['小貓','小兔'],['貓咪','兔兔'],['餵貓','餵兔'],['摸貓','摸兔'],['橘白','白色'],['貓','兔'],['小魚乾','小胡蘿蔔'],['魚乾','胡蘿蔔'],['點心碗','點心盤'],['呼嚕聲','音效'],['喵一聲','叫一聲'],['喵～','啾～'],['呼嚕給妳聽','動動耳朵給妳看'],['Cat house','Bunny house'],['碗','盤']]};
+function pet(){return PETS[S.pet]||PETS.cat}
+function petImg(k){return pet().img[k]}
+function petLines(k){return (S.pet==='rabbit'&&RABBIT_LINES[k])||CAT_LINES[k]}
+function petStr(t){
+  const sw=PET_SWAP[S.pet];if(!sw||!t)return t;
+  for(const [a,b] of sw)t=t.split(a).join(b);
+  return t.replace(/(\d+)\s?條/g,'$1 根');
+}
+function petText(root){
+  if(!PET_SWAP[S.pet]||!root)return;
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:x=>x.parentElement&&x.parentElement.closest('[data-noswap]')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});let n;
+  while((n=w.nextNode())){const v=petStr(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v}
+  root.querySelectorAll('[alt],[aria-label],[placeholder],[title]').forEach(el=>{for(const a of ['alt','aria-label','placeholder','title']){const v=el.getAttribute(a);if(v){const x=petStr(v);if(x!==v)el.setAttribute(a,x)}}});
+}
+const FISH_SVG=null;
+function applyPetSymbol(){
+  const sym=document.getElementById('fish');if(!sym)return;
+  if(!sym.dataset.orig)sym.dataset.orig=sym.innerHTML;
+  sym.innerHTML=S.pet==='rabbit'?'<path d="M7 26 L21 9 Q26 6 25.5 11 L9 27.5 Q5 29.5 7 26Z" fill="#e8873a" stroke="#c0662a" stroke-width="1"/><path d="M12.5 20.5l2.2 1.8M16 16.5l2.2 1.8M19 12.8l1.8 1.6" stroke="#c0662a" stroke-width="1.1" stroke-linecap="round"/><path d="M22.5 8.5l1-5M24 9.5l5-2.2M23.4 9l4.2-4.5" stroke="#7aa35a" stroke-width="2.2" stroke-linecap="round"/>':sym.dataset.orig;
+  document.body.classList.toggle('pet-globe',!!pet().globe);
+}
+function petPicker(){
+  return `<div class="pet-pick" data-noswap role="group" aria-label="選擇陪伴妳的小動物">${Object.values(PETS).map(x=>`<button type="button" data-pet="${x.id}" aria-pressed="${(S.pet||'cat')===x.id}"><img src="${x.img.rest}" alt=""><span>${x.name}</span></button>`).join('')}</div>`;
+}
+
 /* ======================================================================
    工具
    ====================================================================== */
@@ -1077,6 +1123,7 @@ function openProfile(){
     <form id="profileForm" class="stack">
       <div class="field"><label for="pName">怎麼稱呼妳？</label><input id="pName" required maxlength="20" value="${esc(m.name||'')}"></div>
       <div class="field"><label for="pPhone">手機號碼（和預約時用的一樣）</label><input id="pPhone" required inputmode="tel" pattern="09[0-9]{8}" placeholder="0912345678"></div>
+      <div class="field"><label>選一位陪伴妳的小動物</label>${petPicker()}</div>
       <div class="field"><label for="pBday">妳的生日（選填，生日月有小驚喜）</label><input id="pBday" type="date"></div>
       <div class="field"><label for="pBaby">寶寶的生日或預產期（選填）</label><input id="pBaby" type="date"></div>
       <p class="tiny" style="margin:0" id="pErr"></p>
@@ -1333,9 +1380,9 @@ const fishSvg=(s=18)=>`<svg class="coin" width="${s}" height="${s}" aria-hidden=
 const snow=()=>`<div class="snow" aria-hidden="true">${[[8,12,11],[22,78,16],[46,16,8],[14,62,9],[60,88,12],[36,40,7]].map(([t,l,s],i)=>`<span style="top:${t}%;left:${l}%;font-size:${s}px;animation-delay:${i*.6}s">✦</span>`).join('')}</div>`;
 function sky(eyebrow,title,sub,line){
   return `<section class="sky gutter">${snow()}<div class="eyebrow">${eyebrow}</div><h2 class="h2" tabindex="-1" id="pageTitle">${title}</h2>${sub?`<p>${sub}</p>`:''}
-  <div class="talk"><div class="talk-cat"><img src="assets/cat-rest.webp" alt=""></div><div class="bubble pop" id="catTalk">${line}</div></div></section>`;
+  <div class="talk"><div class="talk-cat"><img src="${petImg('rest')}" alt=""></div><div class="bubble pop" id="catTalk">${line}</div></div></section>`;
 }
-function catSay(text){const b=$('#catTalk');if(!b)return;b.classList.remove('pop');void b.offsetWidth;b.innerHTML=text;b.classList.add('pop')}
+function catSay(text){const b=$('#catTalk');if(!b)return;b.classList.remove('pop');void b.offsetWidth;b.innerHTML=petStr(text);b.classList.add('pop')}
 
 function viewHome(){
   const d=today(), done=Object.keys(d.tasks).length, fishToday=TASKS.filter(t=>d.tasks[t.id]).reduce((s,t)=>s+t.fish,0);
@@ -1344,8 +1391,8 @@ function viewHome(){
   const unclaimed=TASKS.filter(t=>taskState(t)==='ready').length;
   return `
   <section class="hero">
-    <img class="hero-img" src="assets/cat-window.webp" alt="橘白小貓坐在窗邊，陪妳看冬夜和柔柔的燈光" fetchpriority="high">
-    <div class="hero-talk"><div class="bubble pop" id="catTalk">${pick(CAT_LINES.home)}</div></div>
+    <img class="hero-img" src="${petImg('window')}" alt="橘白小貓坐在窗邊，陪妳看冬夜和柔柔的燈光" fetchpriority="high">
+    <div class="hero-talk"><div class="bubble pop" id="catTalk">${pick(petLines('home'))}</div></div>
   </section>
   <div class="gutter">
     <div class="hello"><h1 tabindex="-1" id="pageTitle">歡迎回到<br>芯彤的<em>小角落</em></h1>
@@ -1370,10 +1417,10 @@ function viewHome(){
       <div class="eyebrow">Today's corner</div>
       <h2 class="h2" style="margin-bottom:14px">今天，想去哪個小角落？</h2>
       <div class="tiles">
-        <button class="tile" data-go="cards"><img src="assets/cat-letter.webp" alt="" loading="lazy"><span class="badge ${drawn?'done':''}">${drawn?`今日已抽 ${todayDraws().length} 張`:'每日指引'}</span><b>今日牌卡</b><small>塔羅指引・精油建議</small></button>
-        <button class="tile" data-go="cat"><img src="assets/cat-rest.webp" alt="" loading="lazy"><span class="badge">${S.fish} 條待餵</span><b>貓咪小屋</b><small>摸摸牠、餵小魚乾</small></button>
-        <button class="tile" data-go="play"><img src="assets/cat-oil.webp" alt="" loading="lazy"><span class="badge ${today().gameDone?'done':''}">${today().gameDone?'今日已玩':'1 分鐘小遊戲'}</span><b>香氣翻牌</b><small>配對漢芳療的香氣</small></button>
-        <button class="tile" data-go="mom"><img src="assets/hero-globe.webp" alt="" loading="lazy"><span class="badge">${today().water||0} / ${S.waterGoal||8} 杯水</span><b>媽媽小幫手</b><small>喝水打卡・心情日曆</small></button>
+        <button class="tile" data-go="cards"><img src="${petImg('letter')}" alt="" loading="lazy"><span class="badge ${drawn?'done':''}">${drawn?`今日已抽 ${todayDraws().length} 張`:'每日指引'}</span><b>今日牌卡</b><small>塔羅指引・精油建議</small></button>
+        <button class="tile" data-go="cat"><img src="${petImg('rest')}" alt="" loading="lazy"><span class="badge">${S.fish} 條待餵</span><b>貓咪小屋</b><small>摸摸牠、餵小魚乾</small></button>
+        <button class="tile" data-go="play"><img src="${petImg('oil')}" alt="" loading="lazy"><span class="badge ${today().gameDone?'done':''}">${today().gameDone?'今日已玩':'1 分鐘小遊戲'}</span><b>香氣翻牌</b><small>配對漢芳療的香氣</small></button>
+        <button class="tile" data-go="mom"><img src="${petImg('globe')}" alt="" loading="lazy"><span class="badge">${today().water||0} / ${S.waterGoal||8} 杯水</span><b>媽媽小幫手</b><small>喝水打卡・心情日曆</small></button>
         <button class="tile tile-wide badge-tile" data-go="badges"><span class="tw-copy"><b>本月徽章</b><small>已獲得 ${monthBadges().filter(b=>b.done).length} / ${BADGES.length} 枚・每枚送 ${BADGE_REWARD_FISH} 條小魚乾</small></span><span class="mini-medals">${monthBadges().map(b=>medalSvg(b,30)).join('')}</span></button>
         <button class="tile tile-wide" data-go="articles"><span class="tw-copy"><b>保養小教室</b><small>芯彤寫給妳的保養觀念和小知識</small></span><span class="gift" style="font-size:22px">${ARTICLES.length} 篇</span></button>
         <button class="tile tile-wide" data-go="review"><span class="tw-copy"><b>寫下這次的體驗心得</b><small>勾選感受，小幫手幫妳整理成評論</small></span><span class="gift" style="font-size:24px">✎</span></button>
@@ -1387,7 +1434,7 @@ function viewHome(){
 
     <section class="section">
       <div class="card studio">
-        <img src="assets/hero-globe.webp" alt="水晶球裡的溫室，小貓在裡面睡覺" loading="lazy">
+        <img src="${petImg('globe')}" alt="水晶球裡的溫室，小貓在裡面睡覺" loading="lazy">
         <div><b class="h3">芯彤美學 Heart studio</b><div class="muted">澎湖・泌乳按摩與產後美學</div>
           <div class="links"><a class="chip-link main" href="${lineBookUrl()}" target="_blank" rel="noopener noreferrer">線上預約</a><a class="chip-link" href="https://www.instagram.com/heart_.studio/" target="_blank" rel="noopener noreferrer">Instagram</a></div></div>
       </div>
@@ -1405,7 +1452,7 @@ function viewCards(){
     const q=WARM[(hash(dayKey())+(S.warmShift||0))%WARM.length];
     body=`<div class="warm-card"><div class="h">FOR TODAY'S YOU</div><p>${esc(q)}</p><div class="muted" style="font-family:var(--latin);font-style:italic">— 芯彤美學</div></div>
     <div class="row"><button class="btn btn-ghost" id="warmNext">再換一張</button></div>
-    <div class="warm-art"><img src="assets/cat-letter.webp" alt="橘白小貓在桌邊，替妳守著一封小信" loading="lazy"></div>`;
+    <div class="warm-art"><img src="${petImg('letter')}" alt="橘白小貓在桌邊，替妳守著一封小信" loading="lazy"></div>`;
   } else if(!drawn){
     body=`<div class="ritual">
       <div class="ritual-steps" aria-hidden="true"><span id="rs1" class="on">靜心</span><i></i><span id="rs2">洗牌</span><i></i><span id="rs3">攤牌</span><i></i><span id="rs4">抽牌</span></div>
@@ -1429,7 +1476,7 @@ function viewCards(){
         <div class="keys">${card.k.map(k=>`<span>${k}</span>`).join('')}</div>
         <p class="meaning">${card.m}</p>
         <div class="insight"><div class="ins-row"><span class="ins-tag">給妳的提問</span><p>${card.q}</p></div><div class="ins-row"><span class="ins-tag">今日小行動</span><p>${card.act}</p></div></div>
-        <div class="talk" style="margin:0"><div class="talk-cat"><img src="assets/cat-rest.webp" alt=""></div><div class="bubble">${card.cat}</div></div>
+        <div class="talk" style="margin:0"><div class="talk-cat"><img src="${petImg('rest')}" alt=""></div><div class="bubble">${card.cat}</div></div>
         <div class="divider">今日漢芳療 × 脈輪</div>
         <div class="chakra-card">
           <span class="ck-dot" style="background:${ch.color}"></span>
@@ -1442,7 +1489,7 @@ function viewCards(){
       <button class="btn btn-primary btn-block" id="drawMore">還有想問的？再抽一張</button>
     </div>`;
   }
-  return sky('Daily card','今日牌卡',drawn&&deck==='tarot'?'今天的牌已經為妳翻開了。':'讓牌卡替今天說一句話。',drawn?pick(CAT_LINES.cardsDone):pick(CAT_LINES.cards))+`<div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3">${tabs}${body}</div>`;
+  return sky('Daily card','今日牌卡',drawn&&deck==='tarot'?'今天的牌已經為妳翻開了。':'讓牌卡替今天說一句話。',drawn?pick(petLines('cardsDone')):pick(petLines('cards')))+`<div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3">${tabs}${body}</div>`;
 }
 
 let breathTimer=null;
@@ -1451,7 +1498,7 @@ function viewTasks(){
   const C=2*Math.PI*44;
   const filled=S.streak.n>0&&S.streak.n%7===0?7:S.streak.n%7;
   const days=[];for(let i=0;i<7;i++)days.push(i<filled?'on':'');
-  return sky('Little tasks','今日任務','照顧自己的小事，做完就能換小魚乾。',done===TASKS.length?pick(CAT_LINES.tasksDone):pick(CAT_LINES.tasks))+`
+  return sky('Little tasks','今日任務','照顧自己的小事，做完就能換小魚乾。',done===TASKS.length?pick(petLines('tasksDone')):pick(petLines('tasks')))+`
   <div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3">
     <section class="card ring-wrap">
       <div class="ring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="none" stroke="var(--blush)" stroke-width="8"/><circle cx="50" cy="50" r="44" fill="none" stroke="var(--rose)" stroke-width="8" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-frac)}" style="transition:stroke-dashoffset .8s"/></svg>
@@ -1479,11 +1526,12 @@ function viewTasks(){
 function viewCat(){
   const d=today();
   const coinsFromFish=c1(S.fish*CONFIG.coinTenthsPerFeed);
-  return sky('Cat house','貓咪小屋','摸摸牠、餵牠吃小魚乾，貓咪會幫妳存芯幣。',pick(CAT_LINES.cat))+`
+  return sky('Cat house','貓咪小屋','摸摸牠、餵牠吃小魚乾，貓咪會幫妳存芯幣。',pick(petLines('cat')))+`
   <div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3">
+    <section class="card pet-card"><div class="rv-q"><b>陪伴我的小動物</b><small>隨時可以換，芯幣不受影響</small></div>${petPicker()}</section>
     <section class="house" id="house">
-      <video id="petCat" class="cat-vid" src="assets/cat-idle.mp4" poster="assets/cat-rest.webp" muted loop playsinline preload="auto" aria-label="橘白小貓在暖燈旁的毛毯上睡著了，點一下可以摸摸牠"></video>
-      <video id="catPetVid" class="cat-vid cat-react" src="assets/cat-pet.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
+${pet().video?`<video id="petCat" class="cat-vid" src="assets/cat-idle.mp4" poster="assets/cat-rest.webp" muted loop playsinline preload="auto" aria-label="橘白小貓在暖燈旁的毛毯上睡著了，點一下可以摸摸牠"></video>
+      <video id="catPetVid" class="cat-vid cat-react" src="assets/cat-pet.mp4" muted playsinline preload="auto" aria-hidden="true"></video>`:`<img id="petCat" class="cat-vid" src="${petImg('rest')}" alt="小動物在毛毯上休息，點一下可以摸摸牠">`}
       <div class="bubble" id="houseTalk">摸摸我～（今天 ${Math.min(d.pets,99)} 下）</div>
       <span class="pet-hint">點圖摸摸小貓 ♡</span>
     </section>
@@ -1515,7 +1563,7 @@ function viewCoins(){
   const nearest=SERVER.expiring?Date.parse(SERVER.expiring.nearest):null;
   const coupons=S.coupons.slice().sort((a,b)=>(a.used-b.used)||(b.at-a.at));
   const hist=S.hist.slice().sort((a,b)=>b.at-a.at).slice(0,12);
-  return sky('Heart coins','我的芯幣','每一枚芯幣，都是妳好好照顧自己的證明。',pick(CAT_LINES.coins))+`
+  return sky('Heart coins','我的芯幣','每一枚芯幣，都是妳好好照顧自己的證明。',pick(petLines('coins')))+`
   <div class="gutter stack" style="position:relative;z-index:3">
     <section class="card purse">
       <svg class="big-coin" aria-hidden="true"><use href="#coin"/></svg>
@@ -1642,6 +1690,7 @@ function sfx(kind){
   else if(kind==='tick'){noiseHit(t,.04,3200,1.5,.25)}
   else if(kind==='spread'){for(let i=0;i<DECK_N;i++)noiseHit(t+i*.045,.05,2200+i*60,1.4,.16)}
   else if(kind==='flip'){noiseHit(t,.18,1400,.7,.25);[880,1320,1760].forEach((f,i)=>tone(t+.25+i*.09,f,1.2,.06))}
+  else if(kind==='soft'){[660,990].forEach((f,i)=>tone(t+i*.12,f,.5,.05))}
   else if(kind==='meow'){
     // 「喵～」：鋸齒波經過兩個共振峰濾波，音高先上揚再落下，加一點顫音
     const dur=.55+Math.random()*.2,base=480+Math.random()*120;
@@ -1915,7 +1964,7 @@ function productBox(key,care,ci){
 function openVideo(kind){
   const url=CARE_VIDEOS[kind]||CARE_VIDEOS.general;
   if(url){sheet(`<b class="h3" style="display:block;text-align:center">芯彤的示範影片</b><p class="muted" style="text-align:center">影片會在新視窗打開。</p><a class="btn btn-primary btn-block" href="${url}" target="_blank" rel="noopener noreferrer">開始觀看</a>`);return}
-  sheet(`<div style="text-align:center"><img src="assets/cat-oil.webp" alt="" style="border-radius:16px;margin-bottom:12px"><b class="h3" style="display:block">示範影片拍攝中</b><p class="muted">芯彤正在準備${kind==='belly'?'腹部':kind==='breast'?'乳房':'居家'}保養的示範影片，拍好後就會放在這裡。</p><button class="btn btn-ghost btn-block" data-close>我知道了</button></div>`);
+  sheet(`<div style="text-align:center"><img src="${petImg('oil')}" alt="" style="border-radius:16px;margin-bottom:12px"><b class="h3" style="display:block">示範影片拍攝中</b><p class="muted">芯彤正在準備${kind==='belly'?'腹部':kind==='breast'?'乳房':'居家'}保養的示範影片，拍好後就會放在這裡。</p><button class="btn btn-ghost btn-block" data-close>我知道了</button></div>`);
 }
 
 
@@ -2018,7 +2067,7 @@ function growthCard(){
     <div class="g-head"><div><span class="eyebrow">Lv.${cur.lv}</span><b class="h3" style="display:block">${cur.name}</b></div><span class="tiny">經驗值 <b class="num">${xp}</b>${next?` / ${next.xp}`:''}</span></div>
     <div class="progress"><i style="width:${pct}%"></i></div>
     <p class="muted" style="margin:0">${next?`再餵 ${next.xp-xp} 條小魚乾，就會長成「${next.name}」，解鎖${DECOR.find(x=>x.lv===next.lv).name}。`:'貓咪已經長成最可靠的小屋守護貓了！'}</p>
-    <div class="talk" style="margin:0"><div class="talk-cat"><img src="assets/cat-rest.webp" alt=""></div><div class="bubble">${cur.line}</div></div>
+    <div class="talk" style="margin:0"><div class="talk-cat"><img src="${petImg('rest')}" alt=""></div><div class="bubble">${cur.line}</div></div>
     <div><b style="font-weight:500">小屋布置</b><span class="tiny">　點一下擺上或收起</span></div>
     <div class="decor-grid">${DECOR.map(dc=>{const unlocked=cur.lv>=dc.lv,onn=unlocked&&S.decor&&S.decor[dc.id];
       return `<button class="decor ${onn?'on':''}" data-decor="${dc.id}" ${unlocked?'':'disabled'} aria-pressed="${!!onn}"><span class="d-ic">${decorIcon(dc.id)}</span><b>${dc.name}</b><small>${unlocked?(onn?'已擺上':'點我擺上'):`Lv.${dc.lv} 解鎖`}</small></button>`}).join('')}</div>
@@ -2235,7 +2284,7 @@ function viewArticles(){
         <div class="a-meta">芯彤美學・閱讀約 ${a.mins} 分鐘</div>
         <div class="a-body">${body}</div>
       </article>
-      <div class="talk" style="margin:0"><div class="talk-cat"><img src="assets/cat-rest.webp" alt=""></div><div class="bubble">看完了嗎？有想問的都可以傳 LINE 給芯彤喔。</div></div>
+      <div class="talk" style="margin:0"><div class="talk-cat"><img src="${petImg('rest')}" alt=""></div><div class="bubble">看完了嗎？有想問的都可以傳 LINE 給芯彤喔。</div></div>
       <div class="rv-btns" style="margin-top:14px"><a class="btn btn-primary" href="${lineBookUrl()}" target="_blank" rel="noopener noreferrer">LINE 問問芯彤</a><button class="btn btn-ghost" data-article="">看其他文章</button></div>
     </div>`;
   }
@@ -2328,9 +2377,9 @@ function bindStaff(){
 
 function viewInvite(){
   const m=S.member;
-  if(!m) return sky('Invite','邀請好友','先加入會員，就有自己的邀請碼。',pick(CAT_LINES.invite))+`<div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3"><button class="btn btn-primary btn-block" id="joinBtn">加入會員</button></div>`;
+  if(!m) return sky('Invite','邀請好友','先加入會員，就有自己的邀請碼。',pick(petLines('invite')))+`<div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3"><button class="btn btn-primary btn-block" id="joinBtn">加入會員</button></div>`;
   const link=CONFIG.inviteBase+m.code;
-  return sky('Invite friends','邀請好友','把小角落分享給也需要被照顧的她。',pick(CAT_LINES.invite))+`
+  return sky('Invite friends','邀請好友','把小角落分享給也需要被照顧的她。',pick(petLines('invite')))+`
   <div class="gutter stack" style="margin-top:-12px;position:relative;z-index:3">
     <section class="card invite-hero">
       <div class="eyebrow">My invite code</div>
@@ -2370,6 +2419,7 @@ function render(nav){
   $('#dotCards').hidden=!!(S.draw&&S.draw.date===dayKey());
   $('#dotTasks').hidden=!TASKS.some(t=>taskState(t)==='ready');
   if(nav){window.scrollTo({top:0,behavior:'instant'});const h=$('#pageTitle');if(h)h.focus({preventScroll:true})}
+  applyPetSymbol();petText($('#main'));petText($('.topbar'));petText($('#nav'));
   bind();
 }
 
@@ -2403,6 +2453,7 @@ function bind(){
       setTimeout(()=>toast('抽到了！去任務頁領小魚乾吧'),1400)},800);
   });
 
+  bindPetPick(document);
   // cat
   const pc=$('#petCat');
   if(pc&&pc.tagName==='VIDEO'){
@@ -2417,9 +2468,10 @@ function bind(){
     const house=$('#house');house.classList.remove('purr');void house.offsetWidth;house.classList.add('purr');
     const r=house.getBoundingClientRect();const h=document.createElement('span');h.className='float';h.textContent='♡';
     h.style.left=(e.clientX-r.left-10)+'px';h.style.top=(e.clientY-r.top-20)+'px';house.appendChild(h);setTimeout(()=>h.remove(),1200);
-    $('#houseTalk').textContent=pick(CAT_LINES.pet);
+    $('#houseTalk').textContent=petStr(pick(petLines('pet')));
     $('#petCount').textContent=d.pets;
-    if(S.sound){ac();const a=$('#purr');let ok=false;try{a.currentTime=0;const pr=a.play();if(pr)pr.then(()=>{ok=true},()=>sfx('purr'));else ok=true}catch(err){sfx('purr')}
+    if(S.sound&&S.pet==='rabbit'){ac();sfx('soft')}
+    else if(S.sound){ac();const a=$('#purr');let ok=false;try{a.currentTime=0;const pr=a.play();if(pr)pr.then(()=>{ok=true},()=>sfx('purr'));else ok=true}catch(err){sfx('purr')}
       if(d.pets%3===1)setTimeout(()=>sfx('meow'),120)}
     if(d.pets===5){toast('摸摸任務完成！到任務頁領小魚乾');$('#dotTasks').hidden=false}
   };
@@ -2476,14 +2528,14 @@ function selectText(el){const r=document.createRange();r.selectNodeContents(el);
 
 async function feed(n,btn){
   if(needLogin())return;
-  if(!S.fish){$('#houseTalk').textContent=pick(CAT_LINES.feedEmpty);return}
+  if(!S.fish){$('#houseTalk').textContent=pick(petLines('feedEmpty'));return}
   n=Math.min(n,S.fish);if(btn)btn.disabled=true;
   const r=await api('feed',{n});
   if(r.error){toast(r.error);if(btn)btn.disabled=false;return}
   today().fed=(today().fed||0)+n;
   flyTo(btn,$('#petCat'),'fish',Math.min(n,4));
   setTimeout(()=>{
-    const house=$('#house');if(house){house.classList.remove('purr');void house.offsetWidth;house.classList.add('purr');$('#houseTalk').textContent=pick(CAT_LINES.feed)}
+    const house=$('#house');if(house){house.classList.remove('purr');void house.offsetWidth;house.classList.add('purr');$('#houseTalk').textContent=pick(petLines('feed'))}
     flyTo($('#petCat'),$('.wallet-chip'),'coin',Math.min(n,3));
     setTimeout(()=>{applyServer(r.state);toast(`貓咪吃了 ${n} 條，存入 ${c1(n*CONFIG.coinTenthsPerFeed)} 芯幣`);render()},900);
   },700);
@@ -2537,13 +2589,23 @@ function openJoin(ref){openLogin(ref)}
 function sheet(html){
   $('#sheetRoot').innerHTML=`<div class="sheet-bg" id="sheetBg"><div class="sheet" role="dialog" aria-modal="true"><div class="grab"></div>${html}</div></div>`;
   $('#sheetBg').onclick=e=>{if(e.target.id==='sheetBg'||e.target.closest('[data-close]'))closeSheet()};
+  petText($('#sheetRoot'));bindPetPick($('#sheetRoot'));
   const f=$('#sheetRoot input,#sheetRoot button.btn-primary');if(f)setTimeout(()=>f.focus(),300);
+}
+function bindPetPick(root){
+  root.querySelectorAll('[data-pet]').forEach(b=>b.onclick=()=>{
+    S.pet=b.dataset.pet;save();
+    const inSheet=!!b.closest('#sheetRoot');
+    if(inSheet){root.querySelectorAll('[data-pet]').forEach(x=>x.setAttribute('aria-pressed',x===b))}
+    const y=scrollY;render();window.scrollTo(0,y);
+    if(!inSheet)toast(`現在陪伴妳的是${pet().name} ♡`);
+  });
 }
 function closeSheet(){$('#sheetRoot').innerHTML=''}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
 
 let toastT;
-function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),2400)}
+function toast(msg){const t=$('#toast');t.textContent=petStr(msg);t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),2400)}
 
 $('#logoutBtn').onclick=async()=>{await api('logout',{});SERVER=null;S.member=null;S.coupons=[];S.hist=[];S.fish=0;save();render();toast('已登出')};
 window.addEventListener('scroll',()=>$('#topbar').classList.toggle('scrolled',scrollY>8),{passive:true});
@@ -2561,6 +2623,7 @@ function playIntro(){
     const fallback=()=>{if(closed||!fb.hidden)return;clearTimeout(guard);v.pause();v.hidden=true;fb.hidden=false;skip.textContent='進入小角落';guard=setTimeout(close,4000)};
     skip.onclick=close;
     scr.hidden=false;document.body.classList.add('intro-open');
+    if(pet().id!=='cat'){fb.querySelector('img').src='/'+petImg('globe');fb.querySelector('img').alt='水晶球裡的'+pet().name+'正在向妳問好';fallback();return}
     if(matchMedia('(prefers-reduced-motion: reduce)').matches){fallback();return}
     guard=setTimeout(fallback,4000);
     v.addEventListener('playing',()=>{clearTimeout(guard);guard=setTimeout(close,11000)},{once:true});
